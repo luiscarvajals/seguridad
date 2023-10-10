@@ -1,6 +1,7 @@
 // npm init -y 
 //npm i express dotenv mongoose cookie-parser cors body-parser nodemon
-// "type": "module",
+// En package.json:
+//"type": "module",
 //   "scripts": {
 //     "start": "nodemon index.js"
 //   },
