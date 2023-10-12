@@ -19,7 +19,6 @@ export const registroUsuario = async (req, res, next) => {
         telefono,
       } = req.body;
   
-      // Verificar si el usuario o correo electrónico ya están registrados
       const usuarioExistente = await Usuario.findOne({ $or: [{ email }, { usuario }] });
       if (usuarioExistente) {
         return res.status(400).json({ mensaje: 'El usuario o correo electrónico ya está registrado.' });
@@ -38,9 +37,9 @@ export const registroUsuario = async (req, res, next) => {
         img,
         ciudad,
         telefono,
-        roles: ['admin'], // Establece el rol predeterminado como 'admin'
-        activo: true, // Establece como activo por defecto
-        intentosFallidos: 0, // Establece intentos fallidos a 0
+        roles: ['admin'],
+        activo: true,
+        intentosFallidos: 0,
         resetPasswordToken: null,
         resetPasswordExpires: null,
       });
@@ -59,7 +58,6 @@ export const loginAdmin = async (req, res, next) => {
     const user = await Usuario.findOne({ usuario: req.body.usuario, activo: true });
 
   try {
-    // Buscar al administrador en la base de datos por nombre de usuario
     await Usuario.findOne({ usuario: req.body.usuario, activo: true});
 
     // if (!admin) {
@@ -75,7 +73,6 @@ export const loginAdmin = async (req, res, next) => {
     const token = jwt.sign({ id: user._id, roles: [user.roles] }, process.env.JWT, { expiresIn: '1h' });
     const {password, roles, ...otherDeails} = user._doc;
 
-    // El token se envía como cookie HTTPOnly
     res
     .cookie("admin_token", token, { 
       httpOnly: true 
@@ -88,7 +85,6 @@ export const loginAdmin = async (req, res, next) => {
 };
 
 export const logoutAdmin = (req, res) => {
-    // Elimina la cookie que contiene el token JWT
     res.clearCookie("admin_token");
     res.status(200).json({ mensaje: 'Cierre de sesión exitoso para administrador' });
   };

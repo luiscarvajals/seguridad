@@ -1,7 +1,5 @@
 import Noticia from '../models/Noticia.js';
 
-
-// Crear Noticia
 export const crearNoticia = async (req, res, next) => {
     try {
       const { titulo, descripcion, destacada, contenido } = req.body;
@@ -20,7 +18,6 @@ export const crearNoticia = async (req, res, next) => {
     }
   };
 
-// Leer Noticias (todas las noticias activas)
 export const leerNoticias = async (req, res, next) => {
     try {
       const noticias = await Noticia.find({ activo: true }).sort({ fecha_publicacion: -1 });
@@ -49,8 +46,7 @@ export const leerNoticiaPorId = async (req, res, next) => {
   }
 };
 
-  
-  // Actualizar Noticia
+
   export const actualizarNoticia = async (req, res, next) => {
     const { id } = req.params;
     try {
@@ -61,8 +57,8 @@ export const leerNoticiaPorId = async (req, res, next) => {
       next(error);
     }
 };
-  
-  // Borrado Lógico de Noticia (marcar como inactiva)
+
+
   export const borrarNoticia = async (req, res, next) => {
     const { id } = req.params;
     try {
