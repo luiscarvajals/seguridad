@@ -10,7 +10,6 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
-import expressSession from "express-session";
 import cors from "cors";
 import autenticacionRuta from "./routes/autenticacion.js";
 import noticiasRuta from "./routes/noticia.js";
@@ -37,8 +36,8 @@ app.use(express.json());
 app.use(cors());
 
 // Rutas
-app.use("/api/autenticacion", autenticacionRuta);
-app.use("/api/noticias", noticiasRuta);
+app.use("https://proytecnoweb-ldqw.vercel.app/api/autenticacion", autenticacionRuta);
+app.use("https://proytecnoweb-ldqw.vercel.app/api/noticias", noticiasRuta);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
