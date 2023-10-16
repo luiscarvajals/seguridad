@@ -35,7 +35,7 @@ const handleLogin = async (e) => {
   e.preventDefault();
   dispatch({ type: "LOGIN_INICIADO" });
   try {
-    const res = await axios.post("/api/autenticacion/login", credenciales);
+    const res = await axios.post("/autenticacion/login", credenciales);
     if (res.data.roles.includes("admin")) {
       dispatch({ type: "LOGIN_EXITOSO", payload: res.data.detalles });
       toast.success("Inicio de sesión exitoso, Bienvenido", {
