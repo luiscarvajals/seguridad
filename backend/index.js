@@ -1,5 +1,5 @@
 // npm init -y 
-//npm i express dotenv mongoose cookie-parser cors body-parser nodemon bcrypt jsonwebtoken
+//npm i express dotenv mongoose cookie-parser cors body-parser nodemon jsonwebtoken
 // En package.json:
 //"type": "module",
 //   "scripts": {
