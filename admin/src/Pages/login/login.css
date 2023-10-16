@@ -3,8 +3,9 @@
 
 .login::before {
     content: "";
-    background-image: url('https://scontent.flpb1-2.fna.fbcdn.net/v/t39.30808-6/302060174_501354705330860_1420953049873365769_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=52f669&_nc_ohc=8o79qidOSSsAX8hbPli&_nc_ht=scontent.flpb1-2.fna&oh=00_AfBBsSg9zvDkUBDzSXw3OndEIYr5gCx95JoPq0kPGfvVmQ&oe=652B8A26');
+    background-image: url('https://res.cloudinary.com/dwwj8mhse/image/upload/v1697428217/302060174_501354705330860_1420953049873365769_n_nz5msz.jpg');
     position: absolute;
+    background-size: cover;
     top: 0;
     left: 0;
     width: 100%;

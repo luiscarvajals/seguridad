@@ -170,7 +170,7 @@ const handleLogin = async (e) => {
         transition={{ delay: 0.4, duration: 0.5 }}
       >
         <img
-          src="https://tja.ucb.edu.bo/wp-content/uploads/2020/09/logo-UCB.png"
+          src="https://res.cloudinary.com/dwwj8mhse/image/upload/v1697428216/cropped-logo-UCB_fawwhm.png"
           alt="Logo de UCB"
           className="login_log"
         />
