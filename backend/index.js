@@ -36,8 +36,8 @@ app.use(express.json());
 app.use(cors());
 
 // Rutas
-app.use("https://proytecnoweb-ldqw.vercel.app/api/autenticacion", autenticacionRuta);
-app.use("https://proytecnoweb-ldqw.vercel.app/api/noticias", noticiasRuta);
+app.use("/api/autenticacion", autenticacionRuta);
+app.use("/api/noticias", noticiasRuta);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
