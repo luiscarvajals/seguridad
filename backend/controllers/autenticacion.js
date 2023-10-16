@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import Usuario from '../models/Usuario.js';
-import bcrypt from 'bcryptjs';
+
 
 export const registroUsuario = async (req, res, next) => {
   try {
@@ -22,7 +22,6 @@ export const registroUsuario = async (req, res, next) => {
       return res.status(400).json({ mensaje: 'El usuario o correo electrónico ya está registrado.' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10); // Utiliza bcryptjs.hash
 
     const nuevoUsuario = new Usuario({
       nombre,
@@ -30,7 +29,7 @@ export const registroUsuario = async (req, res, next) => {
       fechaNacimiento,
       usuario,
       email,
-      password: hashedPassword, 
+      password, 
       pais,
       img,
       ciudad,
@@ -60,9 +59,8 @@ export const loginAdmin = async (req, res, next) => {
       return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
     }
 
-    const contraseñaValida = await bcrypt.compare(req.body.password, user.password);
-
-    if (!contraseñaValida) {
+    // Compara la contraseña ingresada con la contraseña en la base de datos directamente
+    if (req.body.password !== user.password) {
       return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
     }
 
