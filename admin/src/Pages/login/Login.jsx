@@ -36,7 +36,7 @@ const handleLogin = async (e) => {
   dispatch({ type: "LOGIN_INICIADO" });
   try {
     const res = await axios.post("/autenticacion/login", credenciales);
-    if (res.data.roles.includes("admin")) {
+    if (res.data.roles && res.data.roles.includes("admin")) {
       dispatch({ type: "LOGIN_EXITOSO", payload: res.data.detalles });
       toast.success("Inicio de sesión exitoso, Bienvenido", {
         duration: 5000,
@@ -72,17 +72,13 @@ const handleLogin = async (e) => {
     }
   } catch (err) {
     dispatch({ type: "LOGIN_FALLIDO", payload: err.response.data });
-    if (
-      err.response.status === 401 &&
-      err.response.data.message.includes("alcanzado el límite de intentos fallidos")
-      
-    ) {
+    if (err.response.status === 404) {
       setIntentosFallidos(true);
       setBloquearIngreso(true);
-      setTimeout(() => {
-        setIntentosFallidos(false);
-        setBloquearIngreso(false);
-      }, 5000); 
+        setTimeout(() => {
+          setIntentosFallidos(false);
+          setBloquearIngreso(false);
+        }, 5000); 
       toast.error(err.response.data.message, {
         duration: 5000, 
         position: "top-center",

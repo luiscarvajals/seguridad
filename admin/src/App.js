@@ -31,7 +31,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         
-        <Route path="/" element={<Sidebar />}  />
+        <Route path="/" element={<Navigate to="/login" />}  />
         <Route path="/login" element={<Login />} />
         <Route
           exact

@@ -63,11 +63,30 @@ export const loginAdmin = async (req, res, next) => {
     // if (!admin) {
     //   return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
     // }
-    const contraseñaValida = await bcrypt.compare(req.body.password, user.password);
+    
+
+    if (!user.roles.includes('admin')) {
+      //logger.warn("Intento de inicio de sesión de un usuario no registrado"); // Registro de warning en el logger
+      throw crearError(401, "Acceso denegado");
+    }else{
+   
+      const contraseñaValida = await bcrypt.compare(req.body.password, user.password);
+    
 
     if (!contraseñaValida) {
-      return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
+      await Usuario.findByIdAndUpdate(user._id, { $inc: { intentosFallidos: 1 } });
+      //logger.warn("Contraseña incorrecta"); // Registro de warning en el logger
+
+      if (user.intentosFallidos >= 2) {
+        //logger.warn(`El usuario ${user.usuario} ha alcanzado el límite de intentos fallidos`); // Registro de warning en el logger
+        throw crearError(404, "El administrador ha alcanzado el límite de intentos fallidos. Por favor, inténtelo de nuevo en 5 segundos.");
+      }
+      return next(crearError(400, "Contraseña incorrecta"));
+      //logger.warn(`El usuario ${user.usuario} ingresó una contraseña incorrecta`); // Registro de warning en el logger
     }
+
+    await Usuario.findByIdAndUpdate(user._id, { intentosFallidos: 0 });
+
 
 
     const token = jwt.sign({ id: user._id, roles: [user.roles] }, process.env.JWT, { expiresIn: '1h' });
@@ -79,8 +98,9 @@ export const loginAdmin = async (req, res, next) => {
     })
     .status(200)
     .json({ detalles: {...otherDeails}, roles});
+  }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 };
 
