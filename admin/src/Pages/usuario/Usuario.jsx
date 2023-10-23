@@ -1,6 +1,5 @@
 import "./usuario.scss";
 import Sidebar from "../../Components/Sidebar/Sidebar";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -153,9 +152,9 @@ const New = ({ inputs, title }) => {
           <div className="right">
             <form onSubmit={handleClick}>
               <div className="formInput">
-                <label htmlFor="files">
+                {/* <label htmlFor="files">
                   Images: <DriveFolderUploadOutlinedIcon className="icon" />
-                </label>
+                </label> */}
                 <input
                   type="file"
                   id="files"
