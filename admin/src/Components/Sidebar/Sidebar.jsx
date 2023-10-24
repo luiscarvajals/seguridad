@@ -116,7 +116,7 @@ const Sidebar = () => {
           >
             <NavLink
               className="comp"
-              to="/Noticias"
+              to="/noticias"
               onClick={() => handleSelect("Noticias")}
             >
               Noticias

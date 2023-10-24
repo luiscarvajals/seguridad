@@ -1,26 +1,32 @@
 import Noticia from '../models/Noticia.js';
 
 export const crearNoticia = async (req, res, next) => {
-    try {
-      const { titulo, descripcion, destacada, contenido } = req.body;
-      const nuevaNoticia = new Noticia({
-        titulo,
-        descripcion,
-        destacada,
-        contenido,
-      });
-  
-      await nuevaNoticia.save();
-      res.status(201).json({ mensaje: 'Noticia creada con éxito' });
-    } catch (error) {
-      console.error(`Error al crear noticia: ${error.message}`);
-      next(error);
-    }
-  };
+  try {
+    const { titulo, descripcion, destacada, contenido, img } = req.body;
+
+    const imagenes = Array.isArray(img) ? img : [img];
+
+    const nuevaNoticia = new Noticia({
+      titulo,
+      descripcion,
+      destacada,
+      contenido,
+      img: imagenes,
+    });
+
+    await nuevaNoticia.save();
+    res.status(201).json({ mensaje: 'Noticia creada con éxito' });
+  } catch (error) {
+    console.error(`Error al crear noticia: ${error.message}`);
+    next(error);
+  }
+};
+
+
 
 export const leerNoticias = async (req, res, next) => {
     try {
-      const noticias = await Noticia.find({ activo: true }).sort({ fecha_publicacion: -1 });
+      const noticias = await Noticia.find().sort({ fecha_publicacion: -1 });
       res.status(200).json(noticias);
     } catch (error) {
       console.error(`Error al leer noticias: ${error.message}`);
@@ -36,9 +42,9 @@ export const leerNoticiaPorId = async (req, res, next) => {
     if (!noticia) {
       return res.status(404).json({ mensaje: 'Noticia no encontrada' });
     }
-    if (!noticia.activo) {
-      return res.status(404).json({ mensaje: 'Noticia inactiva' });
-    }
+    // if (!noticia.activo) {
+    //   return res.status(404).json({ mensaje: 'Noticia inactiva' });
+    // }
     res.status(200).json(noticia);
   } catch (error) {
     console.error(`Error al leer noticia por ID: ${error.message}`);
@@ -47,16 +53,28 @@ export const leerNoticiaPorId = async (req, res, next) => {
 };
 
 
-  export const actualizarNoticia = async (req, res, next) => {
-    const { id } = req.params;
-    try {
-      const noticiaActualizada = await Noticia.findByIdAndUpdate(id, req.body, { new: true });
-      res.status(200).json(noticiaActualizada);
-    } catch (error) {
-      console.error(`Error al actualizar noticia: ${error.message}`);
-      next(error);
-    }
+export const actualizarNoticia = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    // Obtén la noticia existente
+    const noticiaExistente = await Noticia.findById(id);
+
+    // Combina los valores existentes con los nuevos valores
+    const nuevosValores = {
+      ...noticiaExistente.toObject(), // Convierte la noticia existente a un objeto para evitar modificarla directamente
+      ...req.body, // Utiliza los nuevos valores proporcionados en el cuerpo de la solicitud
+    };
+
+    // Actualiza la noticia con los nuevos valores
+    const noticiaActualizada = await Noticia.findByIdAndUpdate(id, nuevosValores, { new: true });
+
+    res.status(200).json(noticiaActualizada);
+  } catch (error) {
+    console.error(`Error al actualizar noticia: ${error.message}`);
+    next(error);
+  }
 };
+
 
 
   export const borrarNoticia = async (req, res, next) => {

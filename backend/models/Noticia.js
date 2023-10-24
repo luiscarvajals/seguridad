@@ -25,6 +25,9 @@ const NoticiaSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+      img: [{ type: String }],
+    
+
 });
 
 export default mongoose.model('Noticia', NoticiaSchema);

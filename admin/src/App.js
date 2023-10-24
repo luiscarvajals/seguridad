@@ -13,10 +13,11 @@ import { Navigate } from "react-router-dom";
 import Login from "./Pages/login/Login";
 import List from "./Components/list/List";
 import Usuario from "./Pages/usuario/Usuario";
-import {userInputs} from "./formSource";
-import { userColumns} from "./datatablesource";
-//import ActualizarUsuario from "./Pages/actualizarUsuario/ActualizarUsuario";
-
+import {userInputs, noticiaInputs} from "./formSource";
+import { noticiaColumns, userColumns} from "./datatablesource";
+import ActualizarUsuario from "./Pages/actualizarUsuario/actualizarUsuario";
+import Noticia from "./Pages/noticia/Noticia";
+import ActualizarNoticia from "./Pages/actualizarNoticia/actualizarNoticia";
 
 function App() {
   const RutaProtegida = ({ children }) => {
@@ -52,7 +53,7 @@ function App() {
             </RutaProtegida>
           }
         />
-        {/* <Route
+        <Route
           path="/usuarios/:id"
           element={
             <RutaProtegida>
@@ -60,7 +61,38 @@ function App() {
             <ActualizarUsuario inputs={userInputs} title="Actualizar Usuario" />
             </RutaProtegida>
           }
-        /> */}
+        />
+
+
+
+        <Route
+          exact
+          path="/noticias"
+          element={
+            <RutaProtegida>
+              <Sidebar />
+              <List columns={noticiaColumns} />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/noticias/nuevoUsuario"
+          element={
+            <RutaProtegida>
+              <Sidebar />
+            <Noticia inputs={noticiaInputs} title="Agregar nueva noticia" />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/noticias/:id"
+          element={
+            <RutaProtegida>
+              <Sidebar />
+            <ActualizarNoticia inputs={noticiaInputs} title="Actualizar Noticia" />
+            </RutaProtegida>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

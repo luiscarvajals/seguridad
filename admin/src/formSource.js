@@ -37,7 +37,8 @@ export const userInputs = [
     {
       id: "password",
       label: "Password",
-      type: "********",
+      type: "password",
+      placeholder: "*********",
     },
     {
       id: "pais",
@@ -51,6 +52,39 @@ export const userInputs = [
       type: "text",
       placeholder: "Ingrese Ciudad",
     },
+  ];
+
+  export const noticiaInputs = [
+    {
+      id: "titulo",
+      label: "Titulo",
+      type: "text",
+      placeholder: "Titulo",
+    },
+    {
+      id: "descripcion",
+      label: "Descripcion",
+      type: "text",
+      placeholder: "Descripcion",
+    },
+    {
+      id: "contenido",
+      label: "Contenido",
+      type: "text",
+      placeholder: "Contenido",
+    },
+    // {
+    //   id: "fecha",
+    //   label: "Fecha",
+    //   type: "date",
+    // },
+    // {
+    //   id: "img",
+    //   label: "Imagen",
+    //   type: "file",
+    //   placeholder: "Imagen",
+    // },
+    
   ];
   
   

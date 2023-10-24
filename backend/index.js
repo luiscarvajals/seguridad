@@ -13,6 +13,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import autenticacionRuta from "./routes/autenticacion.js";
 import noticiasRuta from "./routes/noticia.js";
+import usuariosRuta from "./routes/usuario.js";
+import rolesRuta from "./routes/roles.js";
 
 const app = express();
 dotenv.config();
@@ -35,9 +37,19 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 
+// Definir roles
+export const roles = {
+  admin: "admin",
+  admin2: "admin2",
+  admin3: "admin3",
+  // Agrega más roles según sea necesario
+};
+
 // Rutas
 app.use("/api/autenticacion", autenticacionRuta);
 app.use("/api/noticias", noticiasRuta);
+app.use("/api/usuarios", usuariosRuta);
+app.use("/api/roles",rolesRuta);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;

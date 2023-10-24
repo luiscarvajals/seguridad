@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import Usuario from '../models/Usuario.js';
 import { crearError } from '../extra/error.js';
+import logger from '../extra/winston.js';
+import { roles } from '../index.js';
 
 
 export const registroUsuario = async (req, res, next) => {
@@ -60,13 +62,8 @@ export const loginAdmin = async (req, res, next) => {
   try {
     await Usuario.findOne({ usuario: req.body.usuario, activo: true});
 
-    // if (!admin) {
-    //   return res.status(401).json({ mensaje: 'Credenciales incorrectas' });
-    // }
-    
-
-    if (!user.roles.includes('admin')) {
-      //logger.warn("Intento de inicio de sesión de un usuario no registrado"); // Registro de warning en el logger
+    if (!user.roles.includes(roles.admin)) {
+      logger.warn("Intento de inicio de sesión de un usuario no registrado"); // Registro de warning en el logger
       throw crearError(401, "Acceso denegado");
     }else{
    
@@ -75,21 +72,21 @@ export const loginAdmin = async (req, res, next) => {
 
     if (!contraseñaValida) {
       await Usuario.findByIdAndUpdate(user._id, { $inc: { intentosFallidos: 1 } });
-      //logger.warn("Contraseña incorrecta"); // Registro de warning en el logger
+      logger.warn("Contraseña incorrecta"); // Registro de warning en el logger
 
       if (user.intentosFallidos >= 2) {
         //logger.warn(`El usuario ${user.usuario} ha alcanzado el límite de intentos fallidos`); // Registro de warning en el logger
         throw crearError(404, "El administrador ha alcanzado el límite de intentos fallidos. Por favor, inténtelo de nuevo en 5 segundos.");
       }
       return next(crearError(400, "Contraseña incorrecta"));
-      //logger.warn(`El usuario ${user.usuario} ingresó una contraseña incorrecta`); // Registro de warning en el logger
+      logger.warn(`El usuario ${user.usuario} ingresó una contraseña incorrecta`); // Registro de warning en el logger
     }
 
     await Usuario.findByIdAndUpdate(user._id, { intentosFallidos: 0 });
 
 
 
-    const token = jwt.sign({ id: user._id, roles: [user.roles] }, process.env.JWT, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id, roles: user.roles }, process.env.JWT, { expiresIn: '1h' });
     const {password, roles, ...otherDeails} = user._doc;
 
     res
