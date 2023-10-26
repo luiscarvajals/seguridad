@@ -76,7 +76,7 @@ export const actualizarNoticia = async (req, res, next) => {
 };
 
 
-
+  //borrado lógico
   export const borrarNoticia = async (req, res, next) => {
     const { id } = req.params;
     try {

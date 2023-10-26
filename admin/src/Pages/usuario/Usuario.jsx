@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 
 const New = ({ inputs, title }) => {
+
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
 

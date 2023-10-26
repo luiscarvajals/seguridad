@@ -85,7 +85,7 @@ export const loginAdmin = async (req, res, next) => {
     await Usuario.findByIdAndUpdate(user._id, { intentosFallidos: 0 });
 
 
-
+    //JSONWEBTOKEN Y COOKIES
     const token = jwt.sign({ id: user._id, roles: user.roles }, process.env.JWT, { expiresIn: '1h' });
     const {password, roles, ...otherDeails} = user._doc;
 
