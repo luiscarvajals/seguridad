@@ -16,6 +16,9 @@ import noticiasRuta from "./routes/noticia.js";
 import usuariosRuta from "./routes/usuario.js";
 import rolesRuta from "./routes/roles.js";
 
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./swagger.config.js";
+
 const app = express();
 dotenv.config();
 
@@ -46,10 +49,16 @@ export const roles = {
 };
 
 // Rutas
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/autenticacion", autenticacionRuta);
 app.use("/api/noticias", noticiasRuta);
 app.use("/api/usuarios", usuariosRuta);
 app.use("/api/roles",rolesRuta);
+
+app.get('/api-docs.json', (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
+});
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
