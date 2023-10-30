@@ -11,11 +11,11 @@ const options = {
     },
       servers: [
         {
-          url: 'http://localhost:8800', // Reemplaza con la URL de tu servidor
+          url: 'http://localhost:8800',
         },
       ],
     },
-    apis: ['./routes/*.js'], // Ruta a tus archivos de rutas
+    apis: ['./routes/*.js'],
   };
   
   const swaggerSpec = swaggerJSDoc(options);
