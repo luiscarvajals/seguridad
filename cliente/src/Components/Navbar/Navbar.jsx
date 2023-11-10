@@ -1,9 +1,57 @@
-import React from 'react'
+import React from "react";
+import "./navbar.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
 const Navbar = () => {
-  return (
-    <div>Navbar</div>
-  )
-}
+  const [activeLink, setActiveLink] = useState("inicio");
+  // const navigate = useNavigate();
 
-export default Navbar
+  // const handleCarrera = () => {
+  //   navigate("/carrera");
+  // };
+  // const handleAbout = () => {
+  //   navigate("/about");
+  // };
+
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+  };
+  return (
+    <nav>
+      <NavLink>Portal Web</NavLink>
+      <ul className="navbar-nav ms-auto">
+        <li className={`nav-item ${activeLink === "inicio" ? "active" : ""}`}>
+          <a
+            className="nav-link"
+            href="/"
+            onClick={() => handleLinkClick("inicio")}
+          >
+            Inicio
+          </a>
+        </li>
+        <li className={`nav-item ${activeLink === "carrera" ? "active" : ""}`}>
+          <a
+            className="nav-link"
+            href="/carrera"
+            onClick={() => handleLinkClick("carrera")}
+          >
+            Carrera
+          </a>
+        </li>
+        <li className={`nav-item ${activeLink === "nosotros" ? "active" : ""}`}>
+          <a
+            className="nav-link"
+            href="/about"
+            onClick={() => handleLinkClick("nosotros")}
+          >
+            Nosotros
+          </a>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+export default Navbar;
