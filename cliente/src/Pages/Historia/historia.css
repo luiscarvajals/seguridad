@@ -1,0 +1,100 @@
+
+.historia-wrapper {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-size: cover; */
+  /* background-image: url("https://res.cloudinary.com/dwwj8mhse/image/upload/v1699757234/bfej4mgj3wi5dp2zqzvx.jpg"); */
+  background-color: #1a1a1a;
+  background-repeat: no-repeat;
+}
+
+.linea-vertical1 {
+  background-color: white;
+  width: 1px; /* Ancho de la linea */
+  height: 17%; /* Altura de la linea */
+  top: 0;
+  left: 50%; /* Justo al medio */
+}
+
+.linea-horizontal {
+  background-color: white;
+  width: 100%; /* Ancho completo */
+  height: 5px;
+  position: absolute;
+  top: 20%;
+  right: 0;
+  transform: translateY(-50%); /* Centra verticalmente */
+}
+
+.linea-vertical2 {
+  background-color: white;
+  width: 1px; /* Ancho de la linea */
+  height: 70%; /* Altura de la linea */
+  position: absolute;
+  top: 25%;
+  left: 50%; /* Justo al medio*/
+}
+
+.texto-izqH {
+  top: 620px; /* Espacio desde la parte superior */
+  left: 15%; /* Espacio desde la izquierda */
+  position: absolute;
+  color: white; /* Color del texto en negro */
+  font-size: 65px; /* Tamaño de fuente */
+}
+
+.texto-der1H {
+  position: absolute;
+  top: 250px;
+  left: 53%; /* Espacio desde la izquierda */
+  right: 10%;
+  color: white; /* Color del texto en negro */
+  font-size: 23px; /* Tamaño de fuente */
+  text-align: justify;
+}
+
+.enlace {
+  position: absolute;
+  top: 12%;
+  left: 62%;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.enlace::before {
+  content: "➜ "; /* Agrega el círculo y la flecha */
+  color: white;
+  font-size: 30px;
+  margin-right: 5px;
+}
+
+.enlace:hover {
+  text-decoration: underline; /* Subrayar en el hover */
+}
+
+.imagen {
+  position: absolute;
+  top: 37%;
+  left: 31%;
+  width: 20%;
+}
+
+.texto-der2H {
+  position: absolute;
+  top: 450px;
+  left: 53%; /* Espacio desde la izquierda */
+  right: 10%;
+  color: white; /* Color del texto en negro */
+  font-size: 23px; /* Tamaño de fuente */
+  text-align: justify;
+}
+

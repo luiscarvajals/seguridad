@@ -1,0 +1,104 @@
+.rosa {
+    background-color: rgb(245, 228, 245);
+    height: 100px; /* 33.33% de la altura de la ventana gráfica */
+    width: 100%; /* Ancho completo de la ventana gráfica */
+    flex: 1;
+
+}
+
+.texto-izq1 {
+    color: rgb(46, 46, 46); /* Color del texto en negro */
+    font-size: 20px; /* Tamaño de fuente */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.texto-izq2 {
+    color: black;
+    font-size: 35px;
+    white-space: nowrap; /* Evita que el texto se divida automáticamente */
+}
+
+/* Estilos para las líneas grises horizontales en la parte derecha */
+.linea-horizontal {
+    background-color: rgb(245, 245, 245);
+    width: 40%; /* Ancho completo de la franja rosa */
+    height: 200px;
+    transform: translateY(-50%); /* Centra verticalmente */
+}
+
+/* Estilos para la sección con fondo negro y columnas */
+.fondo-negro {
+    background-color: black;
+    height: calc(30.67vh + 100px); /* Ocupa el resto de la pantalla */
+    width: 100%; /* Ancho completo de la ventana gráfica */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Ajuste para que las columnas comiencen en la parte superior */
+}
+
+/* Estilos para las columnas */
+.columna {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: rgb(245, 228, 245);
+    font-size: 18px;
+    margin-left: 70px;
+}
+
+/* Estilos para los enlaces (hipervínculos) */
+.columna a {
+    text-decoration: none; /* Quita el subrayado predeterminado */
+    color: white; /* Color del texto en blanco */
+    margin: 2px; /* Espacio entre enlaces */
+}
+
+.columna a:hover {
+    text-decoration: underline; /* Subrayado al pasar el cursor sobre el enlace */
+}
+
+
+/* Estilos para el texto en la parte inferior izquierda */
+.derechos-reservados {
+    bottom: 10px;
+    left: 10px; 
+    color: rgb(32, 32, 32);
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para los enlaces en la parte inferior derecha */
+.enlaces-sociales {
+    bottom: 10px;
+    right: 10px; 
+    background-color: rgb(245, 228, 245);
+    padding: 20px;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.enlaces-sociales a {
+    text-decoration: none; /* Quita el subrayado predeterminado */
+    color: rgb(73, 73, 73); /* Color del texto en blanco */
+    margin: 0 20px; /* Espacio entre enlaces horizontal */
+    font-weight: bold;
+}
+
+.enlaces-sociales a:hover {
+    color: rgb(255, 107, 96); /* Cambio de color al pasar el cursor */
+}
+
+/* Estilos para la imagen en la parte inferior */
+.imagen {
+    bottom: 20px; /* Ajusta la distancia desde la parte inferior */
+    left: 50%; /* Coloca la imagen en el centro horizontalmente */
+    transform: translateX(-50%); /* Centra horizontalmente */
+    width: 150px; /* Ancho de la imagen (ajusta según tus necesidades) */
+    height: auto; /* Mantiene la proporción original de la imagen */
+}

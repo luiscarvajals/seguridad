@@ -1,45 +1,41 @@
-/* body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
+.content {
+    padding: 20px; 
+    flex-grow: 1; 
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     background-image: url('https://res.cloudinary.com/dwwj8mhse/image/upload/v1699753553/kavonkcwybqnowibs4tw.jpg');
-    background-size: cover;
     background-position: center;
-} */
-
-.container{
-    background-image: url('https://res.cloudinary.com/dwwj8mhse/image/upload/v1699753553/kavonkcwybqnowibs4tw.jpg');
     background-size: cover;
-    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
+    z-index: 1;
+    position: relative;
 }
 
-.logo {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    max-width: 200px; /* Ajusta el tamaño de la imagen */
+.texto-izq, .texto-der {
+    color: white;
+    text-align: center;
 }
 
 .texto-izq {
-    position: absolute;
-    top: 25%; /* Espacio desde la parte superior */
-    left: 5%; /* Espacio desde la izquierda */
-    color: white; /* Color del texto en negro */
-    font-size: 70px; /* Tamaño de fuente */
+    font-size: 70px;
+    margin-top: 25px;
 }
 
 .texto-der {
-    position: absolute;
-    width: 30%; /* Tamaño del cuadro transparente */
-    top: 25%; /* Espacio desde la parte superior */
-    left: 75%; /* Espacio desde la izquierda */
-    transform: translateX(-50%);
-    background: rgba(128, 128, 128, 0.5); /* Fondo transparente */
-    color: white; /* Color del texto en blanco */
-    font-size: 28px; /* Tamaño del texto */
-    font-style: italic; /* Texto en cursiva */
+    width: 80%;
+    background: rgba(128, 128, 128, 0.5);
+    font-size: 28px;
+    font-style: italic;
     padding: 20px;
+    margin-top: 10px;
+}
+
+.logo {
+    max-width: 200px;
+    margin-top: 20px;
 }

@@ -1,52 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+/* Navbar Styles */
 
-/* Estilos generales */
-body {
-    background-color: #000;
-    color: #fff;
-    font-family: 'Arial', sans-serif;
-  }
+.navbar {
+  background-color: #e00505; /* Color de fondo del Navbar */
+  padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #ffffff; /* Color del texto del logo */
   
-  /* Estilos para el menú de navegación */
-  nav {
-    background-color: #000;
-    padding: 15px 0;
-    color: #fff;
-  }
+}
+.logoNav{
+  width: 80px;
+  height: 80px;
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 0.25rem;
   
+}
+
+.navbar-nav {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: #ffffff; /* Color del texto de los enlaces */
+  margin-right: 15px;
+}
+
+.nav-link:hover {
+  color: #28a745; /* Cambio de color al pasar el ratón */
+}
+
+/* Dropdown Styles */
+
+.navbar-nav .nav-item.dropdown:hover > .nav-link {
+  color: #28a745; /* Cambio de color del enlace principal al pasar el ratón */
+}
+
+.dropdown-menu {
+  background-color: #343a40; /* Color de fondo del menú desplegable */
+  border: none;
+}
+
+.dropdown-item {
+  color: #ffffff; /* Color del texto del ítem del menú desplegable */
+}
+
+.dropdown-item:hover {
+  background-color: #28a745; /* Cambio de color al pasar el ratón */
+  color: #ffffff; /* Cambio de color del texto al pasar el ratón */
+}
+
+/* Media Query para dispositivos pequeños */
+
+@media (max-width: 768px) {
   .navbar-nav {
-    display: flex;
-    align-items: center;
+    margin-top: 1rem; /* Ajuste de margen superior para dispositivos pequeños */
   }
-  
-  .nav-item {
-    margin-right: 15px;
+
+  .navbar-collapse {
+    background-color: #343a40; /* Color de fondo del menú desplegable en dispositivos pequeños */
+    box-shadow: none; /* Sin sombra en dispositivos pequeños */
   }
-  
-  .nav-link {
-    color: #fff;
-    transition: color 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    color: #17a2b8; /* Cambiar al color deseado al hacer hover */
-  }
-  
-  /* Estilos para el estado activo */
-  .active .nav-link {
-    color: #17a2b8; /* Cambiar al color deseado para el estado activo */
-  }
-  
-  /* Media Query para hacer el menú responsivo */
-  @media (max-width: 768px) {
-    .navbar-nav {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .nav-item {
-      margin-bottom: 10px;
-      margin-right: 0;
-    }
-  }
-  
+}
