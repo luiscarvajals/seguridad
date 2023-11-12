@@ -6,7 +6,6 @@ const About = () => {
   return (
     <div>
      <div><Navbar /></div>
-  
       <img src="https://res.cloudinary.com/dwwj8mhse/image/upload/v1699753553/kavonkcwybqnowibs4tw.jpg" alt="Logo de la U.C.B." class="logo"/>
     <div class="vertical-line">
     <div class="texto-izq">

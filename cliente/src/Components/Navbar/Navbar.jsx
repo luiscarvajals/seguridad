@@ -49,6 +49,15 @@ const Navbar = () => {
             Nosotros
           </a>
         </li>
+        <li className={`nav-item ${activeLink === "historia" ? "active" : ""}`}>
+          <a
+            className="nav-link"
+            href="/historia"
+            onClick={() => handleLinkClick("historia")}
+          >
+            Historia
+          </a>
+        </li>
       </ul>
     </nav>
   );

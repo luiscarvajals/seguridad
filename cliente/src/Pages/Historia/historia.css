@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    background-size: cover;
+}
+
+.linea-vertical1 {
+    background-color: white;
+    width: 1px; /* Ancho de la linea */
+    height: 17%; /* Altura de la linea */
+    position: absolute;
+    top: 0;
+    left: 50%; /* Justo al medio */
+}
+
+.linea-horizontal {
+    background-color: white;
+    width: 100%; /* Ancho completo */
+    height: 5px;
+    position: absolute;
+    top: 20%;
+    right: 0;
+    transform: translateY(-50%); /* Centra verticalmente */
+}
+
+.linea-vertical2 {
+    background-color: white;
+    width: 1px; /* Ancho de la linea */
+    height: 70%; /* Altura de la linea */
+    position: absolute;
+    top: 25%;
+    left: 50%; /* Justo al medio*/
+}
+
+.texto-izq {
+    position: absolute;
+    top: 0; /* Espacio desde la parte superior */
+    left: 5%; /* Espacio desde la izquierda */
+    color: white; /* Color del texto en negro */
+    font-size: 65px; /* Tamaño de fuente */
+}
+
+.texto-der1 {
+    position: absolute;
+    top: 0; /* Espacio desde la parte superior */
+    left: 53%; /* Espacio desde la izquierda */
+    right: 5%;
+    color: white; /* Color del texto en negro */
+    font-size: 18px; /* Tamaño de fuente */
+}
+
+.enlace {
+    position: absolute;
+    top: 12%;
+    left: 62%;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.enlace::before {
+    content: "➜ "; /* Agrega el círculo y la flecha */
+    color: white;
+    font-size: 30px;
+    margin-right: 5px;
+}
+
+.enlace:hover {
+    text-decoration: underline; /* Subrayar en el hover */
+}
+
+.imagen {
+    position: absolute;
+    top: 30%;
+    left: 5%;
+    max-width: 40%; /* Ajusta el tamaño de la imagen */
+}
+
+.texto-der2 {
+    position: absolute;
+    top: 33%; /* Espacio desde la parte superior */
+    left: 53%; /* Espacio desde la izquierda */
+    right: 10%;
+    color: white; /* Color del texto en negro */
+    font-size: 23px; /* Tamaño de fuente */
+}
