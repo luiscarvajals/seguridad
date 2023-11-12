@@ -1,6 +1,7 @@
 import React from 'react'
 import './about.css'
 import Navbar from '../../Components/Navbar/Navbar'
+import Footer from '../../Components/Footer/Footer'
 
 const About = () => {
   return (
@@ -21,6 +22,7 @@ const About = () => {
             alentador para aprender, investigar, 
             enseñar, trabajar y crecer en comunidad."</p>
     </div>
+    <Footer/>
     </div>
   )
 }

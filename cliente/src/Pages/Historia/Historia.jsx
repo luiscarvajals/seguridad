@@ -5,7 +5,7 @@ import Navbar from '../../Components/Navbar/Navbar'
 const Historia = () => {
   return (
     <div>
-    <img src="histimg.png" alt="Imagen Historia" class="imagen"/>
+    <img src="https://res.cloudinary.com/dwwj8mhse/image/upload/v1699757234/bfej4mgj3wi5dp2zqzvx.jpg" alt="Imagen Historia" class="imagen"/>
     <div class="linea-vertical1"></div>
     <div class="linea-horizontal"></div>
     <div class="linea-vertical2"></div>

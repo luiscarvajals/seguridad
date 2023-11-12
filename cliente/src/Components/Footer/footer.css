@@ -1,0 +1,209 @@
+.rosa {
+    background-color: rgb(245, 228, 245);
+    height: 33.33vh; /* 33.33% de la altura de la ventana gráfica */
+    width: 100%; /* Ancho completo de la ventana gráfica */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Estilos para la línea vertical gris que cubre la franja rosa */
+.linea-gris {
+    background-color: rgb(163, 163, 163);
+    width: 2px; /* Ancho de 2 píxeles */
+    height: 33.33%; /* Altura completa de la franja rosa */
+    position: absolute;
+    top: 0;
+    left: 50%; /* Justo al medio de la franja rosa */
+}
+
+/* Estilos para el texto en la parte izquierda */
+.texto-izq1 {
+    position: absolute;
+    top: 50px; /* Espacio desde la parte superior */
+    left: 80px; /* Espacio desde la izquierda */
+    color: black; /* Color del texto en negro */
+    font-size: 20px; /* Tamaño de fuente */
+}
+
+.texto-izq2 {
+    position: absolute;
+    top: 35px;
+    left: 80px;
+    color: black;
+    font-size: 55px;
+    white-space: nowrap; /* Evita que el texto se divida automáticamente */
+}
+
+/* Estilos para las líneas grises horizontales en la parte derecha */
+.linea-horizontal {
+    background-color: rgb(163, 163, 163);
+    width: 40%; /* Ancho completo de la franja rosa */
+    height: 2px;
+    position: absolute;
+    right: 0; /* Al lado derecho de la franja rosa */
+    transform: translateY(-50%); /* Centra verticalmente */
+}
+
+.linea-1 {
+    top: 40%; 
+    right: 80px;
+}
+
+.linea-2 {
+    top: 65%; 
+    right: 80px;
+}
+
+.linea-3 {
+    top: 90%; 
+    right: 80px;
+}
+
+/* Estilos para la sección con fondo negro y columnas */
+.fondo-negro {
+    background-color: black;
+    height: calc(66.67vh + 2px); /* Ocupa el resto de la pantalla */
+    width: 100%; /* Ancho completo de la ventana gráfica */
+    position: absolute;
+    top: 33.33vh; /* Comienza desde la parte inferior de la franja rosa */
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Ajuste para que las columnas comiencen en la parte superior */
+}
+
+/* Estilos para las columnas */
+.columna {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: white; /* Color del texto en blanco */
+    font-size: 18px;
+    margin-left: 70px;
+}
+
+/* Estilos para los enlaces (hipervínculos) */
+.columna a {
+    text-decoration: none; /* Quita el subrayado predeterminado */
+    color: white; /* Color del texto en blanco */
+    margin: 2px; /* Espacio entre enlaces */
+}
+
+.columna a:hover {
+    text-decoration: underline; /* Subrayado al pasar el cursor sobre el enlace */
+}
+
+/* Estilos para los rectángulos grises con esquinas curvas */
+.rectangulo-1 {
+    width: 200px; /* Ancho del rectángulo */
+    height: 35px; /* Altura del rectángulo */
+    background-color: #d8dadc; /* Color de fondo azul */
+    border-radius: 20px; /* Esquinas curvas con un radio de 20px */
+    position: absolute; /* Posición absoluta para personalizar la ubicación */
+    top: 500px; /* Posición desde la parte superior en píxeles */
+    left: 125px; /* Posición desde la izquierda en píxeles */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+}
+
+.rectangulo-2 {
+    width: 200px; /* Ancho del rectángulo */
+    height: 35px; /* Altura del rectángulo */
+    background-color: #d8dadc; /* Color de fondo azul */
+    border-radius: 20px; /* Esquinas curvas */
+    position: absolute; /* Posición absoluta para personalizar la ubicación */
+    top: 500px; /* Posición desde la parte superior en píxeles */
+    left: 375px; /* Posición desde la izquierda en píxeles */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+}
+
+.rectangulo-3 {
+    width: 200px; /* Ancho del rectángulo */
+    height: 35px; /* Altura del rectángulo */
+    background-color: #d8dadc; /* Color de fondo azul */
+    border-radius: 20px; /* Esquinas curvas  */
+    position: absolute; /* Posición absoluta para personalizar la ubicación */
+    top: 500px; /* Posición desde la parte superior en píxeles */
+    left: 625px; /* Posición desde la izquierda en píxeles */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+}
+
+.rectangulo-4 {
+    width: 200px; /* Ancho del rectángulo */
+    height: 35px; /* Altura del rectángulo */
+    background-color: #d8dadc; /* Color de fondo azul */
+    border-radius: 20px; /* Esquinas curvas  */
+    position: absolute; /* Posición absoluta para personalizar la ubicación */
+    top: 500px; /* Posición desde la parte superior en píxeles */
+    left: 875px; /* Posición desde la izquierda en píxeles */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+}
+
+.rectangulo-5 {
+    width: 200px; /* Ancho del rectángulo */
+    height: 35px; /* Altura del rectángulo */
+    background-color: #d8dadc; /* Color de fondo azul */
+    border-radius: 20px; /* Esquinas curvas */
+    position: absolute; /* Posición absoluta para personalizar la ubicación */
+    top: 500px; /* Posición desde la parte superior en píxeles */
+    left: 1125px; /* Posición desde la izquierda en píxeles */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+}
+
+/* Estilos para el texto en la parte inferior izquierda */
+.derechos-reservados {
+    position: absolute;
+    bottom: 10px; /* 10 píxeles desde la parte inferior */
+    left: 10px; /* 10 píxeles desde la izquierda */
+    color: white;
+}
+
+/* Estilos para los enlaces en la parte inferior derecha */
+.enlaces-sociales {
+    position: absolute;
+    bottom: 10px; /* 10 píxeles desde la parte inferior */
+    right: 10px; /* 10 píxeles desde la derecha */
+}
+
+.enlaces-sociales a {
+    text-decoration: none; /* Quita el subrayado predeterminado */
+    color: white; /* Color del texto en blanco */
+    margin: 0 10px; /* Espacio entre enlaces horizontal */
+    font-weight: bold;
+}
+
+.enlaces-sociales a:hover {
+    color: blue; /* Cambio de color al pasar el cursor */
+}
+
+/* Estilos para la imagen en la parte inferior */
+.imagen {
+    position: absolute;
+    bottom: 20px; /* Ajusta la distancia desde la parte inferior */
+    left: 50%; /* Coloca la imagen en el centro horizontalmente */
+    transform: translateX(-50%); /* Centra horizontalmente */
+    width: 150px; /* Ancho de la imagen (ajusta según tus necesidades) */
+    height: auto; /* Mantiene la proporción original de la imagen */
+}
