@@ -1,0 +1,60 @@
+
+
+.containerIni {
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.button {
+    width: 180px;
+    height: 100px;
+    margin: 10px;
+    border-radius: 20px;
+    background-color: #3498db;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Añade transición para el cambio de color y sombra */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una sutil sombra */
+}
+
+.button:hover {
+    background-color: #2978a0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Incrementa la sombra al pasar el mouse */
+}
+
+/* Estilos para cada botón */
+#button1, #button2, #button3, #button4 {
+    background-color: #3498db;
+}
+
+#button5, #button6, #button7, #button8 {
+    background-color: #34db66;
+}
+
+#button9, #button10, #button11, #button12 {
+    background-color: #e74c3c;
+}
+
+#button13, #button14, #button15, #button16 {
+    background-color: #db8534;
+}
+
+.small-text {
+    font-size: 10px;
+}

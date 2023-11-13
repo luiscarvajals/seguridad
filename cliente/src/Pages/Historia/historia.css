@@ -1,4 +1,5 @@
 
+
 .historia-wrapper {
   margin: 0;
   padding: 0;
@@ -42,8 +43,8 @@
 }
 
 .texto-izqH {
-  top: 620px; /* Espacio desde la parte superior */
-  left: 15%; /* Espacio desde la izquierda */
+  top: 720px; /* Espacio desde la parte superior */
+  left: 5%; /* Espacio desde la izquierda */
   position: absolute;
   color: white; /* Color del texto en negro */
   font-size: 65px; /* Tamaño de fuente */
@@ -84,8 +85,8 @@
 .imagen {
   position: absolute;
   top: 37%;
-  left: 31%;
-  width: 20%;
+  left: 25%;
+  width: 600px;
 }
 
 .texto-der2H {
@@ -96,5 +97,6 @@
   color: white; /* Color del texto en negro */
   font-size: 23px; /* Tamaño de fuente */
   text-align: justify;
+  font-family: Georgia, 'Times New Roman', Times, serif
 }
 

@@ -1,0 +1,64 @@
+.containerCarrera {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.5s ease-in-out;
+}
+
+header {
+    background-color: white;
+    padding: 20px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    margin-right: 230px; /* Ajusta el margen derecho del título para agregar distancia */
+}
+
+.image {
+    max-width: 100%;
+    height: auto;
+}
+
+.content {
+    padding: 20px;
+    text-align: center; /* Centra el texto en el contenido */
+}
+
+/* Estilos para la imagen y el texto */
+.image-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px; /* Añade espacio entre el contenido y la imagen/texto */
+}
+
+.sub-image {
+    max-width: 48%; /* Ajusta el ancho de la imagen */
+    height: auto;
+    
+}
+
+
+.sub-text {
+    max-width: 48%; /* Ajusta el ancho del texto */
+    margin-left: 20px; /* Añade espacio entre la imagen y el texto */
+}
+
+/* Estilos para los nuevos textos */
+.additional-texts {
+    display: flex;
+    justify-content: space-around; /* Espacio igual entre los textos */
+    margin-top: 20px; /* Añade espacio entre el texto y los nuevos textos */
+}
+
+.additional-text {
+    max-width: 30%; /* Ajusta el ancho de cada texto */
+    text-align: center; /* Centra el texto en su contenedor */
+}
+
