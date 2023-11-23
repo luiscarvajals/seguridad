@@ -4,14 +4,13 @@ import axios from "axios";
 import "./actualizarUsuario.css";
 import {useParams} from "react-router-dom";
 
-const ActualizarUsuario = ({ inputs, title, match }) => {
-  const [files, setFiles] = useState([]);
+const ActualizarUsuario = ({ inputs, title }) => {
+  const [files] = useState([]);
   const [info, setInfo] = useState({});
   const [userData, setUserData] = useState({});
   const { id } = useParams();
-  const [previewImage, setPreviewImage] = useState("");
   const [availableRoles, setAvailableRoles] = useState([]);
-    const [currentUserRole, setCurrentUserRole] = useState("");
+    const [setCurrentUserRole] = useState("");
 
 
   
@@ -36,7 +35,9 @@ const ActualizarUsuario = ({ inputs, title, match }) => {
         // Manejar errores si es necesario
         console.error('Error al obtener el rol del usuario:', error);
       });
-  }, [id]);
+  
+      
+  }, [setCurrentUserRole, id]);
   
 
   useEffect(() => {
@@ -58,31 +59,31 @@ const ActualizarUsuario = ({ inputs, title, match }) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  const handleFileChange = (e) => {
-    const selectedFiles = e.target.files;
-    setFiles([...selectedFiles]);
+  // const handleFileChange = (e) => {
+  //   const selectedFiles = e.target.files;
+  //   setFiles([...selectedFiles]);
   
-    if (selectedFiles.length > 0) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setPreviewImage(reader.result);
-      };
-      reader.readAsDataURL(selectedFiles[0]);
-    } else {
-      setPreviewImage("");
-    }
-  };
+  //   if (selectedFiles.length > 0) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       setPreviewImage(reader.result);
+  //     };
+  //     reader.readAsDataURL(selectedFiles[0]);
+  //   } else {
+  //     setPreviewImage("");
+  //   }
+  // };
   
   
 
-  const handleDeleteImage = () => {
-  if (userData && userData.img) {
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      img: "" // Borrar la URL de la imagen estableciéndola como una cadena vacía
-    }));
-  }
-};
+//   const handleDeleteImage = () => {
+//   if (userData && userData.img) {
+//     setUserData((prevUserData) => ({
+//       ...prevUserData,
+//       img: "" // Borrar la URL de la imagen estableciéndola como una cadena vacía
+//     }));
+//   }
+// };
 
 
 const handleClick = async (e) => {

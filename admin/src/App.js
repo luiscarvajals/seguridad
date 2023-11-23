@@ -6,18 +6,18 @@
 
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Sidebar from "./Components/Sidebar/Sidebar";
+import Sidebar from "./Components/Sidebar/Sidebar.jsx";
 import { useContext } from "react";
-import { AuthContexto } from "./Context/AuthContexto";
+import { AuthContexto } from "./Context/AuthContexto.js";
 import { Navigate } from "react-router-dom";
-import Login from "./Pages/login/Login";
-import List from "./Components/list/List";
-import Usuario from "./Pages/usuario/Usuario";
-import {userInputs, noticiaInputs} from "./formSource";
-import { noticiaColumns, userColumns} from "./datatablesource";
-import ActualizarUsuario from "./Pages/actualizarUsuario/actualizarUsuario";
-import Noticia from "./Pages/noticia/Noticia";
-import ActualizarNoticia from "./Pages/actualizarNoticia/actualizarNoticia";
+import Login from "./Pages/login/Login.jsx";
+import List from "./Components/list/List.jsx";
+import Usuario from "./Pages/usuario/Usuario.jsx";
+import {userInputs, noticiaInputs} from "./formSource.js";
+import { noticiaColumns, userColumns} from "./datatablesource.js";
+import ActualizarUsuario from "./Pages/actualizarUsuario/actualizarUsuario.jsx";
+import Noticia from "./Pages/noticia/Noticia.jsx";
+import ActualizarNoticia from "./Pages/actualizarNoticia/actualizarNoticia.jsx";
 
 function App() {
   const RutaProtegida = ({ children }) => {

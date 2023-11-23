@@ -1,6 +1,5 @@
 import Usuario from "../models/Usuario.js";
 import { crearError } from "../extra/error.js";
-import logger from '../extra/winston.js';
 
 export const actualizarUsuario = async (req, res, next) => {
     try {
@@ -20,10 +19,10 @@ export const actualizarUsuario = async (req, res, next) => {
   
       const options = { new: true };
       const updatedUsuario = await Usuario.findByIdAndUpdate(req.params.id, { $set: updatedUser }, options);
-      logger.info(`Usuario actualizado: ${updatedUsuario}`);
+      //logger.info(`Usuario actualizado: ${updatedUsuario}`);
       res.status(200).json(updatedUsuario);
     } catch (err) {
-      logger.error(`Error al actualizar usuario: ${err.message}`);
+      //logger.error(`Error al actualizar usuario: ${err.message}`);
       next(err);
     }
   };
@@ -43,16 +42,16 @@ export const actualizarUsuario = async (req, res, next) => {
   export const borrarUsuario = async (req, res, next) => {
     try {
       const isAdmin = req.user.roles.includes('admin');
-      logger.info(`Este es el log para saber si el admin llega o no ${req.user.isAdmin}` ) // Obtener el valor de isAdmin del objeto de usuario en la solicitud
+      //logger.info(`Este es el log para saber si el admin llega o no ${req.user.isAdmin}` ) // Obtener el valor de isAdmin del objeto de usuario en la solicitud
       if (!isAdmin) {
         throw crearError(403, 'No tienes permiso para eliminar usuarios');
       }
     
       await Usuario.findByIdAndUpdate(req.params.id, { activo: false });
-      logger.info(`Usuario eliminado con éxito por el administrador ${req.user.usuario}`);
+      //logger.info(`Usuario eliminado con éxito por el administrador ${req.user.usuario}`);
       res.status(200).json("Usuario ha sido borrado");
     } catch (err) {
-      logger.error(`Error al eliminar usuario: ${err.message}`);
+      //logger.error(`Error al eliminar usuario: ${err.message}`);
       next(err);
     }
   };
@@ -63,7 +62,7 @@ export const actualizarUsuario = async (req, res, next) => {
     //Get Usuario único
     try {
       const usuario = await Usuario.findById(req.params.id);
-      console.log(`Usuario obtenido: ${usuario}`);
+      //console.log(`Usuario obtenido: ${usuario}`);
       res.status(200).json(usuario);
     } catch (err) {
       console.log(`Error al obtener usuario: ${err.message}`);
@@ -74,7 +73,7 @@ export const actualizarUsuario = async (req, res, next) => {
   export const obtenerUsuarios = async (req, res, next) => {
     try {
       const usuarios = await Usuario.find();
-      console.log(`Usuarios obtenidos: ${usuarios}`);
+      //console.log(`Usuarios obtenidos: ${usuarios}`);
       res.status(200).json(usuarios);
     } catch (err) {
       console.log(`Error al obtener usuarios: ${err.message}`);

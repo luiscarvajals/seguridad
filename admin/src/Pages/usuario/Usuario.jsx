@@ -1,4 +1,4 @@
-import "./usuario.scss";
+import './usuario.css'
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import { useState } from "react";
 import axios from "axios";
@@ -12,8 +12,6 @@ const New = ({ inputs, title }) => {
   const [files, setFiles] = useState("");
   const [info, setInfo] = useState({});
 
-  const [errors, setErrors] = useState({});
-  const [formError, setFormError] = useState(null);
 
   const [availableRoles, setAvailableRoles] = useState([]);
 

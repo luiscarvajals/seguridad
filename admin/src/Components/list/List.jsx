@@ -1,6 +1,5 @@
-import "./list.scss"
-import { useLocation } from "react-router-dom"
-import Datatable from "../datatable/Datatable"
+import "./list.css"
+import Datatable from '../datatable/Datatable'
 import { useState } from "react"
 
 

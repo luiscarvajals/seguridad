@@ -1,20 +1,18 @@
 import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FaSun, FaMoon } from "react-icons/fa";
-import { useSpring, animated } from "react-spring";
+import { useSpring } from "react-spring";
 import "./sidebar.css";
 import axios from "axios";
 import { AuthContexto } from "../../Context/AuthContexto";
 import { motion } from "framer-motion";
 
 const Sidebar = () => {
-  const [selected, setSelected] = useState("Dashboard");
-  const [darkMode, setDarkMode] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [setSelected] = useState("Dashboard");
+  const [sidebarOpen] = useState(true);
 
-  const handleToggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+  // const handleToggleSidebar = () => {
+  //   setSidebarOpen(!sidebarOpen);
+  // };
 
   const sidebarAnimation = useSpring({
     transform: sidebarOpen ? "translateX(0)" : "translateX(-100%)",

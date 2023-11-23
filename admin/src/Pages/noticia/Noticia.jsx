@@ -1,11 +1,9 @@
-import "./noticia.scss";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
 
 const Noticia = ({ inputs, title }) => {
   const [files, setFiles] = useState([]);

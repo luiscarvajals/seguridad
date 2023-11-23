@@ -17,8 +17,8 @@ const Login = () => {
     password: undefined,
   });
   const [intentosFallidos, setIntentosFallidos] = useState(false);
-  const [bloquearIngreso, setBloquearIngreso] = useState(false);
-  const { loading, error, dispatch } = useContext(AuthContexto);
+  const [setBloquearIngreso] = useState(false);
+  const { loading, dispatch } = useContext(AuthContexto);
 
   const navigate = useNavigate();
 

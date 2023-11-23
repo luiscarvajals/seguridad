@@ -12,7 +12,7 @@ const ActualizarNoticia = () => {
   const [files, setFiles] = useState([]);
   const [info, setInfo] = useState({});
   const [previewImages, setPreviewImages] = useState([]);
-  const [deletedImages, setDeletedImages] = useState([]);
+  const [deletedImages] = useState([]);
 
   useEffect(() => {
     axios

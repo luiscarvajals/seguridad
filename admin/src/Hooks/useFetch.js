@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { icon } from "@fortawesome/fontawesome-svg-core";
 
 const useFetch = (url) => {
   const [data, setData] = useState([]);
@@ -25,7 +24,7 @@ const useFetch = (url) => {
     };
 
     fetchData();
-  }, []);
+  }, [url]);
 
   const reFetch = async () => {
     setLoading(true);

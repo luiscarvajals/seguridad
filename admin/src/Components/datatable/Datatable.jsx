@@ -1,19 +1,18 @@
-import "./datatable.scss";
+import "./datatable.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../Hooks/useFetch";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { useNavigate } from "react-router-dom";
 
-const Datatable = ({ columns, onRowClick }) => {
+const Datatable = ({ columns }) => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const navigate = useNavigate();
-  const { data, loading, error } = useFetch(`/${path}`);
+  const { data} = useFetch(`/${path}`);
   const [list, setList] = useState([]);
 
   useEffect(() => {
@@ -22,16 +21,17 @@ const Datatable = ({ columns, onRowClick }) => {
     }
   }, [data]);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`/${path}`);
-      setList(response.data);
-    } catch (err) {}
-  };
-
   useEffect(() => {
-    fetchData();
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/${path}`);
+        setList(response.data);
+      } catch (err) {}
+    };
+  
+    fetchData(); 
   }, [path]);
+  
 
   const handleDelete = async (id) => {
     try {
