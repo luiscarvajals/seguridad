@@ -1,8 +1,6 @@
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import Usuario from '../models/Usuario.js';
 import { crearError } from '../extra/error.js';
-import { roles } from '../index.js';
 
 
 export const registroUsuario = async (req, res, next) => {
@@ -25,7 +23,7 @@ export const registroUsuario = async (req, res, next) => {
         return res.status(400).json({ mensaje: 'El usuario o correo electrónico ya está registrado.' });
       }
   
-      const hashedPassword = await bcrypt.hash(password, 10);
+    
   
       const nuevoUsuario = new Usuario({
         nombre,
@@ -33,7 +31,7 @@ export const registroUsuario = async (req, res, next) => {
         fechaNacimiento,
         usuario,
         email,
-        password: hashedPassword,
+        password,
         pais,
         img,
         ciudad,
@@ -55,50 +53,47 @@ export const registroUsuario = async (req, res, next) => {
   };
   
 
-export const loginAdmin = async (req, res, next) => {
-    const user = await Usuario.findOne({ usuario: req.body.usuario, activo: true });
-
-  try {
-    await Usuario.findOne({ usuario: req.body.usuario, activo: true});
-
-    if (!user.roles.includes(roles.admin)) {
-      //logger.warn("Intento de inicio de sesión de un usuario no registrado"); // Registro de warning en el logger
-      throw crearError(401, "Acceso denegado");
-    }else{
-   
-      const contraseñaValida = await bcrypt.compare(req.body.password, user.password);
-    
-
-    if (!contraseñaValida) {
-      await Usuario.findByIdAndUpdate(user._id, { $inc: { intentosFallidos: 1 } });
-      //logger.warn("Contraseña incorrecta"); // Registro de warning en el logger
-
-      if (user.intentosFallidos >= 2) {
-        //logger.warn(`El usuario ${user.usuario} ha alcanzado el límite de intentos fallidos`); // Registro de warning en el logger
-        throw crearError(404, "El administrador ha alcanzado el límite de intentos fallidos. Por favor, inténtelo de nuevo en 5 segundos.");
+  export const loginAdmin = async (req, res, next) => {
+    try {
+      const user = await Usuario.findOne({ usuario: req.body.usuario, activo: true });
+  
+      if (!user) {
+        throw crearError(404, "Usuario no encontrado");
       }
-      return next(crearError(400, "Contraseña incorrecta"));
-      //logger.warn(`El usuario ${user.usuario} ingresó una contraseña incorrecta`); // Registro de warning en el logger
+  
+      if (!user.roles.includes('admin')) {
+        throw crearError(401, "Acceso denegado");
+      } else {
+        // Comparar la contraseña directamente sin verificar el hash
+        const contraseñaValida = req.body.password === user.password;
+  
+        if (!contraseñaValida) {
+          await Usuario.findByIdAndUpdate(user._id, { $inc: { intentosFallidos: 1 } });
+  
+          if (user.intentosFallidos >= 2) {
+            throw crearError(404, "El administrador ha alcanzado el límite de intentos fallidos. Por favor, inténtelo de nuevo en 5 segundos.");
+          }
+  
+          return next(crearError(400, "Contraseña incorrecta"));
+        }
+  
+        // Restablecer intentosFallidos a 0 si la contraseña es válida
+        await Usuario.findByIdAndUpdate(user._id, { intentosFallidos: 0 });
+  
+        const token = jwt.sign({ id: user._id, roles: user.roles }, process.env.JWT, { expiresIn: '1h' });
+        const { password, roles, ...otherDetails } = user._doc;
+  
+        res
+          .cookie("admin_token", token, { httpOnly: true })
+          .status(200)
+          .json({ detalles: { ...otherDetails }, roles });
+      }
+    } catch (error) {
+
+      console.error(error);
+      res.status(error.status || 500).json({ error: error.message });
     }
-
-    await Usuario.findByIdAndUpdate(user._id, { intentosFallidos: 0 });
-
-
-    //JSONWEBTOKEN Y COOKIES
-    const token = jwt.sign({ id: user._id, roles: user.roles }, process.env.JWT, { expiresIn: '1h' });
-    const {password, roles, ...otherDeails} = user._doc;
-
-    res
-    .cookie("admin_token", token, { 
-      httpOnly: true 
-    })
-    .status(200)
-    .json({ detalles: {...otherDeails}, roles});
-  }
-  } catch (error) {
-    next(error);
-  }
-};
+  };
 
 export const logoutAdmin = (req, res) => {
     res.clearCookie("admin_token");
