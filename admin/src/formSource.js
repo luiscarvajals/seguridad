@@ -86,5 +86,56 @@ export const userInputs = [
     // },
     
   ];
+
+  export const sedesInputs = [
+    {
+      id: "nombre",
+      label: "Nombre Sede",
+      type: "text",
+      placeholder: "Nombre",
+    },
+    {
+      id: "ciudad",
+      label: "Ciudad",
+      type: "text",
+      placeholder: "Ciudad",
+    },
+    {
+      id: "telefono",
+      label: "Telefono",
+      type: "text",
+      placeholder: "Telefono",
+    },
+    {
+      id: "calle",
+      label: "Calle",
+      type: "text",
+      placeholder: "Calle",
+    },
+    {
+      id: "numero",
+      label: "Número",
+      type: "text",
+      placeholder: "Número",
+    },
+    {
+      id: "zona",
+      label: "Zona",
+      type: "text",
+      placeholder: "Zona",
+    },
+    {
+      id: "pais",
+      label: "País",
+      type: "text",
+      placeholder: "País",
+    },
+    {
+      id: "email",
+      label: "Email",
+      type: "text",
+      placeholder: "Email",
+    },    
+  ];
   
   

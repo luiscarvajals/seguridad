@@ -114,4 +114,33 @@ export const userColumns = [
     //   },
     // },
   ];
+
+  export const sedesColumns = [
+    { field: "_id",headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>ID</span>, width: 210},
+    {
+      field: "nombre",
+      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Nombre</span>,
+      width: 200,
+    },
+    {
+      field: "pais",
+      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>País</span>,
+      width: 100,
+    },
+    {
+      field: "ciudad",
+      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Ciudad</span>,
+      width: 100,
+    },
+    {
+      field: "telefono",
+      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Teléfono</span>,
+      width: 120,
+    },
+    {
+      field: "activo",
+      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Activo</span>,
+      width: 80,
+    },
+  ];
   

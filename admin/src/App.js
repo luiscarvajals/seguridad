@@ -13,11 +13,13 @@ import { Navigate } from "react-router-dom";
 import Login from "./Pages/login/Login.jsx";
 import List from "./Components/list/List.jsx";
 import Usuario from "./Pages/usuario/Usuario.jsx";
-import {userInputs, noticiaInputs} from "./formSource.js";
-import { noticiaColumns, userColumns} from "./datatablesource.js";
+import {userInputs, noticiaInputs, sedesInputs} from "./formSource.js";
+import { noticiaColumns, userColumns, sedesColumns} from "./datatablesource.js";
 import ActualizarUsuario from "./Pages/actualizarUsuario/actualizarUsuario.jsx";
 import Noticia from "./Pages/noticia/Noticia.jsx";
 import ActualizarNoticia from "./Pages/actualizarNoticia/actualizarNoticia.jsx";
+import ActualizarSede from "./Pages/actualizarSede/actualizarSede.jsx";
+import Sedes from "./Pages/sedes/Sedes.jsx";
 
 function App() {
   const RutaProtegida = ({ children }) => {
@@ -34,6 +36,7 @@ function App() {
         
         <Route path="/" element={<Navigate to="/login" />}  />
         <Route path="/login" element={<Login />} />
+
         <Route
           exact
           path="/usuarios"
@@ -59,6 +62,37 @@ function App() {
             <RutaProtegida>
               <Sidebar />
             <ActualizarUsuario inputs={userInputs} title="Actualizar Usuario" />
+            </RutaProtegida>
+          }
+        />
+
+
+
+<Route
+          exact
+          path="/sedes"
+          element={
+            <RutaProtegida>
+              <Sidebar />
+              <List columns={sedesColumns} />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/sedes/nuevoUsuario"
+          element={
+            <RutaProtegida>
+              <Sidebar />
+            <Sedes inputs={sedesInputs} title="Agregar nueva Sede" />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/sedes/:id"
+          element={
+            <RutaProtegida>
+              <Sidebar />
+            <ActualizarSede inputs={sedesInputs} title="Actualizar Noticia" />
             </RutaProtegida>
           }
         />

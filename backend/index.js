@@ -15,6 +15,7 @@ import autenticacionRuta from "./routes/autenticacion.js";
 import noticiasRuta from "./routes/noticia.js";
 import usuariosRuta from "./routes/usuario.js";
 import rolesRuta from "./routes/roles.js";
+import sedesRuta from "./routes/sedes.js";
 
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swagger.config.js";
@@ -54,6 +55,7 @@ app.use("/api/autenticacion", autenticacionRuta);
 app.use("/api/noticias", noticiasRuta);
 app.use("/api/usuarios", usuariosRuta);
 app.use("/api/roles",rolesRuta);
+app.use("/api/sedes",sedesRuta);
 
 app.get('/api-docs.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
