@@ -7,7 +7,7 @@ import { AuthContexto } from "../../Context/AuthContexto";
 import { motion } from "framer-motion";
 
 const Sidebar = () => {
-  const [setSelected] = useState("Dashboard");
+  // const [setSelected] = useState("Dashboard");
   const [sidebarOpen] = useState(true);
 
   // const handleToggleSidebar = () => {
@@ -18,9 +18,9 @@ const Sidebar = () => {
     transform: sidebarOpen ? "translateX(0)" : "translateX(-100%)",
   });
 
-  const handleSelect = (option) => {
-    setSelected(option);
-  };
+  // const handleSelect = (option) => {
+  //   setSelected(option);
+  // };
 
   const { usuario } = useContext(AuthContexto);
   const navigate = useNavigate();
@@ -76,7 +76,7 @@ const Sidebar = () => {
             <NavLink
               className="comp"
               to="/dashboard"
-              onClick={() => handleSelect("Dashboard")}
+              //onClick={() => handleSelect("Dashboard")}
             >
               Dashboard
             </NavLink>
@@ -89,7 +89,7 @@ const Sidebar = () => {
             <NavLink
               className="comp"
               to="/usuarios"
-              onClick={() => handleSelect("Usuarios")}
+              //onClick={() => handleSelect("Usuarios")}
             >
               Usuarios
             </NavLink>
@@ -102,7 +102,7 @@ const Sidebar = () => {
             <NavLink
               className="comp"
               to="/sedes"
-              onClick={() => handleSelect("Sedes")}
+              //onClick={() => handleSelect("Sedes")}
             >
               Sedes
             </NavLink>
@@ -115,7 +115,7 @@ const Sidebar = () => {
             <NavLink
               className="comp"
               to="/noticias"
-              onClick={() => handleSelect("Noticias")}
+              //onClick={() => handleSelect("Noticias")}
             >
               Noticias
             </NavLink>
@@ -128,7 +128,7 @@ const Sidebar = () => {
             <NavLink
               className="comp"
               to="/Carreras"
-              onClick={() => handleSelect("Carreras")}
+              //onClick={() => handleSelect("Carreras")}
             >
               Carreras
             </NavLink>
@@ -142,7 +142,7 @@ const Sidebar = () => {
             <NavLink
               className="comp"
               to="/Eventos"
-              onClick={() => handleSelect("Eventos")}
+              //onClick={() => handleSelect("Eventos")}
             >
               Eventos
             </NavLink>
@@ -156,7 +156,7 @@ const Sidebar = () => {
             <NavLink
               className="comp"
               to="/Multimedia"
-              onClick={() => handleSelect("Multimedia")}
+              //onClick={() => handleSelect("Multimedia")}
             >
               Multimedia
             </NavLink>
