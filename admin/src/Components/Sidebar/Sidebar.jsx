@@ -127,7 +127,7 @@ const Sidebar = () => {
           >
             <NavLink
               className="comp"
-              to="/Carreras"
+              to="/carreras"
               //onClick={() => handleSelect("Carreras")}
             >
               Carreras

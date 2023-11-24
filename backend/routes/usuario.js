@@ -11,9 +11,9 @@ router.put("/:id", verificarTokenAdmin, actualizarUsuario);
 router.patch("/:id", verificarTokenAdmin, borrarUsuario);
 
 
-router.get("/:id", verificarTokenAdmin, obtenerUsuario);
+router.get("/:id", obtenerUsuario);
 
 
-router.get("/", verificarTokenAdmin, obtenerUsuarios);
+router.get("/", obtenerUsuarios);
 
 export default router;

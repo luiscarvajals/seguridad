@@ -1,8 +1,7 @@
 //Configuraciones iniciales:
 // npm i react-router-dom react-bootstrap bootstrap react-icons axios react-redux redux redux-thunk react-toastify framer-motion react-hot-toast @emotion/react @emotion/styled @mui/icons-material
-// En package.json crear el proxy: "proxy": "http://localhost:8800/api" 
+// En package.json crear el proxy: "proxy": "http://localhost:8800/api"
 // Crear las carpetas necesarias
-
 
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -13,13 +12,25 @@ import { Navigate } from "react-router-dom";
 import Login from "./Pages/login/Login.jsx";
 import List from "./Components/list/List.jsx";
 import Usuario from "./Pages/usuario/Usuario.jsx";
-import {userInputs, noticiaInputs, sedesInputs} from "./formSource.js";
-import { noticiaColumns, userColumns, sedesColumns} from "./datatablesource.js";
+import {
+  userInputs,
+  noticiaInputs,
+  sedesInputs,
+  carrerasInputs,
+} from "./formSource.js";
+import {
+  noticiaColumns,
+  userColumns,
+  sedesColumns,
+  carrerasColumns,
+} from "./datatablesource.js";
 import ActualizarUsuario from "./Pages/actualizarUsuario/actualizarUsuario.jsx";
 import Noticia from "./Pages/noticia/Noticia.jsx";
 import ActualizarNoticia from "./Pages/actualizarNoticia/actualizarNoticia.jsx";
 import ActualizarSede from "./Pages/actualizarSede/actualizarSede.jsx";
 import Sedes from "./Pages/sedes/Sedes.jsx";
+import Carrera from "./Pages/carrera/Carrera.jsx";
+import ActualizarCarrera from "./Pages/actualizarCarrera/actualizarCarrera.jsx";
 
 function App() {
   const RutaProtegida = ({ children }) => {
@@ -33,8 +44,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        
-        <Route path="/" element={<Navigate to="/login" />}  />
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
 
         <Route
@@ -52,7 +62,7 @@ function App() {
           element={
             <RutaProtegida>
               <Sidebar />
-            <Usuario inputs={userInputs} title="Agregar nuevo usuario" />
+              <Usuario inputs={userInputs} title="Agregar nuevo usuario" />
             </RutaProtegida>
           }
         />
@@ -61,14 +71,15 @@ function App() {
           element={
             <RutaProtegida>
               <Sidebar />
-            <ActualizarUsuario inputs={userInputs} title="Actualizar Usuario" />
+              <ActualizarUsuario
+                inputs={userInputs}
+                title="Actualizar Usuario"
+              />
             </RutaProtegida>
           }
         />
 
-
-
-<Route
+        <Route
           exact
           path="/sedes"
           element={
@@ -83,7 +94,7 @@ function App() {
           element={
             <RutaProtegida>
               <Sidebar />
-            <Sedes inputs={sedesInputs} title="Agregar nueva Sede" />
+              <Sedes inputs={sedesInputs} title="Agregar nueva Sede" />
             </RutaProtegida>
           }
         />
@@ -92,12 +103,10 @@ function App() {
           element={
             <RutaProtegida>
               <Sidebar />
-            <ActualizarSede inputs={sedesInputs} title="Actualizar Noticia" />
+              <ActualizarSede inputs={sedesInputs} title="Actualizar Noticia" />
             </RutaProtegida>
           }
         />
-
-
 
         <Route
           exact
@@ -114,7 +123,7 @@ function App() {
           element={
             <RutaProtegida>
               <Sidebar />
-            <Noticia inputs={noticiaInputs} title="Agregar nueva noticia" />
+              <Noticia inputs={noticiaInputs} title="Agregar nueva noticia" />
             </RutaProtegida>
           }
         />
@@ -123,7 +132,42 @@ function App() {
           element={
             <RutaProtegida>
               <Sidebar />
-            <ActualizarNoticia inputs={noticiaInputs} title="Actualizar Noticia" />
+              <ActualizarNoticia
+                inputs={noticiaInputs}
+                title="Actualizar Noticia"
+              />
+            </RutaProtegida>
+          }
+        />
+
+      <Route
+          exact
+          path="/carreras"
+          element={
+            <RutaProtegida>
+              <Sidebar />
+              <List columns={carrerasColumns} />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/carreras/nuevoUsuario"
+          element={
+            <RutaProtegida>
+              <Sidebar />
+              <Carrera inputs={carrerasInputs} title="Agregar nueva carrera" />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="/carreras/:id"
+          element={
+            <RutaProtegida>
+              <Sidebar />
+              <ActualizarCarrera
+                inputs={carrerasInputs}
+                title="Actualizar Carrera"
+              />
             </RutaProtegida>
           }
         />
