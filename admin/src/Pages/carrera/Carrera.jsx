@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
+import './carrera.css';
 
 const Noticia = ({ inputs, title }) => {
   const [files, setFiles] = useState([]);
@@ -18,7 +19,7 @@ const Noticia = ({ inputs, title }) => {
   const [graduaciones, setGraduaciones] = useState([]);
   const [selectedGraduacion, setSelectedGraduacion] = useState([]);
 
-  const [categorias, setCategorias] = useState("");
+
 
   useEffect(() => {
     const cargarSedes = async () => {
@@ -47,19 +48,43 @@ const Noticia = ({ inputs, title }) => {
 
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
-    if (id !== 'categoria') {
+
+    if (type === "checkbox" && id === "modalidadGraduacion") {
+
+      if (!checked && selectedGraduacion.length === 1) {
+        toast.error(
+          "Debe seleccionar al menos una opción",
+          {
+            duration: 5000, 
+            position: "top-center", 
+            style: {
+              background: "red", 
+              color: "white", 
+              fontWeight: "bold", 
+              borderRadius: "10px",
+              boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)", 
+              width: "350px", 
+              height: "90px", 
+            },
+          }
+        );
+        return;
+      }
+    }
+    if (id !== "categoria") {
       setInfo((prev) => ({ ...prev, [id]: value }));
     } else {
-      // Para la categoría, actualiza el estado con el valor seleccionado
       setInfo((prev) => ({ ...prev, [id]: value }));
     }
 
-    if (type === 'checkbox' && id === 'graduacion') {
+    if (type === "checkbox" && id === "modalidadGraduacion") {
       if (checked) {
         setSelectedGraduacion((prev) => [...prev, value]);
         return;
       } else {
-        setSelectedGraduacion((prev) => prev.filter((graduacion) => graduacion !== value));
+        setSelectedGraduacion((prev) =>
+          prev.filter((graduacion) => graduacion !== value)
+        );
         return;
       }
     }
@@ -71,12 +96,11 @@ const Noticia = ({ inputs, title }) => {
       setSelectedGraduacion(value);
     }
 
-
     if (id === "duracion") {
       const duracionValue = parseInt(value);
-      if (duracionValue < 1 || duracionValue > 5) {
+      if (duracionValue < 1 || duracionValue > 6) {
         toast.error(
-          "El precio debe ser positivo o no debe ser mayor a 5 años",
+          "La duración no debe exceder los 6 años",
           {
             duration: 5000, // Duración en milisegundos
             position: "top-center", // Posición del mensaje en la pantalla
@@ -94,25 +118,7 @@ const Noticia = ({ inputs, title }) => {
         return;
       }
     }
-    if (id === "telefono") {
-      const telefonoValue = parseInt(value);
-      if (telefonoValue < 10000000 || telefonoValue > 99999999) {
-        toast.error("El teléfono debe tener 8 dígitos", {
-          duration: 5000, // Duración en milisegundos
-          position: "top-center", // Posición del mensaje en la pantalla
-          style: {
-            background: "red", // Color de fondo del mensaje
-            color: "white", // Color del texto del mensaje
-            fontWeight: "bold", // Grosor del texto
-            borderRadius: "10px", // Borde redondeado
-            boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)", // Sombra
-            width: "350px", // Ancho del mensaje
-            height: "90px", // Alto del mensaje
-          },
-        });
-        return;
-      }
-    }
+   
     setInfo((prevState) => ({ ...prevState, [id]: value }));
   };
 
@@ -167,7 +173,6 @@ const Noticia = ({ inputs, title }) => {
       ...info,
       img: list,
       modalidadGraduacion: selectedGraduacion,
-
     };
     try {
       console.log("Datos de la nueva noticia:", nuevaCarrera);
@@ -187,7 +192,7 @@ const Noticia = ({ inputs, title }) => {
       });
       setTimeout(() => {
         navigate("/carreras");
-      }, 1200);
+      }, 500);
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
         const errorMessage = err.response.data.message;
@@ -223,7 +228,7 @@ const Noticia = ({ inputs, title }) => {
           <div className="right">
             <div className="formInput">
               <strong>
-                <label>Subir Imágenes:</label>
+                <label><strong>Subir Imágenes:</strong></label>
               </strong>
               <div>
                 <input
@@ -253,32 +258,32 @@ const Noticia = ({ inputs, title }) => {
             <form onSubmit={handleClick}>
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
+                  <label><strong>{input.label}</strong></label>
                   <input
                     onChange={handleChange}
                     type={input.type}
                     placeholder={input.placeholder}
                     id={input.id}
+                    min= "1"
                     required
                   />
                 </div>
               ))}
               <div className="formInput">
-  <label>Categoría</label>
-  <select id="categoria" onChange={handleChange} required>
-    <option value="">Seleccione una opción</option>
-    <option value="Pregrado">Pregrado</option>
-    <option value="Postgrado">Postgrado</option>
-  </select>
-</div>
+                <label><strong>Categoría</strong></label>
+                <select id="categoria" onChange={handleChange} required>
+                  <option value="">Seleccione una opción</option>
+                  <option value="Pregrado">Pregrado</option>
+                  <option value="Postgrado">Postgrado</option>
+                </select>
+              </div>
 
               <div className="formInput">
-                <label>Sede</label>
+                <label><strong>Sede</strong></label>
                 <select
                   id="sede"
                   onChange={handleChange}
                   value={selectedSede}
-
                   required
                 >
                   <option value="">Seleccione una opción</option>
@@ -289,23 +294,26 @@ const Noticia = ({ inputs, title }) => {
                   ))}
                 </select>
               </div>
-              <div className="formInput">
-              <label>Modalidad Graduación</label>
-  {graduaciones.map((graduacion) => (
-    <div key={graduacion._id}>
-      <input
-        type="checkbox"
-        id="graduacion"
-        value={graduacion.nombre}
-        checked={selectedGraduacion.includes(graduacion.nombre)}
-        onChange={handleChange}
-      />
-      <label>{graduacion.nombre}</label>
-    </div>
-  ))}
+              <div className="formInput2">
+                <label><strong>Modalidad Graduación</strong></label>
+                <div className="checkboxOptions">
+                {graduaciones.map((graduacion) => (
+                  <div key={graduacion._id} className="checkboxOption">
+                    <input
+                      type="checkbox"
+                      id="modalidadGraduacion"
+                      value={graduacion.nombre}
+                      checked={selectedGraduacion.includes(graduacion.nombre)}
+                      onChange={handleChange}
+          
+                    />
+                    <label><strong>{graduacion.nombre}</strong></label>
+                  </div>
+                ))}
+                </div>
               </div>
               <div className="formInput">
-                <label>Destacada</label>
+                <label><strong>Destacada</strong></label>
                 <select id="destacada" onChange={handleChange} required>
                   <option value="">Seleccione una opción</option>
                   <option value={true}>Si</option>
@@ -314,7 +322,7 @@ const Noticia = ({ inputs, title }) => {
               </div>
 
               <div className="formInput">
-                <label>Activo</label>
+                <label><strong>Activo</strong></label>
                 <select id="activo" onChange={handleChange} required>
                   <option value="">Seleccione una opción</option>
                   <option value={true}>Si</option>

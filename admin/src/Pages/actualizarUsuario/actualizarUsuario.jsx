@@ -44,8 +44,8 @@ const ActualizarUsuario = ({ inputs, title }) => {
     const getUserData = async () => {
       try {
         const response = await axios.get(`/usuarios/${id}`);
-        
         setUserData(response.data);
+        
       } catch (error) {
         console.error(error);
       }
@@ -164,7 +164,7 @@ const handleClick = async (e) => {
           </div>
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
+                  <label><strong>{input.label}</strong></label>
                   <input
                     onChange={handleChange}
                     type={input.type}
@@ -175,11 +175,11 @@ const handleClick = async (e) => {
                 </div>
               ))}
               <div className="formInput">
-  <label>Roles</label>
+  <label><strong>Roles</strong></label>
   <select
     id="roles"
     onChange={handleChange}
-    value={userData.roles} // Aquí asigna el rol actual
+    value={userData.roles}
   >
     <option value="">Seleccione una opción</option>
     {availableRoles.map((role, index) => (
@@ -192,8 +192,8 @@ const handleClick = async (e) => {
 
 
               <div className="formInput">
-                <label>Activo</label>
-                <select id="activo" onChange={handleChange} defaultValue={userData.activo}>
+                <label><strong>Activo</strong></label>
+                <select id="activo" onChange={handleChange} value={userData.activo}>
                 <option value="">Seleccione una opción</option>
                     <option value={true}>Si</option>
                     <option value={false}>No</option>

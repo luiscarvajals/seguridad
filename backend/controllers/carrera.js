@@ -107,15 +107,13 @@ export const actualizarCarrera = async (req, res, next) => {
       return res.status(404).json({ mensaje: "Carrera no encontrada" });
     }
     // Si la carrera existe, actualízala
-    const { nombre, descripcion, img } = req.body;
-    const imagenes = Array.isArray(img) ? img : [img];
+    const nuevosValores = {
+      ...carreraExistente.toObject(), // Convierte la noticia existente a un objeto para evitar modificarla directamente
+      ...req.body, // Utiliza los nuevos valores proporcionados en el cuerpo de la solicitud
+    };
     const carreraActualizada = await Carrera.findByIdAndUpdate(
       id,
-      {
-        nombre,
-        descripcion,
-        img: imagenes,
-      },
+      nuevosValores,
       { new: true }
     );
     res.status(200).json(carreraActualizada);

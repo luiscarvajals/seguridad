@@ -131,7 +131,7 @@ const ActualizarNoticia = () => {
           <div className="right">
             <div className="formInput">
               <strong>
-                <label>Actualizar Imágenes:</label>
+                <label><strong>Actualizar Imágenes:</strong></label>
               </strong>
               <div>
                 <input
@@ -160,7 +160,7 @@ const ActualizarNoticia = () => {
             </div>
             <form onSubmit={handleClick}>
               <div className="formInput">
-                <label>Título</label>
+                <label><strong>Título</strong></label>
                 <input
                   type="text"
                   placeholder="Título"
@@ -171,7 +171,7 @@ const ActualizarNoticia = () => {
                 />
               </div>
               <div className="formInput">
-                <label>Descripción</label>
+                <label><strong>Descripción</strong></label>
                 <input
                   type="text"
                   placeholder="Descripción"
@@ -182,7 +182,7 @@ const ActualizarNoticia = () => {
                 />
               </div>
               <div className="formInput">
-                <label>Contenido</label>
+                <label><strong>Contenido</strong></label>
                 <input
                   type="text"
                   placeholder="Contenido"
@@ -193,7 +193,7 @@ const ActualizarNoticia = () => {
                 />
               </div>
               <div className="formInput">
-                <label>Destacada</label>
+                <label><strong>Destacada</strong></label>
                 <select
                   id="destacada"
                   onChange={handleChange}
@@ -206,7 +206,7 @@ const ActualizarNoticia = () => {
                 </select>
               </div>
               <div className="formInput">
-                <label>Activo</label>
+                <label><strong>Activo</strong></label>
                 <select
                   id="activo"
                   onChange={handleChange}

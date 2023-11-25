@@ -40,7 +40,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/carrera" onClick={handleToggle}>
+              <NavLink className="nav-link" to="/carreras" onClick={handleToggle}>
                 Carrera
               </NavLink>
             </li>

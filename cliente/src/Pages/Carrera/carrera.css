@@ -1,4 +1,4 @@
-.containerCarrera {
+/* .containerCarreraC {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
@@ -10,14 +10,14 @@ header {
     padding: 20px;
 }
 
-.header-content {
+.header-contentC {
     display: flex;
     align-items: center;
 }
 
 header h1 {
     margin: 0;
-    margin-right: 230px; /* Ajusta el margen derecho del título para agregar distancia */
+    margin-right: 230px;
 }
 
 .image {
@@ -25,40 +25,99 @@ header h1 {
     height: auto;
 }
 
-.content {
+.contentC {
     padding: 20px;
-    text-align: center; /* Centra el texto en el contenido */
+    text-align: center;
 }
 
-/* Estilos para la imagen y el texto */
-.image-container {
+.image-containerC {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 20px; /* Añade espacio entre el contenido y la imagen/texto */
+    margin-top: 20px; 
 }
 
-.sub-image {
-    max-width: 48%; /* Ajusta el ancho de la imagen */
+.sub-imageC {
+    max-width: 48%;
     height: auto;
     
 }
 
 
-.sub-text {
-    max-width: 48%; /* Ajusta el ancho del texto */
-    margin-left: 20px; /* Añade espacio entre la imagen y el texto */
+.sub-textC {
+    max-width: 48%; 
+    margin-left: 20px; 
 }
 
-/* Estilos para los nuevos textos */
-.additional-texts {
+
+.additional-textsC {
     display: flex;
-    justify-content: space-around; /* Espacio igual entre los textos */
-    margin-top: 20px; /* Añade espacio entre el texto y los nuevos textos */
+    justify-content: space-around;
+    margin-top: 20px;
 }
 
-.additional-text {
-    max-width: 30%; /* Ajusta el ancho de cada texto */
-    text-align: center; /* Centra el texto en su contenedor */
+.additional-textC {
+    max-width: 30%; 
+    text-align: center; 
 }
+ */
 
+ .imageC{
+    max-width: 100%;
+    height: auto;
+ }
+ .containerCarrera {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .header-contentC {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .header-contentC h1 {
+    font-size: 32px;
+    color: #333;
+  }
+  
+  .contentC {
+    margin-bottom: 20px;
+  }
+  
+  .contentC p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  .additional-textsC {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .text-groupC {
+    width: 48%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .text-groupC p {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .text-groupC strong {
+    color: #555;
+  }
+  
+  

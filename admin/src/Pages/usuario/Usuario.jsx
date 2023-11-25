@@ -178,7 +178,7 @@ const New = ({ inputs, title }) => {
               </div>
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
+                  <label><strong>{input.label}</strong></label>
                   <input
                     onChange={handleChange}
                     onKeyPress={
@@ -195,7 +195,7 @@ const New = ({ inputs, title }) => {
                 </div>
               ))}
               <div className="formInput">
-                <label>Rol</label>
+                <label><strong>Rol</strong></label>
                 <select id="roles" onChange={handleChange} required>
                   <option value="">Seleccione una opción</option>
                   {availableRoles.map((role, index) => (
@@ -207,7 +207,7 @@ const New = ({ inputs, title }) => {
               </div>
 
               <div className="formInput">
-                <label>Activo</label>
+                <label><strong>Activo</strong></label>
                 <select id="activo" onChange={handleChange} required>
                   <option value="">Seleccione una opción</option>
                   <option value={true}>Si</option>

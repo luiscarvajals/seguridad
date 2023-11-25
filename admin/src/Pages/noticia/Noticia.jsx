@@ -121,7 +121,7 @@ const Noticia = ({ inputs, title }) => {
         <div className="bottom">
           <div className="right">
             <div className="formInput">
-              <strong><label>Subir Imágenes:</label></strong>
+              <strong><label><strong>Subir Imágenes:</strong></label></strong>
               <div>
                 <input
                   type="file"
@@ -150,7 +150,7 @@ const Noticia = ({ inputs, title }) => {
             <form onSubmit={handleClick}>
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
+                  <label><strong>{input.label}</strong></label>
                   <input
                     onChange={handleChange}
                     type={input.type}
@@ -161,7 +161,7 @@ const Noticia = ({ inputs, title }) => {
                 </div>
               ))}
               <div className="formInput">
-                <label>Destacada</label>
+                <label><strong>Destacada</strong></label>
                 <select id="destacada" onChange={handleChange} required>
                   <option value="">Seleccione una opción</option>
                   <option value={true}>Si</option>
@@ -170,7 +170,7 @@ const Noticia = ({ inputs, title }) => {
               </div>
 
               <div className="formInput">
-                <label>Activo</label>
+                <label><strong>Activo</strong></label>
                 <select id="activo" onChange={handleChange} required>
                   <option value="">Seleccione una opción</option>
                   <option value={true}>Si</option>

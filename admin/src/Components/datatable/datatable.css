@@ -10,6 +10,7 @@
   box-shadow: 2px -5px 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   animation: fadeIn 1.5s ease-in-out;
+  
 }
 .datatable .datatableTitle {
   font-family: "Roboto", sans-serif;

@@ -151,11 +151,11 @@ export const userColumns = [
       headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Nombre</span>,
       width: 200,
     },
-    {
-      field: "descripcion",
-      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Descripción</span>,
-      width: 200,
-    },
+    // {
+    //   field: "descripcion",
+    //   headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Descripción</span>,
+    //   width: 200,
+    // },
     {
       field: "destacada",
       headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Destacada</span>,
@@ -174,17 +174,17 @@ export const userColumns = [
     {
       field:"categoria",
       headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Categoría</span>,
-      width: 200,
+      width: 120,
     },
     {
       field: "duracion",
       headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Duración</span>,
-      width: 200,
+      width: 120,
     },
     {
       field: "sede",
       headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Sede</span>,
-      width: 200,
+      width: 100,
     },
     
   ];
