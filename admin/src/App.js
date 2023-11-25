@@ -31,6 +31,7 @@ import ActualizarSede from "./Pages/actualizarSede/actualizarSede.jsx";
 import Sedes from "./Pages/sedes/Sedes.jsx";
 import Carrera from "./Pages/carrera/Carrera.jsx";
 import ActualizarCarrera from "./Pages/actualizarCarrera/actualizarCarrera.jsx";
+import Dashboard from "./Pages/dashbaord/Dashboard.jsx";
 
 function App() {
   const RutaProtegida = ({ children }) => {
@@ -46,6 +47,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<Login />} />
+
+        <Route
+          exact
+          path="/dashboard"
+          element={
+            <RutaProtegida>
+              <Sidebar />
+              <Dashboard />
+            </RutaProtegida>
+          }
+        />
 
         <Route
           exact

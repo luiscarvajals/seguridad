@@ -1,0 +1,26 @@
+.dashboard-container {
+  max-width: 600px;
+  margin-top: 50px;
+  margin-left: 20%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+
+}
+
+.dashboard-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.chart-wrapper {
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.chart-wrapper:hover {
+  transition: transform 0.5s ease-in-out;
+}
