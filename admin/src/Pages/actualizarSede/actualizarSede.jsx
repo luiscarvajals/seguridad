@@ -131,7 +131,7 @@ const ActualizarSede = () => {
           <div className="right">
             <div className="formInput">
               <strong>
-                <label>Actualizar Imágenes:</label>
+                <label><strong>Actualizar Imágenes:</strong></label>
               </strong>
               <div>
                 <input
@@ -160,7 +160,7 @@ const ActualizarSede = () => {
             </div>
             <form onSubmit={handleClick}>
               <div className="formInput">
-                <label>Nombre</label>
+                <label><strong>Nombre</strong></label>
                 <input
                   type="text"
                   placeholder="Nombre"
@@ -171,7 +171,7 @@ const ActualizarSede = () => {
                 />
               </div>
               <div className="formInput">
-                <label>Ciudad</label>
+                <label><strong>Ciudad</strong></label>
                 <input
                   type="text"
                   placeholder="Ciudad"
@@ -182,7 +182,7 @@ const ActualizarSede = () => {
                 />
               </div>
               <div className="formInput">
-                <label>Telefono</label>
+                <label><strong>Telefono</strong></label>
                 <input
                   type="number"
                   placeholder="Telefono"
@@ -193,7 +193,7 @@ const ActualizarSede = () => {
                 />
               </div>
               <div className="formInput">
-                <label>Calle</label>
+                <label><strong>Calle</strong></label>
                 <input
                   type="text"
                   placeholder="Calle"
@@ -205,7 +205,7 @@ const ActualizarSede = () => {
               </div>
 
               <div className="formInput">
-                <label>Número de dirección</label>
+                <label><strong>Número de dirección</strong></label>
                 <input
                   type="number"
                   placeholder="Numero"
@@ -217,7 +217,7 @@ const ActualizarSede = () => {
               </div>
 
               <div className="formInput">
-                <label>Zona</label>
+                <label><strong>Zona</strong></label>
                 <input
                   type="text"
                   placeholder="Zona"
@@ -228,7 +228,7 @@ const ActualizarSede = () => {
                 />
               </div>
               <div className="formInput">
-                <label>País</label>
+                <label><strong>País</strong></label>
                 <input
                   type="text"
                   placeholder="País"
@@ -239,7 +239,7 @@ const ActualizarSede = () => {
                 />
               </div>
               <div className="formInput">
-                <label>Email</label>
+                <label><strong>Email</strong></label>
                 <input
                   type="text"
                   placeholder="Email"
@@ -250,7 +250,7 @@ const ActualizarSede = () => {
                 />
               </div>
               <div className="formInput">
-                <label>Destacada</label>
+                <label><strong>Destacada</strong></label>
                 <select
                   id="destacada"
                   onChange={handleChange}
@@ -263,7 +263,7 @@ const ActualizarSede = () => {
                 </select>
               </div>
               <div className="formInput">
-                <label>Activo</label>
+                <label><strong>Activo</strong></label>
                 <select
                   id="activo"
                   onChange={handleChange}

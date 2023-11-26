@@ -13,12 +13,8 @@ const Inicio = () => {
       <p className='parrafoHome'>Para poder acceder a la informacion de los alumnos, profesores y materias, es necesario que inicies sesion con tu cuenta de correo institucional.</p>
       <p className='parrafoHome'>Si no tienes una cuenta de correo institucional, puedes registrarte en la opcion de registro, donde podras crear una cuenta de correo institucional.</p>
       <p className='parrafoHome'>Si ya tienes una cuenta de correo institucional, puedes iniciar sesion en la opcion de inicio de sesion, donde podras ingresar a la informacion de los alumnos, profesores y materias.</p>
-      
-    
+
     </div>
-    <div>
-      <Noticias />
-      </div>
     <Footer />
     </div>
   )

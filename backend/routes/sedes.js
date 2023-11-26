@@ -5,9 +5,9 @@ import {verificarTokenAdmin} from './../extra/verficarToken.js';
 
 const router = express.Router();
 
-router.get('/',verificarTokenAdmin, obtenerSedes);
+router.get('/', obtenerSedes);
 
-router.get('/:id', verificarTokenAdmin, obtenerSedePorId);
+router.get('/:id', obtenerSedePorId);
 
 router.post('/crear', verificarTokenAdmin, crearSede);
 

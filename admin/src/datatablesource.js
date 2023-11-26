@@ -143,4 +143,49 @@ export const userColumns = [
       width: 80,
     },
   ];
+
+  export const carrerasColumns = [
+    { field: "_id",headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>ID</span>, width: 210},
+    {
+      field: "nombre",
+      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Nombre</span>,
+      width: 200,
+    },
+    // {
+    //   field: "descripcion",
+    //   headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Descripción</span>,
+    //   width: 200,
+    // },
+    {
+      field: "destacada",
+      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Destacada</span>,
+      width: 130,
+    },
+    {
+      field: "activo",
+      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Activo</span>,
+      width: 80,
+    },
+    {
+      field: "fecha_publicacion",
+      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Fecha Publicación</span>,
+      width: 200,
+    },
+    {
+      field:"categoria",
+      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Categoría</span>,
+      width: 120,
+    },
+    {
+      field: "duracion",
+      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Duración</span>,
+      width: 120,
+    },
+    {
+      field: "sede",
+      headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Sede</span>,
+      width: 100,
+    },
+    
+  ];
   

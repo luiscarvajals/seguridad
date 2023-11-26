@@ -17,7 +17,7 @@ const Login = () => {
     password: undefined,
   });
   const [intentosFallidos, setIntentosFallidos] = useState(false);
-  const [setBloquearIngreso] = useState(false);
+  const [, setBloquearIngreso] = useState(false);
   const { loading, dispatch } = useContext(AuthContexto);
 
   const navigate = useNavigate();
@@ -78,8 +78,8 @@ const handleLogin = async (e) => {
         setTimeout(() => {
           setIntentosFallidos(false);
           setBloquearIngreso(false);
-        }, 5000); 
-      toast.error(err.response.data.message, {
+        }, 10000); 
+      toast.error("El administrador ha alcanzado el límite de intentos fallidos. Por favor, inténtelo de nuevo en 10 segundos.", {
         duration: 5000, 
         position: "top-center",
         style: {

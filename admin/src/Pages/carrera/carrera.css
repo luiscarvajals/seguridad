@@ -1,0 +1,28 @@
+.formInput2 {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  
+  }
+  
+  .checkboxOptions {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .checkboxOption {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  label {
+    margin-right: 8px;
+  }
+  
+  input[type="checkbox"] {
+    width: 20px; 
+    height: 20px;
+  }
+  
+   

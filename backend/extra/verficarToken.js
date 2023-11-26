@@ -7,7 +7,7 @@ export const verificarTokenAdmin = async (req, res, next) => {
     return next(crearError(401, "No autorizado"));
     }
     try {
-        const decoded = await jwt.verify(token, process.env.JWT);
+        const decoded = jwt.verify(token, process.env.JWT);
         req.usuario = decoded;
         next();
       } catch (err) {

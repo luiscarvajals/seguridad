@@ -8,11 +8,12 @@ import { motion } from "framer-motion";
 
 const Sidebar = () => {
   // const [setSelected] = useState("Dashboard");
-  const [sidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  // const handleToggleSidebar = () => {
-  //   setSidebarOpen(!sidebarOpen);
-  // };
+
+  const handleToggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
   const sidebarAnimation = useSpring({
     transform: sidebarOpen ? "translateX(0)" : "translateX(-100%)",
@@ -127,7 +128,7 @@ const Sidebar = () => {
           >
             <NavLink
               className="comp"
-              to="/Carreras"
+              to="/carreras"
               //onClick={() => handleSelect("Carreras")}
             >
               Carreras
@@ -171,6 +172,15 @@ const Sidebar = () => {
       >
         Cerrar Sesión
       </motion.button>
+      <motion.div
+        className="toggle-button"
+        onClick={handleToggleSidebar}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        icon={sidebarOpen ? "fas fa-times" : "fas fa-bars"}
+      />
+      
     </div>
   );
 };

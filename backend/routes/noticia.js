@@ -8,10 +8,10 @@ const router = express.Router();
 router.post('/crear', verificarTokenAdmin, crearNoticia);
 
 
-router.get('/', verificarTokenAdmin, leerNoticias);
+router.get('/', leerNoticias);
 
 
-router.get('/:id', verificarTokenAdmin, leerNoticiaPorId);
+router.get('/:id', leerNoticiaPorId);
 
 
 router.put('/:id', verificarTokenAdmin, actualizarNoticia);

@@ -39,6 +39,10 @@ const SedesSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    destacada: {
+        type: Boolean,
+        default: false,
+    },
 
   
 

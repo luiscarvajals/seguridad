@@ -1,15 +1,30 @@
-import React from 'react'
-import Footer from '../../Components/Footer/Footer'
-import Navbar from '../../Components/Navbar/Navbar'
-import './carreraini.css'
+import React, { useEffect, useState } from "react";
+import Footer from "../../Components/Footer/Footer";
+import Navbar from "../../Components/Navbar/Navbar";
+import "./carreraini.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 
 const CarreraIni = () => {
-  return (
+  const [carrera, setCarrera] = useState([]);
 
-<div class="containerIni">
-<Navbar />
-        <h1>CARRERAS</h1>
+  const navigate=useNavigate();
+
+  useEffect(() => {
+    const fetchCarrera = async () => {
+      const response = await axios.get("http://localhost:8800/api/carreras/");
+      console.log("first",(response.data));
+      setCarrera(response.data);
+    };
+    fetchCarrera();
+  }, []);
+
+  console.log(carrera);
+
+  
+    /* <h1>CARRERAS</h1>
         <div class="button-container">
         
             <div class="button" id="button1">Administracion de Empresas</div>
@@ -29,16 +44,27 @@ const CarreraIni = () => {
             <div class="button" id="button15">Ciencias Politicas</div>
             <div class="button" id="button16">Derecho</div>
            
-        </div>
-        <Footer />
+        </div> */
+  
+
+  return (
+    <div className="containerIni">
+      <Navbar />
+      <h1>CARRERAS</h1>
+      <div className="button-container">
+        {carrera.map((carrera, index) => (
+          <button className="button"
+          onClick={() => {
+            navigate(`/carreras/${carrera._id}`, { state: { carreraData: carrera } });
+          }}
+        >
+          {carrera.nombre}
+        </button>
+        ))}
+      </div>
+      <Footer />
     </div>
+  );
+};
 
-
-
-
-
-    
-  )
-}
-
-export default CarreraIni
+export default CarreraIni;

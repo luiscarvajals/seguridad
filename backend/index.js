@@ -16,6 +16,9 @@ import noticiasRuta from "./routes/noticia.js";
 import usuariosRuta from "./routes/usuario.js";
 import rolesRuta from "./routes/roles.js";
 import sedesRuta from "./routes/sedes.js";
+import carrerasRuta from "./routes/carrera.js";
+import graduacionesRuta from "./routes/graduacion.js";
+import dashboardRuta from "./routes/dashboard.js";
 
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swagger.config.js";
@@ -56,6 +59,9 @@ app.use("/api/noticias", noticiasRuta);
 app.use("/api/usuarios", usuariosRuta);
 app.use("/api/roles",rolesRuta);
 app.use("/api/sedes",sedesRuta);
+app.use("/api/carreras",carrerasRuta);
+app.use("/api/graduaciones",graduacionesRuta);
+app.use("/api/dashboard", dashboardRuta)
 
 app.get('/api-docs.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
