@@ -5,22 +5,21 @@ import './noticias.css'
 const Noticias = () => {
   const { data, loading } = useFetch("http://localhost:8800/api/noticias?destacado=true&activo=true");
   return (
-    <div className="fp">
+    <div className="news-feed">
       {loading ? (
         "Cargando..."
       ) : (
         <>
           {data.map((item) => (
-            <div className="fpItem" key={item._id}>
-              <img src={item.img[0]} alt="" className="fpImg" />
-              <span className="fpTipo">
-                <strong>Título</strong> {item.titulo}
-              </span>
-              <div>
-                <span className="fpPuntuacion">
-                  {" "}
-                  <strong>Descripción:</strong> {item.descripcion}
-                </span>
+            <div className="news-card" key={item._id}>
+              <img src={item.img[0]} alt={item.titulo} className="news-card__image" />
+              <div className="news-card__content">
+                <h2 className="news-card__title">
+                  {item.titulo}
+                </h2>
+                <p className="news-card__description">
+                  {item.descripcion}
+                </p>
               </div>
             </div>
           ))}
