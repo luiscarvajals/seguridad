@@ -1,8 +1,9 @@
 import React from 'react'
 import useFetch from '../../hooks/useFetch'
+import './noticias.css'
 
 const Noticias = () => {
-  const { data, loading, error } = useFetch("/noticias?destacado=true&activo=true");
+  const { data, loading } = useFetch("http://localhost:8800/api/noticias?destacado=true&activo=true");
   return (
     <div className="fp">
       {loading ? (
@@ -11,27 +12,16 @@ const Noticias = () => {
         <>
           {data.map((item) => (
             <div className="fpItem" key={item._id}>
-              <img src={item.imagenes[0]} alt="" className="fpImg" />
+              <img src={item.img[0]} alt="" className="fpImg" />
               <span className="fpTipo">
                 <strong>Título</strong> {item.titulo}
               </span>
-              {/* <div className="fpCategory">
-                <strong>Categoría: </strong>
-                {Array.from(
-                  { length: getStarRating(item.categoria) },
-                  (_, index) => (
-                    <FaStar key={index} />
-                  )
-                )}
-              </div> */}
-
               <div>
                 <span className="fpPuntuacion">
                   {" "}
                   <strong>Descripción:</strong> {item.descripcion}
                 </span>
               </div>
-              
             </div>
           ))}
         </>

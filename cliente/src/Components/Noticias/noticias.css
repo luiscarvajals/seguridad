@@ -52,5 +52,12 @@
 
 }
 
-.enlaceNoti:hover {
+.fpImg{
+    width: 10%;
+    height: 10%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
+
+

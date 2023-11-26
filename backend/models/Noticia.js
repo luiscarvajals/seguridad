@@ -26,6 +26,11 @@ const NoticiaSchema = new mongoose.Schema({
     default: Date.now,
   },
       img: [{ type: String }],
+
+  activo: {
+    type: Boolean,
+    default: true,
+  },
     
 
 });
