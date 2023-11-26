@@ -1,13 +1,34 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import Navbar from "../../Components/Navbar/Navbar";
+import React, {useState, useEffect} from "react";
+import { useLocation, useParams } from "react-router-dom";
+import NavbarDrop from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import "./carrera.css";
+import axios from "axios";
 
 const Carrera = () => {
   const location = useLocation();
-  const carreraData = location.state?.carreraData;
-  console.log("El carrera dataa es:",carreraData);
+  //const carreraData = location.state?.carreraData;
+  //console.log("El carrera dataa es:",carreraData);
+
+  const { id } = useParams();
+  const [carreraData, setCarreraData] = useState({});
+  const [loading, setLoading] = useState(true);
+
+ 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8800/api/carreras/${id}`);
+    
+        setCarreraData(response.data);
+      } catch (error) {
+        console.error('Error al cargar datos de la carrera:', error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
 
   return (
     // <div>
@@ -52,7 +73,7 @@ const Carrera = () => {
  
 
     <div>
-    <Navbar />
+    <NavbarDrop />
     <div className="containerCarrera">
       <div className="header-contentC">
         <h1>{carreraData.nombre}</h1>

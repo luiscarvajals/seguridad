@@ -1,15 +1,16 @@
 /* Navbar Styles */
 
-.navbar {
-  background-color: #e00505; /* Color de fondo del Navbar */
+/* .navbar {
+  background-color: #e00505;
   padding: 1rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-}
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  position: s;
+} */
 
 
 .navbar-brand {
   font-size: 1.5rem;
-  color: #ffffff; /* Color del texto del logo */
+  color: #ffffff;
   
 }
 .logoNav{

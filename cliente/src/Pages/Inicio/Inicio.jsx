@@ -1,12 +1,14 @@
 import React from "react";
-import Navbar from "../../Components/Navbar/Navbar";
+import NavbarPort from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import Noticias from "../../Components/Noticias/Noticias";
+import Carrera from "../Carrera/Carrera";
+import CarreraIni from "../Carrera/CarreraIni";
 
 const Inicio = () => {
   return (
     <div>
-      <Navbar />
+      <NavbarPort />
       <div className="contHome">
         <h1 className="tituloHome">
           Universidad Católica Boliviana "San Pablo"
@@ -34,8 +36,12 @@ const Inicio = () => {
         </p>
       </div>
       <div>
-        Noticias:
+     
         <Noticias />
+      </div>
+      <div>
+
+        <CarreraIni />
       </div>
       <Footer />
     </div>

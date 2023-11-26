@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Footer from "../../Components/Footer/Footer";
-import Navbar from "../../Components/Navbar/Navbar";
 import "./carreraini.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -49,7 +47,7 @@ const CarreraIni = () => {
 
   return (
     <div className="containerIni">
-      <Navbar />
+      {/* <Navbar /> */}
       <h1>CARRERAS</h1>
       <div className="button-container">
         {carrera.map((carrera, index) => (
@@ -62,7 +60,7 @@ const CarreraIni = () => {
         </button>
         ))}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

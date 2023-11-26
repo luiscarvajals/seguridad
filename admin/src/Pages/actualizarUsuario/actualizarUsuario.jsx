@@ -2,15 +2,20 @@ import Sidebar from "../../Components/Sidebar/Sidebar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./actualizarUsuario.css";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast";
+
 
 const ActualizarUsuario = ({ inputs, title }) => {
-  const [files] = useState([]);
   const [info, setInfo] = useState({});
   const [userData, setUserData] = useState({});
   const { id } = useParams();
   const [availableRoles, setAvailableRoles] = useState([]);
   const [setCurrentUserRole] = useState("");
+
+  console.log("User data:", userData)
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -23,19 +28,19 @@ const ActualizarUsuario = ({ inputs, title }) => {
       });
   }, []);
 
-  useEffect(() => {
-    // Realizar una solicitud GET para obtener el rol actual del usuario específico desde el backend
-    axios
-      .get(`/api/roles/${id}`)
-      .then((response) => {
-        const userRole = response.data.roles;
-        setCurrentUserRole(userRole); // Establecer el rol actual del usuario
-      })
-      .catch((error) => {
-        // Manejar errores si es necesario
-        console.error("Error al obtener el rol del usuario:", error);
-      });
-  }, [setCurrentUserRole, id]);
+  // useEffect(() => {
+  //   // Realizar una solicitud GET para obtener el rol actual del usuario específico desde el backend
+  //   axios
+  //     .get(`/api/roles/${id}`)
+  //     .then((response) => {
+  //       const userRole = response.data.roles;
+  //       setCurrentUserRole(userRole); // Establecer el rol actual del usuario
+  //     })
+  //     .catch((error) => {
+  //       // Manejar errores si es necesario
+  //       console.error("Error al obtener el rol del usuario:", error);
+  //     });
+  // }, [setCurrentUserRole, id]);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -51,60 +56,62 @@ const ActualizarUsuario = ({ inputs, title }) => {
   }, [id]);
 
   const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    const { id, type, checked, value } = e.target;
+  
+    let newValue;
+  
+    if (type === "phone") {
+      // Validar que el valor sea al menos 1 para inputs de tipo "number"
+      newValue = value < 1 ? 1 : parseInt(value);
+    } else {
+      newValue = value;
+    }
+  
+    if (type === "checkbox" && id.startsWith("modalidadGraduacion")) {
+     
+    } else {
+      setInfo((prev) => ({
+        ...prev,
+        [id]: type === "checkbox" ? checked : newValue,
+      }));
+    }
   };
 
-  // const handleFileChange = (e) => {
-  //   const selectedFiles = e.target.files;
-  //   setFiles([...selectedFiles]);
-
-  //   if (selectedFiles.length > 0) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       setPreviewImage(reader.result);
-  //     };
-  //     reader.readAsDataURL(selectedFiles[0]);
-  //   } else {
-  //     setPreviewImage("");
-  //   }
-  // };
-
-  //   const handleDeleteImage = () => {
-  //   if (userData && userData.img) {
-  //     setUserData((prevUserData) => ({
-  //       ...prevUserData,
-  //       img: "" // Borrar la URL de la imagen estableciéndola como una cadena vacía
-  //     }));
-  //   }
-  // };
+  const convertirFecha = (fecha) => {
+    if (!fecha) {
+      return '';
+    }
+  
+    const fechaFormateada = new Date(fecha).toISOString().split('T')[0];
+    return fechaFormateada;
+  };
+  
+  
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
       const updatedUser = { ...info };
 
-      if (files.length > 0) {
-        const uploadPromises = files.map((file) => {
-          const data = new FormData();
-          data.append("file", file);
-          data.append("upload_preset", "upload");
-          return axios.post(
-            "https://api.cloudinary.com/v1_1/dwwj8mhse/image/upload",
-            data
-          );
-        });
-
-        const uploadResponses = await Promise.all(uploadPromises);
-        const imageUrls = uploadResponses.map((res) => res.data.secure_url);
-        updatedUser.img = imageUrls;
-      } else if (!userData.img) {
-        updatedUser.img =
-          "https://cdn.tresorit.com/webv10/dist/img/landings/features/icons/icon-file-sharing.3802e9ca.png"; // Borrar la URL de la imagen si no se han agregado nuevas imágenes
-      }
-
       await axios.put(`/usuarios/${id}`, updatedUser);
-
-      window.location.replace("/usuarios");
+      toast.success("Actualización exitosa", {
+        duration: 5000,
+        position: "top-center",
+        style: {
+          background: "#27D23C",
+          color: "white",
+          fontWeight: "bold",
+          borderRadius: "10px",
+          boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
+          width: "300px",
+          height: "50px",
+        },
+      });
+      setTimeout(() => {
+        "Cargando..." 
+         navigate("/usuarios");
+      }, 500);
+     
     } catch (err) {
       console.log(err);
     }
@@ -114,60 +121,118 @@ const ActualizarUsuario = ({ inputs, title }) => {
     <div className="new">
       <Sidebar />
       <div className="newContainer">
-        {/* <Navbar /> */}
         <div className="top">
-          <h1>{title}</h1>
+          <h1>Actualizar Usuario</h1>
         </div>
         <div className="bottom">
-          {/* <div className="left">
-  {previewImage ? (
-    <div>
-      <img src={previewImage} alt="Vista previa de la imagen" />
-      <button onClick={handleDeleteImage}>Eliminar</button>
-    </div>
-  ) : userData.img ? (
-    <div>
-      {userData.img.map((url, index) => (
-        <img key={index} src={url} alt={`Imagen ${index + 1}`} />
-      ))}
-      <button onClick={handleDeleteImage}>Eliminar</button>
-    </div>
-  ) : (
-    <img
-      src="https://cdn.tresorit.com/webv10/dist/img/landings/features/icons/icon-file-sharing.3802e9ca.png"
-      alt="avatar"
-    />
-  )}
-</div> */}
-
           <div className="right">
-            <form>
+          <form onSubmit={handleClick}>
               <div className="formInput">
-                {/* <label htmlFor="files">
-              Imágenes: <DriveFolderUploadOutlinedIcon className="icon" />
-            </label> */}
-                {/* <input
-              type="file"
-              id="files"
-              onChange={handleFileChange}
-              style={{ display: "none" }}
-              multiple
-            /> */}
+                <label><strong>Usuario</strong></label>
+                <input
+                  type="text"
+                  placeholder="Usuario"
+                  id="usuario"
+                  value={info.usuario !== undefined ? info.usuario : userData.usuario}
+                  onChange={handleChange}
+                  required
+                />
               </div>
-              {inputs.map((input) => (
-                <div className="formInput" key={input.id}>
-                  <label>
-                    <strong>{input.label}</strong>
-                  </label>
-                  <input
-                    onChange={handleChange}
-                    type={input.type}
-                    placeholder={input.placeholder}
-                    id={input.id}
-                    defaultValue={userData[input.id]}
-                  />
-                </div>
-              ))}
+              <div className="formInput">
+                <label><strong>Nombre</strong></label>
+                <input
+                  type="text"
+                  placeholder="Nombre"
+                  id="nombre"
+                  value={info.nombre !== undefined ? info.nombre : userData.nombre}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="formInput">
+                <label><strong>Apellido</strong></label>
+                <input
+                  type="text"
+                  placeholder="Apellido"
+                  id="apellido"
+                  value={info.apellido !== undefined ? info.apellido : userData.apellido}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="formInput">
+      <label><strong>Fecha Nacimiento</strong></label>
+      <input
+        type="date"
+        placeholder="Fecha Nacimiento"
+        id="fechaNacimiento"
+        value={info.fechaNacimiento !== undefined ? info.fechaNacimiento : convertirFecha(userData.fechaNacimiento)}
+        onChange={handleChange}
+        required
+        readOnly={userData.fechaNacimiento !== undefined}
+        className="input-date"
+      />
+    </div>
+
+
+              <div className="formInput">
+                <label><strong>Email</strong></label>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  id="email"
+                  value={info.email !== undefined ? info.email : userData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="formInput">
+                <label><strong>Telefono</strong></label>
+                <input
+                  type="phone"
+                  placeholder="Telefono"
+                  id="telefono"
+                  value={info.telefono !== undefined ? info.telefono : userData.telefono}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="formInput">
+                <label><strong>Password</strong></label>
+                <input
+                  type="password"
+                  placeholder="password"
+                  id="password"
+                  value={info.password !== undefined ? info.password : userData.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="formInput">
+                <label><strong>Pais</strong></label>
+                <input
+                  type="text"
+                  placeholder="Pais"
+                  id="pais"
+                  value={info.pais !== undefined ? info.pais : userData.pais}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="formInput">
+                <label><strong>Ciudad</strong></label>
+                <input
+                  type="text"
+                  placeholder="Ciudad"
+                  id="ciudad"
+                  value={info.ciudad !== undefined ? info.ciudad : userData.ciudad}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
               <div className="formInput">
                 <label>
                   <strong>Roles</strong>
@@ -175,7 +240,7 @@ const ActualizarUsuario = ({ inputs, title }) => {
                 <select
                   id="roles"
                   onChange={handleChange}
-                  value={userData.roles}
+                  value={info.roles || userData.roles}
                 >
                   <option value="">Seleccione una opción</option>
                   {availableRoles.map((role, index) => (
@@ -206,6 +271,7 @@ const ActualizarUsuario = ({ inputs, title }) => {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

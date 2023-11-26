@@ -29,7 +29,8 @@ const ActualizarSede = () => {
   }, [id]);
 
   const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    setInfo((prev)=> ({ ...prev, [e.target.id]: e.target.value }));
+    console.log('Value:', e.target.value);
   };
 
   const handleFileChange = (e) => {
@@ -50,6 +51,8 @@ const ActualizarSede = () => {
       const updatedImages = sedes.img.filter((imagen, i) => i !== index);
       
       setSedes({ ...sedes, img: updatedImages });
+      setPreviewImages((prevImages) =>
+      prevImages.filter((_, i) => i !== index));
     }
   };
   const handleClick = async (e) => {
@@ -84,6 +87,7 @@ const ActualizarSede = () => {
       const datosActualizados = {
         ...info,
         img: sedes.img ? [...sedes.img, ...list] : list,
+
       };
       await axios.put(`/sedes/${id}`, datosActualizados);
       toast.success("Actualización exitosa", {
@@ -100,8 +104,9 @@ const ActualizarSede = () => {
         },
       });
       setTimeout(() => {
+        "Cargando..."
         navigate("/sedes");
-      }, 1200);
+      }, 500);
     } catch (err) {
       console.log(err);
       toast.error("Error al actualizar la noticia", {
@@ -165,7 +170,7 @@ const ActualizarSede = () => {
                   type="text"
                   placeholder="Nombre"
                   id="nombre"
-                  value={info.nombre || sedes.nombre}
+                  value={info.nombre !== undefined ? info.nombre : sedes.nombre}
                   onChange={handleChange}
                   required
                 />
@@ -176,7 +181,7 @@ const ActualizarSede = () => {
                   type="text"
                   placeholder="Ciudad"
                   id="ciudad"
-                  value={info.ciudad || sedes.ciudad}
+                  value={info.ciudad !== undefined ? info.ciudad : sedes.ciudad}
                   onChange={handleChange}
                   required
                 />
@@ -187,7 +192,7 @@ const ActualizarSede = () => {
                   type="number"
                   placeholder="Telefono"
                   id="telefono"
-                  value={info.telefono || sedes.telefono}
+                  value={info.telefono !== undefined ? info.telefono : sedes.telefono}
                   onChange={handleChange}
                   required
                 />
@@ -198,7 +203,7 @@ const ActualizarSede = () => {
                   type="text"
                   placeholder="Calle"
                   id="calle"
-                  value={info.calle || sedes.calle}
+                  value={info.calle !== undefined ? info.calle : sedes.calle}
                   onChange={handleChange}
                   required
                 />
@@ -210,7 +215,7 @@ const ActualizarSede = () => {
                   type="number"
                   placeholder="Numero"
                   id="numero"
-                  value={info.numero || sedes.numero}
+                  value={info.numero !== undefined ? info.numero : sedes.numero}
                   onChange={handleChange}
                   required
                 />
@@ -222,7 +227,7 @@ const ActualizarSede = () => {
                   type="text"
                   placeholder="Zona"
                   id="zona"
-                  value={info.zona || sedes.zona}
+                  value={info.zona !== undefined ? info.zona : sedes.zona}
                   onChange={handleChange}
                   required
                 />
@@ -233,7 +238,7 @@ const ActualizarSede = () => {
                   type="text"
                   placeholder="País"
                   id="pais"
-                  value={info.pais || sedes.pais}
+                  value={info.pais !== undefined ? info.pais : sedes.pais}
                   onChange={handleChange}
                   required
                 />
@@ -244,7 +249,7 @@ const ActualizarSede = () => {
                   type="text"
                   placeholder="Email"
                   id="email"
-                  value={info.email || sedes.email}
+                  value={info.email !== undefined ? info.email : sedes.email}
                   onChange={handleChange}
                   required
                 />

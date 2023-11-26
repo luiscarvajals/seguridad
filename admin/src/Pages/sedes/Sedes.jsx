@@ -84,8 +84,9 @@ const Sedes = ({ inputs, title }) => {
         },
       });
       setTimeout(() => {
-        navigate("/noticias");
-      }, 1200);
+        "Cargando..."
+        navigate("/sedes");
+      }, 500);
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
         const errorMessage = err.response.data.message;

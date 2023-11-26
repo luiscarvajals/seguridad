@@ -55,7 +55,7 @@ const Sidebar = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <h2>Administrador</h2>
+              <h2 className="comp2">Panel Administrativo</h2>
             </motion.div>
             <motion.div
               className="insideDown"
@@ -63,7 +63,7 @@ const Sidebar = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <h5>Bienvenido: {usuario.nombre}</h5>
+              <h5 className="comp2">{usuario.nombre} {usuario.apellido}</h5>
             </motion.div>
           </div>
         </motion.div>
@@ -135,7 +135,7 @@ const Sidebar = () => {
             </NavLink>
         </motion.li>
 
-        <motion.li
+        {/* <motion.li
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.4, duration: 0.5 }}
@@ -161,7 +161,7 @@ const Sidebar = () => {
             >
               Multimedia
             </NavLink>
-        </motion.li>
+        </motion.li> */}
       </ul>
       <motion.button
         className="button-logout"

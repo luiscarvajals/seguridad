@@ -5,6 +5,7 @@ import About from './Pages/About/About.jsx';
 import Historia from './Pages/Historia/Historia.jsx';
 import CarreraIni from './Pages/Carrera/CarreraIni.jsx'
 import Carrera from './Pages/Carrera/Carrera.jsx';
+import SedesIni from './Pages/SedesIni/SedesIni.jsx';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/historia" element ={<Historia />} />
           <Route path="/carreras" element ={<CarreraIni/>} />
           <Route path="/carreras/:id" element ={<Carrera/>} />
+          <Route path="/sedes/:id" element ={<SedesIni/>} />
         </Routes>
     </BrowserRouter>
   );

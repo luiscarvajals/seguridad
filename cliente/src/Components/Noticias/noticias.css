@@ -4,6 +4,8 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    padding: 20px;
+    text-align: center;
   }
   
   /* Estilos para cada tarjeta de noticia */
@@ -12,7 +14,9 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 400px;
+    transition: transform 0.3s ease-in-out;
+    height: 400px;
   }
   
   .news-card__image {
@@ -41,6 +45,17 @@
     padding: 20px;
     font-size: 1.2em;
     text-align: center;
+  }
+
+  .buttonVerMas{
+    background-color: #1E51B4;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 20px;
   }
   
 

@@ -46,12 +46,20 @@ const ActualizarNoticia = () => {
   };
 
   const handleDeleteImage = (index) => {
+    console.log("Eliminando imagen en el índice:", index);
     if (noticia && noticia.img && noticia.img.length > 0) {
       const updatedImages = noticia.img.filter((imagen, i) => i !== index);
       
+      console.log("Imágenes actualizadas:", updatedImages);
+      
       setNoticia({ ...noticia, img: updatedImages });
+      
+      setPreviewImages((prevImages) =>
+      prevImages.filter((_, i) => i !== index)
+    );
     }
   };
+  
   const handleClick = async (e) => {
     e.preventDefault();
     try {
@@ -165,7 +173,7 @@ const ActualizarNoticia = () => {
                   type="text"
                   placeholder="Título"
                   id="titulo"
-                  value={info.titulo || noticia.titulo}
+                  value={info.titulo !== undefined ? info.titulo : noticia.titulo}
                   onChange={handleChange}
                   required
                 />
@@ -176,7 +184,7 @@ const ActualizarNoticia = () => {
                   type="text"
                   placeholder="Descripción"
                   id="descripcion"
-                  value={info.descripcion || noticia.descripcion}
+                  value={info.descripcion !== undefined ? info.descripcion : noticia.descripcion}
                   onChange={handleChange}
                   required
                 />
@@ -187,7 +195,7 @@ const ActualizarNoticia = () => {
                   type="text"
                   placeholder="Contenido"
                   id="contenido"
-                  value={info.contenido || noticia.contenido}
+                  value={info.contenido !== undefined ? info.contenido : noticia.contenido}
                   onChange={handleChange}
                   required
                 />
@@ -197,7 +205,7 @@ const ActualizarNoticia = () => {
                 <select
                   id="destacada"
                   onChange={handleChange}
-                  value={info.destacada || noticia.destacada}
+                  value={info.destacada !== undefined ? info.destacada : noticia.destacada}
                   required
                 >
                   <option value="">Seleccione una opción</option>

@@ -59,35 +59,23 @@ export const crearSede = async (req, res, next) => {
         }
 
         export const actualizarSede = async (req, res, next) => {
-            try {
-              const {
-                nombre,
-                ciudad,
-                telefono,
-                img,
-                calle,
-                numero,
-                zona,
-                pais,
-                email,
-              } = req.body;
-          
-              const imagenes = Array.isArray(img) ? img : [img];
-          
-              const sedeActualizada = {
-                nombre,
-                ciudad,
-                telefono,
-                img: imagenes,
-                calle,
-                numero,
-                zona,
-                pais,
-                email,
+          const {id} = req.params;
+          try {
+              
+              const sedeExistente = await Sedes.findById(id);
+              if (!sedeExistente) {
+                return res.status(404).json({ mensaje: "Sede no encontrada" });
+              }
+
+              const nuevosValores = {
+                ...sedeExistente.toObject(), 
+                ...req.body,
               };
-          
-              await Sedes.findByIdAndUpdate(req.params.id, sedeActualizada);
-              res.status(200).json({ mensaje: "Sede actualizada con éxito" });
+
+              const sedeActualizada = await Sedes.findByIdAndUpdate(id, nuevosValores, { new: true });
+
+    
+              res.status(200).json(sedeActualizada);
             } catch (error) {
               console.error(`Error al actualizar sede: ${error.message}`);
               next(error);

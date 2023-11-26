@@ -111,6 +111,9 @@ const ActualizarCarrera = () => {
       const updatedImages = carrera.img.filter((carrera, i) => i !== index);
 
       setCarrera({ ...carrera, img: updatedImages });
+      setPreviewImages((prevImages) =>
+      prevImages.filter((_, i) => i !== index)
+    );
     }
   };
   const handleClick = async (e) => {
@@ -163,7 +166,7 @@ const ActualizarCarrera = () => {
       });
       setTimeout(() => {
         navigate("/carreras");
-      }, 1200);
+      }, 500);
     } catch (err) {
       console.log(err);
       toast.error("Error al actualizar la carrera", {
@@ -231,7 +234,7 @@ const ActualizarCarrera = () => {
                   type="text"
                   placeholder="Nombre de la Carrera"
                   id="nombre"
-                  value={info.nombre || carrera.nombre}
+                  value={info.nombre !== undefined ? info.nombre : carrera.nombre}
                   onChange={handleChange}
                   required
                 />
@@ -244,7 +247,7 @@ const ActualizarCarrera = () => {
                   type="text"
                   placeholder="Descripción"
                   id="descripcion"
-                  value={info.descripcion || carrera.descripcion}
+                  value={info.descripcion !== undefined ? info.descripcion : carrera.descripcion}
                   onChange={handleChange}
                   required
                 />
@@ -257,7 +260,7 @@ const ActualizarCarrera = () => {
                   type="number"
                   placeholder="Duración de la Carrera en años"
                   id="duracion"
-                  value={info.duracion || carrera.duracion}
+                  value={info.duracion !== undefined ? info.duracion : carrera.duracion}
                   onChange={handleChange}
                   required
                 />
@@ -270,7 +273,7 @@ const ActualizarCarrera = () => {
                   type="text"
                   placeholder="Perfil de Egreso de la carrera"
                   id="perfilEgreso"
-                  value={info.perfilEgreso || carrera.perfilEgreso}
+                  value={info.perfilEgreso !== undefined ? info.perfilEgreso : carrera.perfilEgreso}
                   onChange={handleChange}
                   required
                 />
@@ -283,7 +286,7 @@ const ActualizarCarrera = () => {
                   type="text"
                   placeholder="Perfil de Ingreso para la carrera"
                   id="perfilIngreso"
-                  value={info.perfilIngreso || carrera.perfilIngreso}
+                  value={info.perfilIngreso !== undefined ? info.perfilIngreso : carrera.perfilIngreso}
                   onChange={handleChange}
                   required
                 />
@@ -297,7 +300,7 @@ const ActualizarCarrera = () => {
                   type="text"
                   placeholder="Descripción del plan de estudio"
                   id="planEstudio"
-                  value={info.planEstudio || carrera.planEstudio}
+                  value={info.planEstudio !== undefined ? info.planEstudio : carrera.planEstudio}
                   onChange={handleChange}
                   required
                 />
@@ -311,7 +314,7 @@ const ActualizarCarrera = () => {
                   type="text"
                   placeholder="Campo Ocupacional de la carrera"
                   id="campoOcupacional"
-                  value={info.campoOcupacional || carrera.campoOcupacional}
+                  value={info.campoOcupacional !== undefined ? info.campoOcupacional : carrera.campoOcupacional}
                   onChange={handleChange}
                   required
                 />
@@ -325,7 +328,7 @@ const ActualizarCarrera = () => {
                   type="text"
                   placeholder="Resquisitos de Ingreso para la carrera"
                   id="requisitosIngreso"
-                  value={info.requisitosIngreso || carrera.requisitosIngreso}
+                  value={info.requisitosIngreso !== undefined ? info.requisitosIngreso : carrera.requisitosIngreso}
                   onChange={handleChange}
                   required
                 />
@@ -338,7 +341,7 @@ const ActualizarCarrera = () => {
                   type="text"
                   placeholder="Titulo que otorga la carrera"
                   id="tituloOtorga"
-                  value={info.tituloOtorga || carrera.tituloOtorga}
+                  value={info.tituloOtorga !== undefined ? info.tituloOtorga : carrera.tituloOtorga}
                   onChange={handleChange}
                   required
                 />
@@ -352,7 +355,7 @@ const ActualizarCarrera = () => {
                   type="text"
                   placeholder="Persona encargada de informar sobre la carrera"
                   id="contacto"
-                  value={info.contacto || carrera.contacto}
+                  value={info.contacto !== undefined ? info.contacto : carrera.contacto}
                   onChange={handleChange}
                   required
                 />
@@ -366,7 +369,7 @@ const ActualizarCarrera = () => {
                   type="email"
                   placeholder="Persona encargada de informar sobre la carrera"
                   id="correo"
-                  value={info.correo || carrera.correo}
+                  value={info.correo !== undefined ? info.correo : carrera.correo}
                   onChange={handleChange}
                   required
                 />
@@ -380,7 +383,7 @@ const ActualizarCarrera = () => {
                   type="number"
                   placeholder="Telefono de contacto"
                   id="telefono"
-                  value={info.telefono || carrera.telefono}
+                  value={info.telefono !== undefined ? info.telefono : carrera.telefono}
                   onChange={handleChange}
                   required
                 />
@@ -394,7 +397,7 @@ const ActualizarCarrera = () => {
                   type="text"
                   placeholder="Director de Carrera"
                   id="dirCarrera"
-                  value={info.dirCarrera || carrera.dirCarrera}
+                  value={info.dirCarrera !== undefined ? info.dirCarrera : carrera.dirCarrera}
                   onChange={handleChange}
                   required
                 />
@@ -408,9 +411,7 @@ const ActualizarCarrera = () => {
                   type="text"
                   placeholder="Ubicación de la Facultad de la carrera"
                   id="ubicacionDirCarrera"
-                  value={
-                    info.ubicacionDirCarrera || carrera.ubicacionDirCarrera
-                  }
+                  value={info.ubicacionDirCarrera !== undefined ? info.ubicacionDirCarrera : carrera.ubicacionDirCarrera}
                   onChange={handleChange}
                   required
                 />
@@ -423,7 +424,7 @@ const ActualizarCarrera = () => {
                 <select
                   id="categoria"
                   onChange={handleChange}
-                  value={info.categoria || carrera.categoria}
+                  value={info.categoria !== undefined ? info.categoria : carrera.categoria}
                   required
                 >
                   <option value="">Seleccione una opción</option>
@@ -439,7 +440,7 @@ const ActualizarCarrera = () => {
                 <select
                   id="sede"
                   onChange={handleChange}
-                  value={info.sede || carrera.sede}
+                  value={info.sede !== undefined ? info.sede : carrera.sede}
                   required
                 >
                   <option value="">Seleccione una opción</option>

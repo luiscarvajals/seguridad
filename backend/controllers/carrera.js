@@ -144,3 +144,24 @@ export const eliminarCarrera = async (req, res, next) => {
     next(error);
   }
 };
+
+export const listarCarrerasPre = async (req, res, next) => {
+  try {
+    const carreras = await Carrera.find({categoria: "Pregrado"});
+    console.log("Carreras del back", carreras)
+    res.status(200).json(carreras);
+  } catch (error) {
+    console.error(`Error al leer carreras: ${error.message}`);
+    next(error);
+  }
+}
+
+export const listarCarrerasPost = async (req, res, next) => {
+  try {
+    const carreras = await Carrera.find({categoria: "Postgrado"});
+    res.status(200).json(carreras);
+  } catch (error) {
+    console.error(`Error al leer carreras: ${error.message}`);
+    next(error);
+  }
+}

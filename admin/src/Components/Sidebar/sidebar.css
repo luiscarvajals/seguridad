@@ -59,6 +59,13 @@
   }
   .comp{
     font-size: 20px;
+    text-align: center;
+    
+  }
+  .comp2{
+    font-size: 20px;
+    text-align: center;
+    cursor: default;
     
   }
   .comp:hover{

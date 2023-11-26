@@ -145,7 +145,7 @@ export const userColumns = [
   ];
 
   export const carrerasColumns = [
-    { field: "_id",headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>ID</span>, width: 210},
+    { field: "_id",headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>ID</span>, width: 100},
     {
       field: "nombre",
       headerName: <span style={{ fontWeight: 'bold', fontSize:'20px' }}>Nombre</span>,

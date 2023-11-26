@@ -1,0 +1,12 @@
+ 
+.input-date {
+    cursor: pointer;
+    color: black;
+  }
+  
+
+  .input-date[readonly] {
+    cursor: not-allowed;
+    color: gray;
+  }
+  

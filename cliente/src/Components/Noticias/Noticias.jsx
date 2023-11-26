@@ -12,7 +12,7 @@ const Noticias = () => {
         <>
           {data.map((item) => (
             <div className="news-card" key={item._id}>
-              <img src={item.img[0]} alt={item.titulo} className="news-card__image" />
+              <img src={item.img[0]} alt={item.titulo} className="news-card__image"  />
               <div className="news-card__content">
                 <h2 className="news-card__title">
                   {item.titulo}
@@ -20,6 +20,9 @@ const Noticias = () => {
                 <p className="news-card__description">
                   {item.descripcion}
                 </p>
+                <button className='buttonVerMas'>
+                  Ver más
+                </button>
               </div>
             </div>
           ))}
