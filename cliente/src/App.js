@@ -6,6 +6,7 @@ import Historia from './Pages/Historia/Historia.jsx';
 import CarreraIni from './Pages/Carrera/CarreraIni.jsx'
 import Carrera from './Pages/Carrera/Carrera.jsx';
 import SedesIni from './Pages/SedesIni/SedesIni.jsx';
+import NoticiaEspecifica from './Pages/NoticiaEspecifica/NoticiaEspecifica.jsx';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/carreras" element ={<CarreraIni/>} />
           <Route path="/carreras/:id" element ={<Carrera/>} />
           <Route path="/sedes/:id" element ={<SedesIni/>} />
+          <Route path="/noticias/:id" element ={<NoticiaEspecifica/>} />
         </Routes>
     </BrowserRouter>
   );

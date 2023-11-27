@@ -6,13 +6,13 @@ import "./carrera.css";
 import axios from "axios";
 
 const Carrera = () => {
-  const location = useLocation();
+
   //const carreraData = location.state?.carreraData;
   //console.log("El carrera dataa es:",carreraData);
 
   const { id } = useParams();
   const [carreraData, setCarreraData] = useState({});
-  const [loading, setLoading] = useState(true);
+
 
  
   useEffect(() => {
