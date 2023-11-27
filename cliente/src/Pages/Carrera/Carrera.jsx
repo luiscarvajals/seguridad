@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import NavbarDrop from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import "./carrera.css";

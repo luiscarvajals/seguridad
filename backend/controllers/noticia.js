@@ -34,6 +34,16 @@ export const leerNoticias = async (req, res, next) => {
     }
   };
 
+  export const leerNoticiasDestacadaActivo = async (req, res, next) => {
+    try {
+      const noticias = await Noticia.find({ destacada: true, activo:true }).sort({ fecha_publicacion: -1 });
+      res.status(200).json(noticias);
+    } catch (error) {
+      console.error(`Error al leer noticias: ${error.message}`);
+      next(error);
+    }
+  };
+
 // Leer una Noticia por ID
 export const leerNoticiaPorId = async (req, res, next) => {
   const { id } = req.params;
@@ -56,16 +66,15 @@ export const leerNoticiaPorId = async (req, res, next) => {
 export const actualizarNoticia = async (req, res, next) => {
   const { id } = req.params;
   try {
-    // Obtén la noticia existente
+
     const noticiaExistente = await Noticia.findById(id);
 
-    // Combina los valores existentes con los nuevos valores
     const nuevosValores = {
-      ...noticiaExistente.toObject(), // Convierte la noticia existente a un objeto para evitar modificarla directamente
-      ...req.body, // Utiliza los nuevos valores proporcionados en el cuerpo de la solicitud
+      ...noticiaExistente.toObject(),
+      ...req.body, 
     };
+    
 
-    // Actualiza la noticia con los nuevos valores
     const noticiaActualizada = await Noticia.findByIdAndUpdate(id, nuevosValores, { new: true });
 
     res.status(200).json(noticiaActualizada);

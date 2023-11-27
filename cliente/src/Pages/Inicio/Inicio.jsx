@@ -2,10 +2,17 @@ import React from "react";
 import NavbarPort from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import Noticias from "../../Components/Noticias/Noticias";
-import Carrera from "../Carrera/Carrera";
+
 import CarreraIni from "../Carrera/CarreraIni";
+import ImageCarousel from "../../Components/Carousel/Carousel";
 
 const Inicio = () => {
+  const images =[
+    'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701058278/Banner2_hbbkq4.png',
+    'https://www.la-razon.com/wp-content/uploads/2022/11/01/14/Universidad-Catolica-San-Pablo-scaled.jpg',
+    'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701057948/Banner1_jblowc.png',
+
+  ]
   return (
     <div>
       <NavbarPort />
@@ -42,6 +49,9 @@ const Inicio = () => {
       <div>
 
         <CarreraIni />
+      </div>
+      <div>
+        <ImageCarousel images={images} />
       </div>
       <Footer />
     </div>

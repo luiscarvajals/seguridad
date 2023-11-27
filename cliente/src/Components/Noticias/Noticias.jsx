@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import useFetch from '../../hooks/useFetch'
 import './noticias.css'
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -10,7 +9,7 @@ const Noticias = () => {
 
   useEffect(() => { 
     const fetchNoticia = async () => {
-      const response = await axios.get("http://localhost:8800/api/noticias?destacado=true&activo=true");
+      const response = await axios.get("http://localhost:8800/api/noticias/activo/destacada");
       console.log("first",(response.data));
       setNoticia(response.data);
     };

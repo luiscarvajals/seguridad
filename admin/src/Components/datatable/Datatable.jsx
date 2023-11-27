@@ -79,6 +79,7 @@ const Datatable = ({ columns }) => {
         className="datagrid"
         rows={list}
         columns={columns.concat(actionColumn)}
+        pageSize={10}
         getRowId={(row) => row._id}
       />
     </div>

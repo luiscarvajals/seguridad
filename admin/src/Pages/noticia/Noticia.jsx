@@ -21,8 +21,6 @@ const Noticia = ({ inputs, title }) => {
     const selectedFiles = Array.from(e.target.files); // Convertir en un arreglo
 
     setFiles(selectedFiles);
-
-    // Vista previa de las imágenes
     const imagePreviews = selectedFiles.map((file) => {
       return URL.createObjectURL(file);
     });
