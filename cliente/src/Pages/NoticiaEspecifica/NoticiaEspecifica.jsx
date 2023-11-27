@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import NavbarDrop from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
-
+import './noticiaespecifica.css';
 const NoticiaEspecifica = () => {
   const { id } = useParams();
   const [noticiaData, setNoticiaData] = useState({});
@@ -36,22 +36,22 @@ const NoticiaEspecifica = () => {
   return (
     <div>
       <NavbarDrop />
-      <div className="containerCarrera">
-        <div className="header-contentC">
+      <div className="notiespecifica card"> 
+        <div className="header-contentCne">
           <h1>{noticiaData.titulo}</h1>
           <img
-            className="imageC"
+            className="imageCne"
             src={noticiaData.img}
             alt="Descripción de la imagen"
           />
         </div>
 
-        <div className="contentC">
+        <div className="contentCne">
           <p>{noticiaData.descripcion}</p>
         </div>
 
-        <div className="additional-texts">
-          <div className="text-groupC">
+        <div className="additional-textsne">
+          <div className="text-groupCne">
             <p>
               <strong></strong> {noticiaData.contenido}
             </p>
