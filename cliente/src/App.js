@@ -7,6 +7,9 @@ import CarreraIni from './Pages/Carrera/CarreraIni.jsx'
 import Carrera from './Pages/Carrera/Carrera.jsx';
 import SedesIni from './Pages/SedesIni/SedesIni.jsx';
 import NoticiaEspecifica from './Pages/NoticiaEspecifica/NoticiaEspecifica.jsx';
+import Usei from './Pages/Servicios/Usei.jsx';
+import RedSalud from './Pages/Servicios/RedSalud.jsx';
+import FinUcb from './Pages/Servicios/FinUcb.jsx';
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
           <Route path="/carreras/:id" element ={<Carrera/>} />
           <Route path="/sedes/:id" element ={<SedesIni/>} />
           <Route path="/noticias/:id" element ={<NoticiaEspecifica/>} />
+          <Route path="/usei" element ={<Usei/>} />
+          <Route path="/redsalud" element={<RedSalud/>} />
+          <Route path="/finucb" element={<FinUcb/>} />
         </Routes>
     </BrowserRouter>
   );

@@ -8,15 +8,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 
 const NavbarPort = () => {
-  const [, setActiveLink] = useState("inicio");
+  // const [, setActiveLink] = useState("inicio");
   const [isOpen, setIsOpen] = useState(false);
   const [carreraPre, setCarreraPre] = useState({});
   const [carreraPost, setCarreraPost] = useState({});
   const [sedes, setSedes] = useState({});
 
-  const handleLinkClick = (link) => {
-    setActiveLink(link);
-  };
+  // const handleLinkClick = (link) => {
+  //   setActiveLink(link);
+  // };
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -143,8 +143,9 @@ const NavbarPort = () => {
             </NavDropdown>
 
             <NavDropdown title="Servicios" id="basic-nav-dropdown">
-              <NavDropdown.Item href="">Carrera 1</NavDropdown.Item>
-              <NavDropdown.Item href="#carrera2">Carrera 2</NavDropdown.Item>
+              <NavDropdown.Item href="/usei">Servicio de USEI</NavDropdown.Item>
+              <NavDropdown.Item href="/finucb">Financiamiento UCB</NavDropdown.Item>
+              <NavDropdown.Item href="/redsalud">Red Salud</NavDropdown.Item>
             </NavDropdown>
 
             <NavDropdown title="Sedes" id="basic-nav-dropdown">
