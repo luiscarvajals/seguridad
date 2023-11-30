@@ -1,70 +1,65 @@
-.containerCarrera {
-  max-width: 800px;
-  margin: 50px auto;
-  background-color: #ffd700;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.career-details-container {
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 75vh; /* 75% de la altura de la ventana */
 }
 
+.career-details-content {
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  flex-grow: 1;
+  max-width: 800px; /* Máximo ancho del contenido */
+  margin: 0 auto; /* Centrar el contenido */
+}
 
-.header-contentCarrera {
+.career-details-header {
   text-align: center;
 }
 
-.imageCarrera {
+.career-details-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.career-details-image {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-  margin-top: 20px;
 }
 
-.contentCarrera {
-  margin-top: 20px;
-}
-
-.additional-textsCarrera {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.text-groupCarrera {
-  flex: 0 1 48%;
+.career-details-description {
   margin-bottom: 20px;
 }
 
-/* Colores personalizados */
-.text-amarillo {
-  color: #ffd700;
+.career-details-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
 }
 
-.text-azul {
-  color: #0000ff;
+.info-item {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
 }
 
-/* Otros estilos según tu preferencia */
-h1 {
-  color: #000000; /* Color del texto del encabezado */
+.info-item strong {
+  display: block;
+  margin-bottom: 5px;
 }
 
-p {
-  color: #333; /* Color del texto del párrafo */
+/* Estilos para pantallas más pequeñas (responsive) */
+
+@media (max-width: 768px) {
+  .career-details-container {
+    height: auto; /* Ajustar la altura automáticamente para pantallas más pequeñas */
+  }
+
+  .career-details-content {
+    border-radius: 0; /* Eliminar bordes redondeados en pantallas más pequeñas */
+  }
 }
-
-
-/* Agrega esta clase para el fondo azul */
-.bg-azul {
-  background-color: #3498db; /* Azul */
-  padding: 8px; /* Ajusta según tus preferencias */
-  border-radius: 5px; /* Ajusta según tus preferencias */
-}
-
-/* Nueva clase para fondo azul claro */
-.bg-azul-claro {
-  background-color: #3498db; /* Puedes ajustar el color según tu preferencia */
-  padding: 8px;
-  border-radius: 5px;
-}
-
