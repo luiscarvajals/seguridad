@@ -1,65 +1,70 @@
-.career-details-container {
-  font-family: 'Arial', sans-serif;
-  display: flex;
-  flex-direction: column;
-  height: 75vh; /* 75% de la altura de la ventana */
-}
 
-.career-details-content {
-  background-color: #f8f8f8;
+.containerCarrera {
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
+  background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  flex-grow: 1;
-  max-width: 800px; /* Máximo ancho del contenido */
-  margin: 0 auto; /* Centrar el contenido */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
-.career-details-header {
+.hedaerC {
   text-align: center;
+  margin-bottom: 20px;
+  font-size: 80px;
+  color: rgb(44, 100, 204);
+  
 }
 
-.career-details-title {
-  font-size: 24px;
+.h2C{
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 40px;
+  color: rgb(44, 100, 204);
+}
+
+.carrera-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.carrera-image {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.imageC {
+  max-width: 100%;
+  height: auto;
+}
+
+.carrera-details {
+  flex: 2;
+  margin-top: 70px;
+}
+
+.detail-item {
   margin-bottom: 10px;
 }
 
-.career-details-image {
-  max-width: 100%;
-  height: auto;
+.carrera-description {
+  flex: 1;
+}
+
+.carrera-contact {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
   border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.career-details-description {
-  margin-bottom: 20px;
-}
-
-.career-details-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
+.contact-info {
+  margin-top: 20px;
 }
 
 .info-item {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1);
-}
-
-.info-item strong {
-  display: block;
-  margin-bottom: 5px;
-}
-
-/* Estilos para pantallas más pequeñas (responsive) */
-
-@media (max-width: 768px) {
-  .career-details-container {
-    height: auto; /* Ajustar la altura automáticamente para pantallas más pequeñas */
-  }
-
-  .career-details-content {
-    border-radius: 0; /* Eliminar bordes redondeados en pantallas más pequeñas */
-  }
+  margin-bottom: 10px;
 }

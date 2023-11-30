@@ -5,6 +5,7 @@ import Footer from "../../Components/Footer/Footer";
 import "./carrera.css";
 import axios from "axios";
 import "./carrera.css";
+import ImageCarousel from "../../Components/Carousel/Carousel";
 
 const Carrera = () => {
   //const carreraData = location.state?.carreraData;
@@ -12,6 +13,12 @@ const Carrera = () => {
 
   const { id } = useParams();
   const [carreraData, setCarreraData] = useState({});
+
+  const images = [
+    "https://res.cloudinary.com/dwwj8mhse/image/upload/v1701058278/Banner2_hbbkq4.png",
+    "https://www.la-razon.com/wp-content/uploads/2022/11/01/14/Universidad-Catolica-San-Pablo-scaled.jpg",
+    "https://res.cloudinary.com/dwwj8mhse/image/upload/v1701057948/Banner1_jblowc.png",
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,89 +37,75 @@ const Carrera = () => {
   }, [id]);
 
   return (
-    <div className="career-details-container">
-  <NavbarDrop />
+    <div >
+      <NavbarDrop />
+      <div className="containerCarrera">
+        <div className="hedaerC">
+          <h1>{carreraData.nombre}</h1>
+        </div>
+        <div className="carrera-image">
+          {carreraData && carreraData.img && carreraData.img.length > 0 ? (
+            <ImageCarousel images={carreraData.img} />
+          ) : (
+            <p>No hay imágenes disponibles</p>
+          )}
+        </div>
+        <div className="carrera-description">
+          <p>{carreraData.descripcion}</p>
+        </div>
+        <div className="carrera-content">
+          <div className="carrera-details">
+            <div className="detail-item">
+              <strong>Duración (años):</strong> {carreraData.duracion}
+            </div>
 
-  <div className="career-details-content">
-    <header className="career-details-header">
-      <h1 className="career-details-title">{carreraData.nombre}</h1>
-      <img className="career-details-image" src={carreraData.img} alt="Imagen de la carrera" />
-    </header>
+            <div className="detail-item">
+              <strong>Área de estudio:</strong> {carreraData.categoria}
+            </div>
 
-    <section className="career-details-description">
-      <p>{carreraData.descripcion}</p>
-    </section>
-
-    <section className="career-details-info">
-      <div className="info-item">
-        <strong>Duración:</strong> {carreraData.duracion}
-      </div>
-
-      <div className="info-item">
-        <strong>Área de estudio:</strong> {carreraData.categoria}
-      </div>
-
-      <div className="info-item">
-        <strong>Modalidad de Graduación:</strong> {carreraData.modalidadGraduacion}
-      </div>
-
-      <div className="info-item">
-        <strong>Perfil de Egreso:</strong> {carreraData.perfilEgreso}
-      </div>
-
-      <div className="info-item">
-        <strong>Perfil de Ingreso:</strong> {carreraData.perfilIngreso}
-      </div>
-
-      <div className="info-item">
-        <strong>Plan de Estudio:</strong> {carreraData.planEstudio}
-      </div>
-
-      <div className="info-item">
-        <strong>Campo Ocupacional:</strong> {carreraData.campoOcupacional}
-      </div>
-
-      <div className="info-item">
-        <strong>Requisitos de Ingreso:</strong> {carreraData.requisitosIngreso}
-      </div>
-
-      <div className="info-item">
-        <strong>Título Otorga:</strong> {carreraData.tituloOtorga}
-      </div>
-
-      <div className="info-item">
-        <strong>Sede:</strong> {carreraData.sede}
-      </div>
-
-      <div className="info-item">
-        <strong>Contacto:</strong> {carreraData.contacto}
-      </div>
-
-      <div className="info-item">
-        <strong>Correo:</strong> {carreraData.correo}
-      </div>
-
-      <div className="info-item">
-        <strong>Teléfono:</strong> {carreraData.telefono}
-      </div>
-
-      <div className="info-item">
-        <strong>Docentes:</strong> {carreraData.docentes}
-      </div>
-
-      <div className="info-item">
-        <strong>Ubicación Dirección Carrera:</strong> {carreraData.ubicacionDirCarrera}
-      </div>
-
-      <div className="info-item">
-        <strong>Dirección Carrera:</strong> {carreraData.dirCarrera}
-      </div>
-    </section>
-  </div>
-
-  <Footer />
+            <div className="detail-item">
+  <strong>Modalidad de Graduación:</strong>{" "}
+  {carreraData.modalidadGraduacion && carreraData.modalidadGraduacion.length > 0 ? (
+    carreraData.modalidadGraduacion.join(', ')
+  ) : (
+    'No hay información disponible'
+  )}
 </div>
 
+
+            <div className="detail-item">
+              <strong>Perfil de Egreso:</strong> {carreraData.perfilEgreso}
+            </div>
+
+            <div className="detail-item">
+              <strong>Perfil de Ingreso:</strong> {carreraData.perfilIngreso}
+            </div>
+          </div>
+          <div className="detail-item2">
+            <img src="https://i0.wp.com/lpz.ucb.edu.bo/wp-content/uploads/2020/11/logo-sub.png?resize=300%2C282&ssl=1" />
+          </div>
+        </div>
+      </div>
+
+      <div className="carrera-contact">
+        <h2 className="h2C">Contacto</h2>
+        <div className="contact-info">
+          <div className="info-item">
+            <strong>Correo:</strong> {carreraData.correo}
+          </div>
+
+          <div className="info-item">
+            <strong>Teléfono:</strong> {carreraData.telefono}
+          </div>
+
+          <div className="info-item">
+            <strong>Dirección:</strong> {carreraData.ubicacionDirCarrera}
+          </div>
+        </div>
+      </div>
+
+      <Footer />
+    </div>
   );
 };
 

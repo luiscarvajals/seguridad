@@ -1,4 +1,4 @@
-imageC{
+.imageC{
     max-width: 100%;
     height: auto;
  }
@@ -55,4 +55,28 @@ imageC{
   .text-groupS strong {
     color: #555;
   }
+
+  .buttonSede{
+    background-color: rgb(68, 102, 212);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .linkSede{
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+
+  }
+  .linkSede:hover{
+    background-color: rgb(68, 102, 212);
+    color: #fff;
+    text-decoration: none;
+  }
+
+  
   

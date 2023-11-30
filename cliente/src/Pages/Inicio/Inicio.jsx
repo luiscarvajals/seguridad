@@ -9,8 +9,10 @@ import ImageCarousel from "../../Components/Carousel/Carousel";
 const Inicio = () => {
   const images =[
     'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701058278/Banner2_hbbkq4.png',
-    'https://www.la-razon.com/wp-content/uploads/2022/11/01/14/Universidad-Catolica-San-Pablo-scaled.jpg',
+    'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701307940/banner5_zikxlb.png',
     'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701057948/Banner1_jblowc.png',
+    'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701307940/banner4_gbirt7.png',
+    'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701307940/banner3_munger.png'
 
   ]
   return (
