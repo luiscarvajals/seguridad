@@ -9,10 +9,25 @@ import ImageCarousel from "../../Components/Carousel/Carousel";
 const Inicio = () => {
   const images = [
     'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701058278/Banner2_hbbkq4.png',
-    'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701307940/banner5_zikxlb.png',
+    'https://www.la-razon.com/wp-content/uploads/2022/11/01/14/Universidad-Catolica-San-Pablo-scaled.jpg',
     'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701057948/Banner1_jblowc.png',
+  ];
 
-  ]
+  const sedesData = [
+    { title: "Sede La Paz", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/zujy24moayfzlkop0cap.jpg')" },
+    { title: "Sede Cochabamba", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/h71od4quzlmnnpidb9cx.jpg')" },
+    { title: "Sede Tarija", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/cjxxiq82d54cm0rxpf5q.jpg')" },
+    { title: "Sede Santa Cruz", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/wcrlocmkni5pgewf6amj.jpg')" },
+    { title: "Sede la Plata", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/qiyahldgmdmbfv8ivwce.jpg')" },
+    { title: "Escuela de la produccion y la competividad", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/ap4fsoh6npdctkkh78lz.jpg')" },
+    { title: "U.C.B Oruro Virgen del Socabon", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/sussileeqe22r12ntwqu.jpg')" },
+  ];
+
+  const handleNavigate = () => {
+    window.location.href = "/noticias";
+  }
+
+  
   return (
     <div>
       <NavbarPort />
@@ -28,7 +43,7 @@ const Inicio = () => {
           ></video>
           <div className="textOverlay">
             <h1 className="tituloHome">
-              Modelo Institucional U.C.B 2023
+              Universidad Católica Boliviana "San Pablo"
             </h1>
             <p className="parrafoHome">
               Únase a nosotros para celebrar el Modelo Institucional de la
@@ -37,7 +52,7 @@ const Inicio = () => {
               compromiso con la excelencia académica y la educación superior en
               Bolivia durante casi cuatro décadas.
             </p>
-            <button className="learn-more">
+            <button className="learn-more" onClick={handleNavigate}>
               <span className="circle" aria-hidden="true">
                 <span className="icon arrow"></span>
               </span>
@@ -57,7 +72,7 @@ const Inicio = () => {
       <div>
         <h1>Sedes ACADEMICAS</h1>
       </div>
-      <div className="container">
+      <div className="containerInicio">
         {sedesData.map((sede, index) => (
           <div
             className="card"
@@ -67,11 +82,7 @@ const Inicio = () => {
             <p className="title">{sede.title}</p>
             <div className="card-hidden">
               <p className="title-in">{sede.title}</p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                at est orci. Nam molestie pellentesque mi nec lacinia.
-              </p>
-              <a className="button">Button</a>
+              {/* <a className="button">Button</a> */}
             </div>
           </div>
         ))}
