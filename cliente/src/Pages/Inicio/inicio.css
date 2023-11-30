@@ -1,0 +1,215 @@
+.video-container {
+  position: relative;
+  width: 100%;
+}
+
+.video {
+  width: 100%; /* Ajusta el ancho según sea necesario */
+  height: auto;
+  display: block;
+  margin: 0 auto; /* Centra el video horizontalmente */
+}
+
+.textOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.tituloHome {
+  font-size: 4.9em; /* Ajusta el tamaño del título según sea necesario */
+  color: #ffffff; /* Cambia el color del título según sea necesario */
+}
+
+.parrafoHome {
+  font-size: 1.2em; /* Ajusta el tamaño del párrafo según sea necesario */
+  color: #ffffff; /* Cambia el color del párrafo según sea necesario */
+}
+
+button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+  }
+  
+  button.learn-more {
+    width: 12rem;
+    height: auto;
+    margin-top: 20px; /* Espaciado entre el párrafo y el botón */
+  }
+  
+  button.learn-more .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #ff0000;
+    border-radius: 1.625rem;
+  }
+  
+  button.learn-more .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+  }
+  
+  button.learn-more .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+  }
+  
+  button.learn-more .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+  }
+  
+  button.learn-more .button-text {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    color: #362828;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  button:hover .circle {
+    width: 100%;
+  }
+  
+  button:hover .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem, 0);
+  }
+  
+  button:hover .button-text {
+    color: #fff;
+  }
+
+  .container {
+    display: flex;
+    gap: 10px; /* Espaciado entre las tarjetas, ajusta según sea necesario */
+    overflow-x: auto; /* Agrega una barra de desplazamiento horizontal si es necesario */
+  }
+  
+  .card {
+    flex: 0 0 auto;
+    width: 250px; /* Ancho de cada tarjeta, ajusta según sea necesario */
+    height: 254px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    color: #232323;
+    padding: 16px;
+    border: 1px solid #232323;
+    transition: all 0.5s ease-in-out;
+    overflow: hidden;
+    position: relative; /* Añadido */
+  }
+  
+  .card-hidden {
+    position: absolute; /* Cambiado */
+    top: 100%; /* Cambiado */
+    left: 0; /* Cambiado */
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    transition: transform .5s ease-in, opacity .3s ease-in;
+    opacity: 0;
+  }
+  
+  .card-border {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border: 1px dashed #232323;
+    border-radius: 8px;
+    z-index: -1;
+  }
+  
+  /*Hovers*/
+  .card:hover {
+    transform: translate(-15px, -15px);
+    border-color: #5bc0eb;
+  }
+  
+  .card:hover .card-hidden {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .card:hover .title {
+    transform: translateY(200%);
+  }
+  
+  /*Text*/
+  .title {
+    position: absolute;
+    bottom: 1rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+    transition: transform .25s ease-out;
+  }
+  
+  .title-in {
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+  
+  /*Button*/
+  .button {
+    display: inline-flex;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 24px;
+    font-weight: 600;
+    background-color: #5bc0eb;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+  }
+  
+  .button:hover {
+    background-color: #53aed4;
+  }
+  div {
+    text-align: center; /* Centra el texto horizontalmente */
+  }
+  
+  h1 {
+    display: inline-block; /* Permite aplicar estilos como border-bottom sin afectar al bloque completo */
+    border-bottom: 2px solid #ffd700; /* Línea de color amarillo debajo del texto */
+    padding-bottom: 5px; /* Espaciado entre el texto y la línea */
+  }
+    
