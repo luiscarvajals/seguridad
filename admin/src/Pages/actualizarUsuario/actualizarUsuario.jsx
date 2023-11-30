@@ -11,7 +11,6 @@ const ActualizarUsuario = ({ inputs, title }) => {
   const [userData, setUserData] = useState({});
   const { id } = useParams();
   const [availableRoles, setAvailableRoles] = useState([]);
-  const [setCurrentUserRole] = useState("");
 
   console.log("User data:", userData)
 

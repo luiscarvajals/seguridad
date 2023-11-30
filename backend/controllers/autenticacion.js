@@ -3,54 +3,80 @@ import Usuario from '../models/Usuario.js';
 import { crearError } from '../extra/error.js';
 
 
-export const registroUsuario = async (req, res, next) => {
-    try {
-      const {
-        nombre,
-        apellido,
-        fechaNacimiento,
-        usuario,
-        email,
-        password,
-        pais,
-        img,
-        ciudad,
-        telefono,
-      } = req.body;
+// export const registroUsuario = async (req, res, next) => {
+//     try {
+//       const {
+//         nombre,
+//         apellido,
+//         fechaNacimiento,
+//         usuario,
+//         email,
+//         password,
+//         pais,
+//         img,
+//         ciudad,
+//         telefono,
+//       } = req.body;
   
-      const usuarioExistente = await Usuario.findOne({ $or: [{ email }, { usuario }] });
-      if (usuarioExistente) {
-        return res.status(400).json({ mensaje: 'El usuario o correo electrónico ya está registrado.' });
-      }
+//       const usuarioExistente = await Usuario.findOne({ $or: [{ email }, { usuario }] });
+//       if (usuarioExistente) {
+//         return res.status(400).json({ mensaje: 'El usuario o correo electrónico ya está registrado.' });
+//       }
   
     
   
-      const nuevoUsuario = new Usuario({
-        nombre,
-        apellido,
-        fechaNacimiento,
-        usuario,
-        email,
-        password,
-        pais,
-        img,
-        ciudad,
-        telefono,
-        roles: ['admin'],
-        activo: true,
-        intentosFallidos: 0,
-        resetPasswordToken: null,
-        resetPasswordExpires: null,
-      });
+//       const nuevoUsuario = new Usuario({
+//         nombre,
+//         apellido,
+//         fechaNacimiento,
+//         usuario,
+//         email,
+//         password,
+//         pais,
+//         img,
+//         ciudad,
+//         telefono,
+//         roles,
+//         activo: true,
+//         intentosFallidos: 0,
+//         resetPasswordToken: null,
+//         resetPasswordExpires: null,
+//       });
   
-      await nuevoUsuario.save();
+//       await nuevoUsuario.save();
   
-      res.status(201).json({ mensaje: 'Usuario registrado con éxito' });
-    } catch (error) {
-      console.error(`Error al registrar usuario: ${error.message}`);
-      next(error);
+//       res.status(201).json({ mensaje: 'Usuario registrado con éxito' });
+//     } catch (error) {
+//       console.error(`Error al registrar usuario: ${error.message}`);
+//       next(error);
+//     }
+//   };
+
+export const registroUsuario = async (req, res, next) => {
+  try {
+ 
+
+    //Verificación
+    const usuarioExistente = await Usuario.findOne({ usuario: req.body.usuario });
+    if (usuarioExistente) {
+      res.status(400).json({ message: "El usuario ya existe" });
     }
-  };
+
+    const usuarioExistente2 = await Usuario.findOne({ email: req.body.email });
+    if (usuarioExistente2) {
+      res.status(400).json({ message: "El email ya existe" });
+    }
+
+    const usuario = new Usuario({
+      ...req.body,
+    });
+
+    await usuario.save();
+    res.status(201).json({ message: 'Usuario creado correctamente' });
+  } catch (err) {
+    next(err);
+  }
+};
   
 
   export const loginAdmin = async (req, res, next) => {

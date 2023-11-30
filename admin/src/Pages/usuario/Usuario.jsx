@@ -1,4 +1,4 @@
-import './usuario.css'
+import "./usuario.css";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import { useState } from "react";
 import axios from "axios";
@@ -7,23 +7,32 @@ import { toast, Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 
-const New = ({ inputs, title }) => {
 
-  const [files, setFiles] = useState("");
+const New = ({ title }) => {
+
   const [info, setInfo] = useState({});
-
+  const [usuarioNew, setUsuarioNew] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [fechaNacimiento, setFechaNacimiento] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [pais, setPais] = useState("");
+  const [ciudad, setCiudad] = useState("");
+  const [telefono, setTelefono] = useState("");
 
   const [availableRoles, setAvailableRoles] = useState([]);
 
-  const navigate = useNavigate();
+   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('/roles/obtener') // Asegúrate de usar la ruta correcta que coincida con tu backend
+    axios
+      .get("/roles/obtener")
       .then((response) => {
         setAvailableRoles(response.data);
       })
       .catch((error) => {
-        console.error('Error al obtener los roles:', error);
+        console.error("Error al obtener los roles:", error);
       });
   }, []);
 
@@ -31,61 +40,53 @@ const New = ({ inputs, title }) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
 
-  const handleFileChange = (e) => {
-    console.log("Archivo seleccionado:", e.target.files);
-    setFiles([...e.target.files]);
-  };
-
-  const handlePhoneKeyPress = (e) => {
-    const key = e.key;
-    const isNumber = /^\d$/.test(key);
-    const isModifierKey = /^(Backspace|Delete|ArrowLeft|ArrowRight|Tab)$/.test(
-      key
-    );
-
-    if (!isNumber && !isModifierKey) {
-      e.preventDefault();
-    }
-  };
-
   const handleClick = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-    // Validar el formato del correo electrónico
-    const emailInput = form.querySelector("#email");
-    const email = emailInput.value;
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      emailInput.setCustomValidity("Ingrese un correo electrónico válido");
-      emailInput.reportValidity();
-      return;
-    }
-    const data = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      data.append("file", files[i]);
-    }
-    data.append("upload_preset", "upload");
     try {
-      let img =
-        "https://cdn.tresorit.com/webv10/dist/img/landings/features/icons/icon-file-sharing.3802e9ca.png"; // Valor por defecto para el campo de imagen
-      if (files.length > 0) {
-        const uploadRes = await axios.post(
-          "https://api.cloudinary.com/v1_1/dwwj8mhse/image/upload",
-          data
-        );
-        const { secure_url } = uploadRes.data; //subir imagenes a cloudinary
-        img = secure_url;
-      }
+
+       e.preventDefault();
+    const passwordRegex =
+      /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*\d)[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
+    const numberRegex = /\d/;
+
+    if (
+      !passwordRegex.test(password) ||
+      !numberRegex.test(password) ||
+      password.length < 8
+    ) {
+      toast.error(
+        "La contraseña debe contener al menos un caracter especial, un número y tener una longitud de al menos 8 caracteres",
+        {
+          duration: 5000,
+          position: "top-center",
+          style: {
+            background: "red",
+            color: "white", 
+            fontWeight: "bold", 
+            borderRadius: "10px",
+            boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)", // Sombra
+            width: "300px", 
+            height: "180px",
+          },
+        }
+      );
+      return;
+    }
       const nuevoUsuario = {
-        ...info,
-        img: img,
+        
+        usuario: usuarioNew,
+        nombre,
+        apellido,
+        fechaNacimiento,
+        email,
+        password,
+        pais,
+        ciudad,
+        telefono,
+        roles: info.roles,
+        activo: info.activo,
+        
       };
-      console.log("Datos del nuevo usuario:", nuevoUsuario);
+      //console.log("Datos del nuevo usuario:", nuevoUsuario);
       await axios.post("/autenticacion/registro", nuevoUsuario);
       toast.success("¡Registro exitoso!", {
         duration: 5000,
@@ -141,6 +142,8 @@ const New = ({ inputs, title }) => {
     }
   };
 
+ 
+
   return (
     <div className="new">
       <Sidebar />
@@ -150,52 +153,143 @@ const New = ({ inputs, title }) => {
           <h1>{title}</h1>
         </div>
         <div className="bottom">
-          {/* <div className="left">
-            {files ? (
-              files.map((file, index) => (
-                <img key={index} src={URL.createObjectURL(file)} alt="" />
-              ))
-            ) : (
-              <img
-                src="https://cdn.tresorit.com/webv10/dist/img/landings/features/icons/icon-file-sharing.3802e9ca.png"
-                alt=""
-              />
-            )}
-          </div> */}
+          
           <div className="right">
             <form onSubmit={handleClick}>
+              
+
               <div className="formInput">
-                {/* <label htmlFor="files">
-                  Images: <DriveFolderUploadOutlinedIcon className="icon" />
-                </label> */}
-                <input
-                  type="file"
-                  id="files"
-                  onChange={handleFileChange}
-                  style={{ display: "none" }}
-                  unique
-                />
+                <label>
+                  <strong>Nombres</strong>
+                </label>
+                <input 
+                type="text"
+                id="nombre" 
+                value={nombre}
+                placeholder="Ingrese sus Nombres"
+                onChange={(e) => setNombre(e.target.value)} 
+                required>
+                </input>
               </div>
-              {inputs.map((input) => (
-                <div className="formInput" key={input.id}>
-                  <label><strong>{input.label}</strong></label>
-                  <input
-                    onChange={handleChange}
-                    onKeyPress={
-                      input.id === "telefono" ? handlePhoneKeyPress : null
-                    }
-                    type={input.type}
-                    placeholder={input.placeholder}
-                    id={input.id}
-                    required
-                  />
-                  {/* {errors[input.id] && (
-              <span className="error">{errors[input.id]}</span>
-            )} */}
-                </div>
-              ))}
+
               <div className="formInput">
-                <label><strong>Rol</strong></label>
+                <label>
+                  <strong>Apellidos</strong>
+                </label>
+                <input 
+                type="text"
+                id="apellido" 
+                value={apellido}
+                placeholder="Ingrese sus Apellidos"
+                onChange={(e) => setApellido(e.target.value)} 
+                required>
+                </input>
+              </div>
+
+              <div className="formInput">
+                <label>
+                  <strong>Usuario</strong>
+                </label>
+                <input 
+                type="text"
+                id="usuario" 
+                value={usuarioNew}
+                placeholder="Ingrese su Usuario"
+                onChange={(e) => setUsuarioNew(e.target.value)} 
+                required>
+                </input>
+              </div>
+
+              <div className="formInput">
+                <label>
+                  <strong>Password</strong>
+                </label>
+                <input 
+                type="password"
+                id="password" 
+                value={password}
+                placeholder="Ingrese su Password"
+                onChange={(e) => setPassword(e.target.value)} 
+                required>
+                </input>
+              </div>
+
+              <div className="formInput">
+                <label>
+                  <strong>Fecha de Nacimiento</strong>
+                </label>
+                <input 
+                type="date"
+                id="fechaNacimiento" 
+                value={fechaNacimiento}
+                placeholder="Ingrese su Fecha de Nacimiento"
+                onChange={(e) => setFechaNacimiento(e.target.value)} 
+                required>
+                </input>
+              </div>
+              
+              <div className="formInput">
+                <label>
+                  <strong>Email</strong>
+                </label>
+                <input 
+                type="email"
+                id="email" 
+                value={email}
+                placeholder="Ingrese su Email"
+                onChange={(e) => setEmail(e.target.value)} 
+                required>
+                </input>
+              </div>
+
+              <div className="formInput">
+                <label>
+                  <strong>Teléfono</strong>
+                </label>
+                <input 
+                type="phone"
+                id="telefono" 
+                value={telefono}
+                min={1}
+                placeholder="Ingrese su teléfono"
+                onChange={(e) => setTelefono(e.target.value)} 
+                required>
+                </input>
+              </div>
+
+              <div className="formInput">
+                <label>
+                  <strong>Pais</strong>
+                </label>
+                <input 
+                type="text"
+                id="pais" 
+                value={pais}
+                placeholder="Ingrese su País"
+                onChange={(e) => setPais(e.target.value)} 
+                required>
+                </input>
+              </div>
+              
+              <div className="formInput">
+                <label>
+                  <strong>Ciudad</strong>
+                </label>
+                <input 
+                type="text"
+                id="ciudad" 
+                value={ciudad}
+                placeholder="Ingrese su ciudad"
+                onChange={(e) => setCiudad(e.target.value)} 
+                required>
+                </input>
+              </div>
+
+
+              <div className="formInput">
+                <label>
+                  <strong>Rol</strong>
+                </label>
                 <select id="roles" onChange={handleChange} required>
                   <option value="">Seleccione una opción</option>
                   {availableRoles.map((role, index) => (
@@ -207,7 +301,9 @@ const New = ({ inputs, title }) => {
               </div>
 
               <div className="formInput">
-                <label><strong>Activo</strong></label>
+                <label>
+                  <strong>Activo</strong>
+                </label>
                 <select id="activo" onChange={handleChange} required>
                   <option value="">Seleccione una opción</option>
                   <option value={true}>Si</option>

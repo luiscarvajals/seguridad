@@ -21,10 +21,10 @@ const CarreraIni = () => {
 
   return (
     <div className="containerIni">
-      <h1>PREGRADO</h1>
+      <h1>Pregrado</h1>
       <div className="button-container">
         {carrera.map((carrera, index) => (
-          <button className="button"
+          <button className="buttonCaI"
           onClick={() => {
             navigate(`/carreras/${carrera._id}`, { state: { carreraData: carrera } });
           }}

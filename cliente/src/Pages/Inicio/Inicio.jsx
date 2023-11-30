@@ -42,9 +42,11 @@ const Inicio = () => {
             className="video"
           ></video>
           <div className="textOverlay">
+            <div>
             <h1 className="tituloHome">
               Universidad Católica Boliviana "San Pablo"
             </h1>
+            </div>
             <p className="parrafoHome">
               Únase a nosotros para celebrar el Modelo Institucional de la
               Universidad Católica Boliviana "San Pablo" (U.C.B.) 2023 y
@@ -61,6 +63,9 @@ const Inicio = () => {
           </div>
         </div>
       </div>
+      <div>
+        <ImageCarousel images={images} />
+      </div>
       <div><h1>Noticias: UCB en Línea</h1></div>
       <div>
         <Noticias />
@@ -70,7 +75,7 @@ const Inicio = () => {
       </div>
 
       <div>
-        <h1>Sedes ACADEMICAS</h1>
+        <h1>Sedes Académicas</h1>
       </div>
       <div className="containerInicio">
         {sedesData.map((sede, index) => (
@@ -89,9 +94,7 @@ const Inicio = () => {
         <div className="card-border"></div>
       </div>
 
-      <div>
-        <ImageCarousel images={images} />
-      </div>
+     
       <Footer />
     </div>
   );

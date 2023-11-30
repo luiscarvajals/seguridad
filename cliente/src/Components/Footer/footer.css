@@ -28,7 +28,7 @@
 
 
 .fondo-negro {
-    background-color: black;
+    background-color: #343a40;
     height: calc(30.67vh + 100px);
     width: 100%;
     display: flex;
