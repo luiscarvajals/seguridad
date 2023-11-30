@@ -31,91 +31,54 @@ const Carrera = () => {
 
 
   return (
-    // <div>
-    //   <Navbar />
-    //   <div className="containerCarrera">
-    //     <div>
-    //       <div class="header-contentC">
-    //         <h1>Administracion de Empresas</h1>
-
-    //         <img class="imageC" src="admi.png" alt="Descripción de la imagen" />
-    //       </div>
-
-    //       <div class="contentC">
-    //         <p>
-    //           Administración de Empresas de la Cato forma gerentes y
-    //           emprendedores, con sólidas competencias de gestión empresarial y
-    //           complementadas con habilidades blandas, para la toma decisiones en
-    //           base a sólidos principios éticos.
-    //         </p>
-
-    //         <div class="image-containerC">
-    //           <img
-    //             class="sub-imageC"
-    //             src="admiacre.png"
-    //             alt="Descripción de la imagen 1"
-    //           />
-    //           <p class="sub-text">
-    //             Acreditada por el Sistema de la Universidad Boliviana SUB.
-    //           </p>
-    //         </div>
-    //       </div>
-
-    //       <div class="additional-textsC">
-    //         <p class="additional-textC">Duracion de carrera.</p>
-    //         <p class="additional-textC">Area de Estudio.</p>
-    //         <p class="additional-textC">Modalidad de Graduacion.</p>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <Footer />
-    // </div>
- 
 
     <div>
-    <NavbarDrop />
-    <div className="containerCarrera">
-      <div className="header-contentC">
-        <h1>{carreraData.nombre}</h1>
-        <img className="imageC" src={carreraData.img} alt="Descripción de la imagen" />
+  <NavbarDrop />
+  
+  <div className="containerCarrera">
+    <header className="header-contentC">
+      <h1>{carreraData.nombre}</h1>
+      <img className="imageC" src={carreraData.img} alt="Descripción de la imagen" />
+    </header>
+
+    <section className="contentC">
+      <p>{carreraData.descripcion}</p>
+    </section>
+
+    <section className="additional-texts">
+      <div className="text-groupC">
+        <p><strong>Duración:</strong> {carreraData.duracion}</p>
+        <p><strong>Área de estudio:</strong> {carreraData.categoria}</p>
+        <p><strong>Modalidad de Graduación:</strong> {carreraData.modalidadGraduacion}</p>
+        <p><strong>Perfil de Egreso:</strong> {carreraData.perfilEgreso}</p>
       </div>
-  
-      <div className="contentC">
-        <p>{carreraData.descripcion}</p>
+
+      <div className="text-groupC">
+        <p><strong>Perfil de Ingreso:</strong> {carreraData.perfilIngreso}</p>
+        <p><strong>Plan de Estudio:</strong> {carreraData.planEstudio}</p>
+        <p><strong>Campo Ocupacional:</strong> {carreraData.campoOcupacional}</p>
+        <p><strong>Requisitos de Ingreso:</strong> {carreraData.requisitosIngreso}</p>
       </div>
-  
-      <div className="additional-texts">
-        <div className="text-groupC">
-          <p><strong>Duración:</strong> {carreraData.duracion}</p>
-          <p><strong>Área de estudio:</strong> {carreraData.categoria}</p>
-          <p><strong>Modalidad de Graduación:</strong> {carreraData.modalidadGraduacion}</p>
-          <p><strong>Perfil de Egreso:</strong> {carreraData.perfilEgreso}</p>
-        </div>
-  
-        <div className="text-groupC">
-          <p><strong>Perfil de Ingreso:</strong> {carreraData.perfilIngreso}</p>
-          <p><strong>Plan de Estudio:</strong> {carreraData.planEstudio}</p>
-          <p><strong>Campo Ocupacional:</strong> {carreraData.campoOcupacional}</p>
-          <p><strong>Requisitos de Ingreso:</strong> {carreraData.requisitosIngreso}</p>
-        </div>
-  
-        <div className="text-groupC">
-          <p><strong>Título Otorga:</strong> {carreraData.tituloOtorga}</p>
-          <p><strong>Sede:</strong> {carreraData.sede}</p>
-          <p><strong>Contacto:</strong> {carreraData.contacto}</p>
-        </div>
-  
-        <div className="text-groupC">
-          <p><strong>Correo:</strong> {carreraData.correo}</p>
-          <p><strong>Teléfono:</strong> {carreraData.telefono}</p>
-          <p><strong>Docentes:</strong> {carreraData.docentes}</p>
-          <p><strong>Ubicación Dirección Carrera:</strong> {carreraData.ubicacionDirCarrera}</p>
-          <p><strong>Dirección Carrera:</strong> {carreraData.dirCarrera}</p>
-        </div>
+
+      <div className="text-groupC">
+        <p><strong>Título Otorga:</strong> {carreraData.tituloOtorga}</p>
+        <p><strong>Sede:</strong> {carreraData.sede}</p>
+        <p><strong>Contacto:</strong> {carreraData.contacto}</p>
       </div>
-    </div>
-    <Footer />
+
+      <div className="text-groupC">
+        <p><strong>Correo:</strong> {carreraData.correo}</p>
+        <p><strong>Teléfono:</strong> {carreraData.telefono}</p>
+        <p><strong>Docentes:</strong> {carreraData.docentes}</p>
+        <p><strong>Ubicación Dirección Carrera:</strong> {carreraData.ubicacionDirCarrera}</p>
+        <p><strong>Dirección Carrera:</strong> {carreraData.dirCarrera}</p>
+      </div>
+    </section>
   </div>
+  
+  <Footer />
+</div>
+
   
 
   );
