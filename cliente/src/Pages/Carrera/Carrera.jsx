@@ -4,6 +4,7 @@ import NavbarDrop from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
 import "./carrera.css";
 import axios from "axios";
+import './carrera.css';
 
 const Carrera = () => {
 
@@ -75,42 +76,42 @@ const Carrera = () => {
     <div>
     <NavbarDrop />
     <div className="containerCarrera">
-      <div className="header-contentC">
+      <div className="header-contentCarrera">
         <h1>{carreraData.nombre}</h1>
-        <img className="imageC" src={carreraData.img} alt="Descripción de la imagen" />
+        <img className="imageCarrera" src={carreraData.img} alt="Descripción de la imagen" />
       </div>
   
-      <div className="contentC">
+      <div className="contentCarrera">
         <p>{carreraData.descripcion}</p>
       </div>
   
-      <div className="additional-texts">
-        <div className="text-groupC">
-          <p><strong>Duración:</strong> {carreraData.duracion}</p>
-          <p><strong>Área de estudio:</strong> {carreraData.categoria}</p>
-          <p><strong>Modalidad de Graduación:</strong> {carreraData.modalidadGraduacion}</p>
-          <p><strong>Perfil de Egreso:</strong> {carreraData.perfilEgreso}</p>
-        </div>
+      <div className="additional-textsCarrera">
+      
+  <div className="text-groupCarrera">
+    {/* Agrega la clase .bg-azul para el fondo azul */}
+    <p className="bg-azul"><strong>Duración:</strong> {carreraData.duracion}</p>
+    <p className="bg-azul"><strong>Área de estudio:</strong> {carreraData.categoria}</p>
+    <p className="bg-azul"><strong>Modalidad de Graduación:</strong> {carreraData.modalidadGraduacion}</p>
+    <p className="bg-azul"><strong>Perfil de Egreso:</strong> {carreraData.perfilEgreso}</p>
+  </div>
   
-        <div className="text-groupC">
-          <p><strong>Perfil de Ingreso:</strong> {carreraData.perfilIngreso}</p>
-          <p><strong>Plan de Estudio:</strong> {carreraData.planEstudio}</p>
-          <p><strong>Campo Ocupacional:</strong> {carreraData.campoOcupacional}</p>
-          <p><strong>Requisitos de Ingreso:</strong> {carreraData.requisitosIngreso}</p>
-        </div>
+  <div className="text-groupCarrera">
+  {/* Aplica la clase bg-azul-claro para el fondo azul claro */}
+  <p><span className="bg-azul-claro"><strong>Título Otorga:</strong> {carreraData.tituloOtorga}</span></p>
+  <p><span className="bg-azul-claro"><strong>Sede:</strong> {carreraData.sede}</span></p>
+  <p><span className="bg-azul-claro"><strong>Contacto:</strong> {carreraData.contacto}</span></p>
+</div>
   
-        <div className="text-groupC">
-          <p><strong>Título Otorga:</strong> {carreraData.tituloOtorga}</p>
-          <p><strong>Sede:</strong> {carreraData.sede}</p>
-          <p><strong>Contacto:</strong> {carreraData.contacto}</p>
-        </div>
-  
-        <div className="text-groupC">
+      
+        <div className="text-groupCarrera">
           <p><strong>Correo:</strong> {carreraData.correo}</p>
           <p><strong>Teléfono:</strong> {carreraData.telefono}</p>
           <p><strong>Docentes:</strong> {carreraData.docentes}</p>
           <p><strong>Ubicación Dirección Carrera:</strong> {carreraData.ubicacionDirCarrera}</p>
           <p><strong>Dirección Carrera:</strong> {carreraData.dirCarrera}</p>
+        </div>
+        <div> 
+          <img src="https://i0.wp.com/lpz.ucb.edu.bo/wp-content/uploads/2023/01/web-Acreditada-Arcu-Sur.jpg?resize=700%2C700&ssl=1"/>
         </div>
       </div>
     </div>
@@ -122,3 +123,6 @@ const Carrera = () => {
 };
 
 export default Carrera;
+
+
+
