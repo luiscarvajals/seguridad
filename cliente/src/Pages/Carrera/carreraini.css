@@ -1,71 +1,63 @@
-
-
 .containerIni {
-    width: 100%;
     text-align: center;
-}
-
-h1 {
-    color: #333;
-}
-
-.button-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 20px;
-
-}
-
-.button {
-    width: 180px;
-    height: 100px;
-    margin: 10px;
-    border-radius: 20px;
-    background-color: #3498db;
-    color: #fff;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;  
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.button:hover {
-    background-color: #2978a0;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-
-}
-a {
-    text-decoration: none; 
-    color: inherit;
+    margin: 20px;
   }
   
-   
-  a:hover {
-    text-decoration: none; 
-    color: #ff6347;
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
   }
-
-#button1, #button2, #button3, #button4 {
+  
+  .button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .button {
     background-color: #3498db;
-}
-
-#button5, #button6, #button7, #button8 {
-    background-color: #34db66;
-}
-
-#button9, #button10, #button11, #button12 {
-    background-color: #e74c3c;
-}
-
-#button13, #button14, #button15, #button16 {
-    background-color: #db8534;
-}
-
-.small-text {
-    font-size: 10px;
-}
+    color: #fff;
+    border-radius: 15px;
+    border: 2px solid #3498db;
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s;
+    width: 200px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 2.1);
+  }
+  
+  .button:hover {
+    background-color: #29b960;
+    font-weight: bold;
+    color: #fff;
+    border: 2px solid #2980b9;
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 2.1);
+    animation: scaleUp 0.3s ease-in-out forwards; /* Ajustamos la propiedad forwards */
+  }
+  
+  @keyframes scaleUp {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+  
+  .button:focus {
+    outline: none;
+  }
+  
+  .button:active {
+    transform: scale(0.95);
+  }
+  
+  @media (max-width: 768px) {
+    .button {
+      width: 150px;
+    }
+  }
+  

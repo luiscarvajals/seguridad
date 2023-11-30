@@ -3,28 +3,25 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import NavbarDrop from "../../Components/Navbar/Navbar";
 import Footer from "../../Components/Footer/Footer";
-
-
+import "./sedesini.css";
+import ImageCarousel from "../../Components/Carousel/Carousel";
 
 const SedesIni = () => {
-    const { id } = useParams();
+  const { id } = useParams();
   const [sede, setSede] = useState({});
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCarrera = async () => {
       const response = await axios.get(`http://localhost:8800/api/sedes/${id}`);
-      console.log("sedesssss",response.data)
+      console.log("sedesssss", response.data);
       setSede(response.data);
     };
     fetchCarrera();
   }, []);
 
-  
-
-  
-    /* <h1>CARRERAS</h1>
+  /* <h1>CARRERAS</h1>
         <div class="button-container">
         
             <div class="button" id="button1">Administracion de Empresas</div>
@@ -45,54 +42,53 @@ const SedesIni = () => {
             <div class="button" id="button16">Derecho</div>
            
         </div> */
-  
 
   return (
     <div>
-    <NavbarDrop />
-    <div className="containerCarrera">
-      <div className="header-contentC">
-        <h1>{sede.nombre}</h1>
-        <img className="imageC" src={sede.img} alt="Descripción de la imagen" />
+      <NavbarDrop />
+      <div className="containerCarrera">
+        <div className="hedaerC">
+          <h1>{sede.nombre}</h1>
+        </div>
+        <div className="carrera-image">
+          {sede && sede.img && sede.img.length > 0 ? (
+            <ImageCarousel images={sede.img} />
+          ) : (
+            <p>No hay imágenes disponibles</p>
+          )}
+        </div>
+
+        <div className="carrera-contact">
+          <h2 className="h2C">Contacto</h2>
+          <div className="contact-info">
+            <div className="info-item">
+              <strong>Correo:</strong> {sede.email}
+            </div>
+
+            <div className="info-item">
+              <strong>Teléfono:</strong> {sede.telefono}
+            </div>
+
+            <div className="info-item">
+              <strong>Dirección:</strong> {sede.calle} #{sede.numero}{" "}
+              {sede.ciudad}
+            </div>
+            <div className="info-item2">
+              <button className="buttonSede">
+                <a className="linkSede"
+                  href="https://lpz.ucb.edu.bo/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ver Más!
+                </a>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-  
-      <div className="contentC">
-        <p>{sede.descripcion}</p>
-      </div>
-  
-      <div className="additional-texts">
-        <div className="text-groupC">
-          <p><strong>Duración:</strong> {sede.duracion}</p>
-          <p><strong>Área de estudio:</strong> {sede.categoria}</p>
-          <p><strong>Modalidad de Graduación:</strong> {sede.modalidadGraduacion}</p>
-          <p><strong>Perfil de Egreso:</strong> {sede.perfilEgreso}</p>
-        </div>
-  
-        <div className="text-groupC">
-          <p><strong>Perfil de Ingreso:</strong> {sede.perfilIngreso}</p>
-          <p><strong>Plan de Estudio:</strong> {sede.planEstudio}</p>
-          <p><strong>Campo Ocupacional:</strong> {sede.campoOcupacional}</p>
-          <p><strong>Requisitos de Ingreso:</strong> {sede.requisitosIngreso}</p>
-        </div>
-  
-        <div className="text-groupC">
-          <p><strong>Título Otorga:</strong> {sede.tituloOtorga}</p>
-          <p><strong>Sede:</strong> {sede.sede}</p>
-          <p><strong>Contacto:</strong> {sede.contacto}</p>
-        </div>
-  
-        <div className="text-groupC">
-          <p><strong>Correo:</strong> {sede.correo}</p>
-          <p><strong>Teléfono:</strong> {sede.telefono}</p>
-          <p><strong>Docentes:</strong> {sede.docentes}</p>
-          <p><strong>Ubicación Dirección Carrera:</strong> {sede.ubicacionDirCarrera}</p>
-          <p><strong>Dirección Carrera:</strong> {sede.dirCarrera}</p>
-        </div>
-      </div>
+      <Footer />
     </div>
-    <Footer />
-  </div>
-  
   );
 };
 

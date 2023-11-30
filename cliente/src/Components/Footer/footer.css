@@ -15,28 +15,27 @@
 .texto-izq2 {
     color: black;
     font-size: 35px;
-    white-space: nowrap; /* Evita que el texto se divida automáticamente */
+    white-space: nowrap; 
 }
 
-/* Estilos para las líneas grises horizontales en la parte derecha */
+
 .linea-horizontal {
     background-color: rgb(245, 245, 245);
-    width: 40%; /* Ancho completo de la franja rosa */
+    width: 40%;
     height: 200px;
-    transform: translateY(-50%); /* Centra verticalmente */
+    transform: translateY(-50%); 
 }
 
-/* Estilos para la sección con fondo negro y columnas */
+
 .fondo-negro {
     background-color: black;
-    height: calc(30.67vh + 100px); /* Ocupa el resto de la pantalla */
-    width: 100%; /* Ancho completo de la ventana gráfica */
+    height: calc(30.67vh + 100px);
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Ajuste para que las columnas comiencen en la parte superior */
+    align-items: flex-start; 
 }
 
-/* Estilos para las columnas */
 .columna {
     flex: 1;
     display: flex;
@@ -48,19 +47,17 @@
     margin-left: 70px;
 }
 
-/* Estilos para los enlaces (hipervínculos) */
 .columna a {
-    text-decoration: none; /* Quita el subrayado predeterminado */
-    color: white; /* Color del texto en blanco */
-    margin: 2px; /* Espacio entre enlaces */
+    text-decoration: none; 
+    color: white; 
+    margin: 2px; 
 }
 
 .columna a:hover {
-    text-decoration: underline; /* Subrayado al pasar el cursor sobre el enlace */
+    text-decoration: underline; 
 }
 
 
-/* Estilos para el texto en la parte inferior izquierda */
 .derechos-reservados {
     bottom: 10px;
     left: 10px; 
@@ -72,7 +69,7 @@
     align-items: center;
 }
 
-/* Estilos para los enlaces en la parte inferior derecha */
+
 .enlaces-sociales {
     bottom: 10px;
     right: 10px; 
@@ -84,21 +81,50 @@
 }
 
 .enlaces-sociales a {
-    text-decoration: none; /* Quita el subrayado predeterminado */
-    color: rgb(73, 73, 73); /* Color del texto en blanco */
-    margin: 0 20px; /* Espacio entre enlaces horizontal */
+    text-decoration: none; 
+    color: rgb(73, 73, 73); 
+    margin: 0 20px; 
     font-weight: bold;
 }
 
 .enlaces-sociales a:hover {
-    color: rgb(255, 107, 96); /* Cambio de color al pasar el cursor */
+    color: rgb(255, 107, 96);
 }
 
-/* Estilos para la imagen en la parte inferior */
 .imagen {
-    bottom: 20px; /* Ajusta la distancia desde la parte inferior */
-    left: 50%; /* Coloca la imagen en el centro horizontalmente */
-    transform: translateX(-50%); /* Centra horizontalmente */
-    width: 150px; /* Ancho de la imagen (ajusta según tus necesidades) */
-    height: auto; /* Mantiene la proporción original de la imagen */
+    bottom: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 150px; 
+    height: auto; 
 }
+
+@media (max-width: 576px) {
+    .fondo-negro {
+      flex-direction: column;
+      align-items: center; 
+    }
+  
+    .columna {
+      margin-left: 0;
+      text-align: center; 
+      margin-bottom: 20px;
+    }
+  
+    .derechos-reservados,
+    .enlaces-sociales {
+      text-align: center; 
+    }
+  
+    .fondo-negro {
+      height: auto; 
+    }
+  
+    .columna {
+      margin-left: 0;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  }
+  
+  

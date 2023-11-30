@@ -9,20 +9,10 @@ import ImageCarousel from "../../Components/Carousel/Carousel";
 const Inicio = () => {
   const images = [
     'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701058278/Banner2_hbbkq4.png',
-    'https://www.la-razon.com/wp-content/uploads/2022/11/01/14/Universidad-Catolica-San-Pablo-scaled.jpg',
+    'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701307940/banner5_zikxlb.png',
     'https://res.cloudinary.com/dwwj8mhse/image/upload/v1701057948/Banner1_jblowc.png',
-  ];
 
-  const sedesData = [
-    { title: "Sede La Paz", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/zujy24moayfzlkop0cap.jpg')" },
-    { title: "Sede Cochabamba", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/h71od4quzlmnnpidb9cx.jpg')" },
-    { title: "Sede Tarija", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/cjxxiq82d54cm0rxpf5q.jpg')" },
-    { title: "Sede Santa Cruz", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/wcrlocmkni5pgewf6amj.jpg')" },
-    { title: "Sede la Plata", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/qiyahldgmdmbfv8ivwce.jpg')" },
-    { title: "Escuela de la produccion y la competividad", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/ap4fsoh6npdctkkh78lz.jpg')" },
-    { title: "U.C.B Oruro Virgen del Socabon", background: "url('https://res.cloudinary.com/dbw9a0kxn/image/upload/v1701309351/sussileeqe22r12ntwqu.jpg')" },
-  ];
-
+  ]
   return (
     <div>
       <NavbarPort />
