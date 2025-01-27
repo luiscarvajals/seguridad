@@ -1,33 +1,31 @@
 import "./usuario.css";
 import Sidebar from "../../Components/Sidebar/Sidebar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
-import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
+import { generateRandomPassword } from "../../Utils/generatePassword";
+import { generateUsername } from "../../Utils/generateUsername";
 
-
-const New = ({ title }) => {
-
-  const [info, setInfo] = useState({});
-  const [usuarioNew, setUsuarioNew] = useState("");
+const Usuario = ({ title }) => {
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [fechaNacimiento, setFechaNacimiento] = useState("");
+  const [usuario, setUsuario] = useState(""); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [pais, setPais] = useState("");
   const [ciudad, setCiudad] = useState("");
   const [telefono, setTelefono] = useState("");
+  const [roles, setRoles] = useState("");
+  const [activo, setActivo] = useState(true);
 
   const [availableRoles, setAvailableRoles] = useState([]);
-
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get("/roles/obtener")
+      .get("/roles/obtener") // carga roles disponibles en db
       .then((response) => {
         setAvailableRoles(response.data);
       })
@@ -36,264 +34,196 @@ const New = ({ title }) => {
       });
   }, []);
 
-  const handleChange = (e) => {
-    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-  };
-
-  const handleClick = async (e) => {
-    try {
-
-       e.preventDefault();
-    const passwordRegex =
-      /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*\d)[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/;
-    const numberRegex = /\d/;
-
-    if (
-      !passwordRegex.test(password) ||
-      !numberRegex.test(password) ||
-      password.length < 8
-    ) {
-      toast.error(
-        "La contraseña debe contener al menos un caracter especial, un número y tener una longitud de al menos 8 caracteres",
-        {
-          duration: 5000,
-          position: "top-center",
-          style: {
-            background: "red",
-            color: "white", 
-            fontWeight: "bold", 
-            borderRadius: "10px",
-            boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)", // Sombra
-            width: "300px", 
-            height: "180px",
-          },
-        }
-      );
+  // genera usuario a partir de nombre y apellido
+  const handleGenerateUsername = () => {
+    if (!nombre || !apellido) {
+      toast.error("Completa el nombre y el apellido antes de generar el usuario");
       return;
     }
-      const nuevoUsuario = {
-        
-        usuario: usuarioNew,
-        nombre,
-        apellido,
-        fechaNacimiento,
-        email,
-        password,
-        pais,
-        ciudad,
-        telefono,
-        roles: info.roles,
-        activo: info.activo,
-        
-      };
-      //console.log("Datos del nuevo usuario:", nuevoUsuario);
+    const newUsername = generateUsername(nombre, apellido);
+    setUsuario(newUsername);
+    toast.success("Usuario generado correctamente");
+  };
+
+  // genera contraseña aleatoria
+  const handleGeneratePassword = () => {
+    const newPassword = generateRandomPassword(10);
+    setPassword(newPassword);
+    toast.success("Contraseña generada correctamente");
+  };
+
+  // copiar al portapapeles
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      toast.success("Copiado al portapapeles");
+    }, (err) => {
+      toast.error("Error al copiar");
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // validacion de campos
+    if (!usuario || !password) {
+      toast.error("Faltan el usuario o la contraseña");
+      return;
+    }
+    
+    // payload para enviar al backend
+    const nuevoUsuario = {
+      usuario,
+      nombre,
+      apellido,
+      fechaNacimiento,
+      email,
+      password,
+      pais,
+      ciudad,
+      telefono,
+      roles: [roles],
+      activo
+    };
+
+    try {
       await axios.post("/autenticacion/registro", nuevoUsuario);
-      toast.success("¡Registro exitoso!", {
-        duration: 5000,
-        position: "top-center",
-        style: {
-          background: "#27D23C",
-          color: "white",
-          fontWeight: "bold",
-          borderRadius: "10px",
-          boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
-          width: "300px",
-          height: "50px",
-        },
-      });
+      toast.success("¡Usuario registrado con éxito!");
       setTimeout(() => {
         navigate("/usuarios");
       }, 1200);
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
-        const errorMessage = err.response.data.message;
-        if (errorMessage === "El usuario ya existe") {
-          toast.error("El usuario ya está en uso", {
-            duration: 5000,
-            position: "top-center",
-            style: {
-              background: "#FFB517",
-              color: "#3F3F3F",
-              fontWeight: "bold",
-              borderRadius: "10px",
-              boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
-              width: "300px",
-              height: "50px",
-            },
-          });
-        } else if (errorMessage === "El email ya existe") {
-          toast.error("Este email ya fue registrado", {
-            duration: 5000,
-            position: "top-center",
-            style: {
-              background: "#3081FF",
-              color: "white",
-              fontWeight: "bold",
-              borderRadius: "10px",
-              boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
-              width: "300px",
-              height: "50px",
-            },
-          });
-        }
+        toast.error(err.response.data.message);
       } else {
-        console.log(err);
+        console.error(err);
+        toast.error("Error al crear usuario");
       }
     }
   };
-
- 
 
   return (
     <div className="new">
       <Sidebar />
       <div className="newContainer">
-        {/* <Navbar /> */}
         <div className="top">
-          <h1>{title}</h1>
+          <h1>{title || "Registrar Nuevo Usuario"}</h1>
         </div>
         <div className="bottom">
-          
           <div className="right">
-            <form onSubmit={handleClick}>
-              
-
+            <form onSubmit={handleSubmit}>
               <div className="formInput">
-                <label>
-                  <strong>Nombres</strong>
-                </label>
-                <input 
-                type="text"
-                id="nombre" 
-                value={nombre}
-                placeholder="Ingrese sus Nombres"
-                onChange={(e) => setNombre(e.target.value)} 
-                required>
-                </input>
+                <label><strong>Nombres</strong></label>
+                <input
+                  type="text"
+                  value={nombre}
+                  onChange={(e) => setNombre(e.target.value)}
+                  required
+                />
               </div>
 
               <div className="formInput">
-                <label>
-                  <strong>Apellidos</strong>
-                </label>
-                <input 
-                type="text"
-                id="apellido" 
-                value={apellido}
-                placeholder="Ingrese sus Apellidos"
-                onChange={(e) => setApellido(e.target.value)} 
-                required>
-                </input>
+                <label><strong>Apellidos</strong></label>
+                <input
+                  type="text"
+                  value={apellido}
+                  onChange={(e) => setApellido(e.target.value)}
+                  required
+                />
+              </div>
+
+              {/* USERNAME */}
+              <div className="formInput">
+                <label><strong>Usuario</strong></label>
+                <div style={{ display: "flex", gap: "0.5rem" }}>
+                  <input
+                    type="text"
+                    value={usuario}
+                    onChange={(e) => setUsuario(e.target.value)}
+                    required
+                  />
+                  <button type="button" onClick={handleGenerateUsername}>
+                    Generar
+                  </button>
+                  <button type="button" onClick={() => copyToClipboard(usuario)}>
+                    Copiar
+                  </button>
+                </div>
+              </div>
+
+              {/* PASSWORD */}
+              <div className="formInput">
+                <label><strong>Password</strong></label>
+                <div style={{ display: "flex", gap: "0.5rem" }}>
+                  <input
+                    type="text"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <button type="button" onClick={handleGeneratePassword}>
+                    Generar
+                  </button>
+                  <button type="button" onClick={() => copyToClipboard(password)}>
+                    Copiar
+                  </button>
+                </div>
               </div>
 
               <div className="formInput">
-                <label>
-                  <strong>Usuario</strong>
-                </label>
-                <input 
-                type="text"
-                id="usuario" 
-                value={usuarioNew}
-                placeholder="Ingrese su Usuario"
-                onChange={(e) => setUsuarioNew(e.target.value)} 
-                required>
-                </input>
+                <label><strong>Fecha de Nacimiento</strong></label>
+                <input
+                  type="date"
+                  value={fechaNacimiento}
+                  onChange={(e) => setFechaNacimiento(e.target.value)}
+                  required
+                />
               </div>
 
               <div className="formInput">
-                <label>
-                  <strong>Password</strong>
-                </label>
-                <input 
-                type="password"
-                id="password" 
-                value={password}
-                placeholder="Ingrese su Password"
-                onChange={(e) => setPassword(e.target.value)} 
-                required>
-                </input>
+                <label><strong>Email</strong></label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
               </div>
 
               <div className="formInput">
-                <label>
-                  <strong>Fecha de Nacimiento</strong>
-                </label>
-                <input 
-                type="date"
-                id="fechaNacimiento" 
-                value={fechaNacimiento}
-                placeholder="Ingrese su Fecha de Nacimiento"
-                onChange={(e) => setFechaNacimiento(e.target.value)} 
-                required>
-                </input>
-              </div>
-              
-              <div className="formInput">
-                <label>
-                  <strong>Email</strong>
-                </label>
-                <input 
-                type="email"
-                id="email" 
-                value={email}
-                placeholder="Ingrese su Email"
-                onChange={(e) => setEmail(e.target.value)} 
-                required>
-                </input>
+                <label><strong>Teléfono</strong></label>
+                <input
+                  type="phone"
+                  value={telefono}
+                  onChange={(e) => setTelefono(e.target.value)}
+                />
               </div>
 
               <div className="formInput">
-                <label>
-                  <strong>Teléfono</strong>
-                </label>
-                <input 
-                type="phone"
-                id="telefono" 
-                value={telefono}
-                min={1}
-                placeholder="Ingrese su teléfono"
-                onChange={(e) => setTelefono(e.target.value)} 
-                required>
-                </input>
+                <label><strong>País</strong></label>
+                <input
+                  type="text"
+                  value={pais}
+                  onChange={(e) => setPais(e.target.value)}
+                  required
+                />
               </div>
 
               <div className="formInput">
-                <label>
-                  <strong>Pais</strong>
-                </label>
-                <input 
-                type="text"
-                id="pais" 
-                value={pais}
-                placeholder="Ingrese su País"
-                onChange={(e) => setPais(e.target.value)} 
-                required>
-                </input>
-              </div>
-              
-              <div className="formInput">
-                <label>
-                  <strong>Ciudad</strong>
-                </label>
-                <input 
-                type="text"
-                id="ciudad" 
-                value={ciudad}
-                placeholder="Ingrese su ciudad"
-                onChange={(e) => setCiudad(e.target.value)} 
-                required>
-                </input>
+                <label><strong>Ciudad</strong></label>
+                <input
+                  type="text"
+                  value={ciudad}
+                  onChange={(e) => setCiudad(e.target.value)}
+                  required
+                />
               </div>
 
-
               <div className="formInput">
-                <label>
-                  <strong>Rol</strong>
-                </label>
-                <select id="roles" onChange={handleChange} required>
-                  <option value="">Seleccione una opción</option>
+                <label><strong>Rol</strong></label>
+                <select value={roles} onChange={(e) => setRoles(e.target.value)} required>
+                  <option value="">Seleccione un rol</option>
                   {availableRoles.map((role, index) => (
-                    <option key={index} value={role.nombre}>
+                    <option key={role._id || index} value={role.nombre}>
                       {role.nombre}
                     </option>
                   ))}
@@ -301,13 +231,14 @@ const New = ({ title }) => {
               </div>
 
               <div className="formInput">
-                <label>
-                  <strong>Activo</strong>
-                </label>
-                <select id="activo" onChange={handleChange} required>
-                  <option value="">Seleccione una opción</option>
-                  <option value={true}>Si</option>
-                  <option value={false}>No</option>
+                <label><strong>Activo</strong></label>
+                <select
+                  value={activo}
+                  onChange={(e) => setActivo(e.target.value === "true")}
+                  required
+                >
+                  <option value="true">Sí</option>
+                  <option value="false">No</option>
                 </select>
               </div>
 
@@ -321,4 +252,4 @@ const New = ({ title }) => {
   );
 };
 
-export default New;
+export default Usuario;

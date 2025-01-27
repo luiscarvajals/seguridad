@@ -1,6 +1,8 @@
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Usuario from '../models/Usuario.js';
 import { crearError } from '../extra/error.js';
+import { sendEmail } from '../utils/sendEmail.js';
 
 
 // export const registroUsuario = async (req, res, next) => {
@@ -54,25 +56,60 @@ import { crearError } from '../extra/error.js';
 
 export const registroUsuario = async (req, res, next) => {
   try {
- 
-
-    //Verificación
-    const usuarioExistente = await Usuario.findOne({ usuario: req.body.usuario });
-    if (usuarioExistente) {
-      res.status(400).json({ message: "El usuario ya existe" });
+    // verificando si el usuario o email ya existen
+    const existingUser = await Usuario.findOne({ usuario: req.body.usuario });
+    if (existingUser) {
+      return res.status(400).json({ message: "El usuario ya existe" });
     }
 
-    const usuarioExistente2 = await Usuario.findOne({ email: req.body.email });
-    if (usuarioExistente2) {
-      res.status(400).json({ message: "El email ya existe" });
+    const existingEmail = await Usuario.findOne({ email: req.body.email });
+    if (existingEmail) {
+      return res.status(400).json({ message: "El email ya existe" });
     }
 
-    const usuario = new Usuario({
+    // hash de la contraseña
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+
+    // estableciendo la fecha de expiración de la contraseña en 90 días
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 90);
+
+    // contruccion de nuevo usuario
+    const newUser = new Usuario({
       ...req.body,
+      password: hashedPassword,
+      passwordExpiresAt: expirationDate,
+      passwordHistory: [
+        {
+          hash: hashedPassword,
+          changedAt: new Date()
+        }
+      ]
     });
 
-    await usuario.save();
-    res.status(201).json({ message: 'Usuario creado correctamente' });
+    await newUser.save();
+
+    // 5) enviando email con las credenciales al usuario
+    await sendEmail({
+      to: req.body.email,
+      subject: "Credenciales de acceso - UCB",
+      text: `Hola ${req.body.nombre} ${req.body.apellido}, 
+      Tus credenciales son:
+      Usuario: ${req.body.usuario}
+      Contraseña: ${req.body.password}`,
+      html: `
+        <h3>¡Bienvenido a UCB!</h3>
+        <p>Estas son tus credenciales:</p>
+        <ul>
+          <li><strong>Usuario:</strong> ${req.body.usuario}</li>
+          <li><strong>Contraseña:</strong> ${req.body.password}</li>
+        </ul>
+        <p>Por favor, guarda esta información de manera segura.</p>
+      `
+    });
+
+    res.status(201).json({ message: "Usuario creado correctamente" });
   } catch (err) {
     next(err);
   }
