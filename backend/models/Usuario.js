@@ -62,6 +62,20 @@ const UsuarioSchema = new mongoose.Schema({
     type: Date,
     default: null,
   },
+  passwordExpiresAt: {
+    type: Date,
+    default: null,
+  },
+  lockedUntil: {
+    type: Date,
+    default: null,
+  },
+  passwordHistory: [
+    {
+      hash: { type: String },
+      changedAt: { type: Date, default: Date.now }
+    }
+  ]
 });
 
 export default mongoose.model("Usuario", UsuarioSchema);
