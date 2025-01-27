@@ -16,11 +16,16 @@ const Login = () => {
     usuario: undefined,
     password: undefined,
   });
+  const [captchaToken, setCaptchaToken] = useState(null); // Captcha token
   const [intentosFallidos, setIntentosFallidos] = useState(false);
   const [, setBloquearIngreso] = useState(false);
   const { loading, dispatch } = useContext(AuthContexto);
 
   const navigate = useNavigate();
+
+  const handleCaptchaChange = (token) => {
+    setCaptchaToken(token);
+  };
 
   const handleChange = (e) => {
     setCredenciales((prev) => ({
@@ -35,7 +40,10 @@ const handleLogin = async (e) => {
   e.preventDefault();
   dispatch({ type: "LOGIN_INICIADO" });
   try {
-    const res = await axios.post("/autenticacion/login", credenciales);
+    const res = await axios.post("/autenticacion/login",{
+        ...credenciales,
+        recaptchaToken: captchaToken
+      });
     if (res.data.roles && res.data.roles.includes("admin")) {
       dispatch({ type: "LOGIN_EXITOSO", payload: res.data.detalles });
       toast.success("Inicio de sesión exitoso, Bienvenido", {
@@ -77,7 +85,7 @@ const handleLogin = async (e) => {
 
   if (status === 400) {
     // "Contraseña incorrecta" or "No puedes reutilizar contraseñas" etc.
-    toast.error(err.response.data.error || "Contraseña incorrecta", {
+    toast.error(err.response.data.error || "Credenciales incorrectos (Contraseña incorrecta)", {
       duration: 5000,
       position: "top-center",
       style: {
@@ -153,7 +161,7 @@ const handleLogin = async (e) => {
     }
   } else if (status === 404) {
     // "Usuario no encontrado"
-    toast.error("Usuario no encontrado", {
+    toast.error("Credenciales incorrectos (Usuario no encontrado)", {
       duration: 5000,
       position: "top-center",
       style: {
@@ -184,11 +192,6 @@ const handleLogin = async (e) => {
   }
 }
 };
-
-
-
-
-  //console.log(usuario)
 
   return (
     <div className="login">
@@ -247,6 +250,12 @@ const handleLogin = async (e) => {
           onChange={handleChange}
         />
       </motion.div>
+      
+      <ReCAPTCHA
+        sitekey="6LdFL8UqAAAAAGobn7cTtrQqZrOteKyazllzXT3z"
+        onChange={handleCaptchaChange}
+      />
+      
       <motion.button
         disabled={loading}
         className="login__button"

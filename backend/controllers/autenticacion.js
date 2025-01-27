@@ -4,6 +4,7 @@ import Usuario from '../models/Usuario.js';
 import { crearError } from '../extra/error.js';
 import { sendEmail } from '../utils/sendEmail.js';
 import { validatePasswordPolicy } from '../utils/validatePassword.js';
+import axios from 'axios';
 
 export const registroUsuario = async (req, res, next) => {
   try {
@@ -74,6 +75,17 @@ export const registroUsuario = async (req, res, next) => {
 
 export const loginAdmin = async (req, res, next) => {
   try {
+    const {recaptchaToken} = req.body;
+    if (!recaptchaToken) {
+      throw crearError(400, "Falta recaptchaToken");
+    }
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
+    const {data} = await axios.post(verifyUrl);
+    if (!data.success) {
+      throw crearError(400, "Captcha invalido");
+    }
+
     // buscando usuario
     const user = await Usuario.findOne({ usuario: req.body.usuario, activo: true });
     if (!user) {
