@@ -59,7 +59,7 @@ const Datatable = ({ columns }) => {
               className="deleteButton"
               onClick={() => handleDelete(params.row._id)}
             >
-              Borrar
+              Activar/Desactivar
             </div>
           </div>
         );

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { motion } from 'framer-motion';
-
+import ReCAPTCHA from "react-google-recaptcha";
 
 
 const Login = () => {
@@ -79,7 +79,7 @@ const handleLogin = async (e) => {
           setIntentosFallidos(false);
           setBloquearIngreso(false);
         }, 10000); 
-      toast.error("El administrador ha alcanzado el límite de intentos fallidos. Por favor, inténtelo de nuevo en 10 segundos.", {
+      toast.error("Se ha alcanzado el límite de intentos fallidos. Por favor, inténtelo de nuevo en 10 segundos.", {
         duration: 5000, 
         position: "top-center",
         style: {
@@ -121,7 +121,7 @@ const handleLogin = async (e) => {
         },
       });
     } else {
-      toast.error("Error de inicio de sesión", {
+      toast.error("Error de inicio de sesión, se bloqueo el login por 10 seg.", {
         duration: 5000, 
         position: "top-center",
         style: {
