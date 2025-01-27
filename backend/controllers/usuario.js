@@ -1,31 +1,73 @@
 import Usuario from "../models/Usuario.js";
 import { crearError } from "../extra/error.js";
+import { sendEmail } from "../utils/sendEmail.js";
+import { validatePasswordPolicy } from "../utils/validatePassword.js";
+import bcrypt from "bcrypt";
 
 export const actualizarUsuario = async (req, res, next) => {
-    try {
-      const { activo, ...updateData } = req.body;
-      const keys = Object.keys(updateData);
-      const updatedFields = {};
-      for (let i = 0; i < keys.length; i++) {
-        updatedFields[keys[i]] = updateData[keys[i]];
-      }
-  
-      const updatedUser = Object.assign({}, updatedFields, { activo });
-      
-      // Comprobar si se ha enviado la imagen
-      if(req.file){
-        updatedUser.img = req.file.filename;
-      }
-  
-      const options = { new: true };
-      const updatedUsuario = await Usuario.findByIdAndUpdate(req.params.id, { $set: updatedUser }, options);
-      //logger.info(`Usuario actualizado: ${updatedUsuario}`);
-      res.status(200).json(updatedUsuario);
-    } catch (err) {
-      //logger.error(`Error al actualizar usuario: ${err.message}`);
-      next(err);
+  try {
+    // extraccion de password y otros campos
+    const { password, activo, ...updateData } = req.body;
+
+    // encontrando el user doc para actualizar
+    const userDB = await Usuario.findById(req.params.id);
+    if (!userDB) {
+      throw crearError(404, "Usuario no encontrado");
     }
-  };
+
+    // si se provee un password, manejar logica de politicas y reuso
+    if (password) {
+      // validacion de politica
+      if (!validatePasswordPolicy(password)) {
+        throw crearError(400, "La contraseña no cumple con la política de seguridad");
+      }
+
+      //  Revisar si la contraseña esta en el historico
+      for (const oldEntry of userDB.passwordHistory || []) {
+        const reused = await bcrypt.compare(password, oldEntry.hash);
+        if (reused) {
+          throw crearError(400, "No puedes reutilizar contraseñas anteriores");
+        }
+      }
+
+      // Hash del nuevo password
+      const hashedNew = await bcrypt.hash(password, 10);
+
+      // registro de nuevo password en historico de contraseñas
+      userDB.passwordHistory.push({
+        hash: hashedNew,
+        changedAt: new Date()
+      });
+
+      // estableciendo nuevo password con fecha de caducidad en 90 dias
+      userDB.password = hashedNew;
+      userDB.passwordExpiresAt = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000);
+
+      // se envia el correo con los nuevos credenciales al usuario
+      await sendEmail({
+        to: userDB.email,
+        subject: "Actualización de Contraseña",
+        text: `Hola ${userDB.nombre}, tu nueva contraseña es: ${password}`,
+        html: `<p>Hola ${userDB.nombre},<br/>Tu nueva contraseña es: <b>${password}</b></p>`
+      });
+    }
+
+    // actualizacion de otros campos si se editan
+    if (req.file) {
+      updateData.img = req.file.filename;
+    }
+    if (typeof activo !== "undefined") {
+      userDB.activo = activo;
+    }
+    Object.assign(userDB, updateData);
+
+    // guardado de usuario actualizado
+    const updatedUsuario = await userDB.save();
+    res.status(200).json(updatedUsuario);
+  } catch (err) {
+    next(err);
+  }
+};
   
   export const borrarUsuario = async (req, res, next) => {
     try {
