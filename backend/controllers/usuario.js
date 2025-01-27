@@ -27,18 +27,6 @@ export const actualizarUsuario = async (req, res, next) => {
     }
   };
   
-  
-  // export const borrarUsuario = async (req, res, next) => {
-  //   try {
-  //     await Usuario.findByIdAndDelete(req.params.id);
-  //     logger.info(`Usuario eliminado con éxito`);
-  //     res.status(200).json("Usuario ha sido borrado");
-  //   } catch (err) {
-  //     logger.error(`Error al eliminar usuario: ${err.message}`);
-  //     next(err);
-  //   }
-  // };
-  
   export const borrarUsuario = async (req, res, next) => {
     try {
       const isAdmin = req.user.roles.includes('admin');
@@ -55,8 +43,6 @@ export const actualizarUsuario = async (req, res, next) => {
       next(err);
     }
   };
-  
-  
   
   export const obtenerUsuario = async (req, res, next) => {
     //Get Usuario único

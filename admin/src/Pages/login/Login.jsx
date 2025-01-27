@@ -71,71 +71,118 @@ const handleLogin = async (e) => {
       });
     }
   } catch (err) {
-    dispatch({ type: "LOGIN_FALLIDO", payload: err.response.data });
-    if (err.response.status === 404) {
-      setIntentosFallidos(true);
-      setBloquearIngreso(true);
-        setTimeout(() => {
-          setIntentosFallidos(false);
-          setBloquearIngreso(false);
-        }, 10000); 
-      toast.error("Se ha alcanzado el límite de intentos fallidos. Por favor, inténtelo de nuevo en 10 segundos.", {
-        duration: 5000, 
-        position: "top-center",
-        style: {
-          background: "red", 
-          color: "white", 
-          fontWeight: "bold", 
-          borderRadius: "10px", 
-          boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
-          width: "300px", 
-          height: "120px",
-        },
+  dispatch({ type: "LOGIN_FALLIDO", payload: err.response.data });
+
+  const status = err.response?.status;
+
+  if (status === 400) {
+    // "Contraseña incorrecta" or "No puedes reutilizar contraseñas" etc.
+    toast.error(err.response.data.error || "Contraseña incorrecta", {
+      duration: 5000,
+      position: "top-center",
+      style: {
+        background: "red",
+        color: "white",
+        fontWeight: "bold",
+        borderRadius: "10px",
+        boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
+        width: "300px",
+        height: "120px",
+      },
+    });
+  } else if (status === 401) {
+    // "No eres administrador" 
+    toast.error("No eres administrador", {
+      duration: 5000,
+      position: "top-center",
+      style: {
+        background: "red",
+        color: "white",
+        fontWeight: "bold",
+        borderRadius: "10px",
+        boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
+        width: "300px",
+        height: "120px",
+      },
+    });
+  } else if (status === 403) {
+    // Could be "Cuenta bloqueada" or "Contraseña expirada"
+    const errorMsg = err.response.data.error || "Acceso prohibido";
+    if (errorMsg.toLowerCase().includes("expirado")) {
+      toast.error("La contraseña ha expirado, por favor actualízala.", {
+        duration: 5000,
+      position: "top-center",
+      style: {
+        background: "red",
+        color: "white",
+        fontWeight: "bold",
+        borderRadius: "10px",
+        boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
+        width: "300px",
+        height: "120px",
+      },
       });
-    } else if (err.response.status === 401) {
-      toast.error("Error, acceso no autorizado", {
-        duration: 5000, 
-        position: "top-center", 
-        style: {
-          background: "red", 
-          color: "white", 
-          fontWeight: "bold", 
-          borderRadius: "10px",
-          boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)", 
-          width: "300px", 
-          height: "80px", 
-        },
-      });
-    } else if (err.response.status === 400) {
-      toast.error("Contraseña incorrecta", {
-        duration: 5000, 
-        position: "top-center", 
-        style: {
-          background: "red", 
-          color: "white", 
-          fontWeight: "bold",
-          borderRadius: "10px",
-          boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)", 
-          width: "300px", 
-          height: "80px", 
-        },
+    } else if (errorMsg.toLowerCase().includes("bloqueada")) {
+      toast.error(errorMsg, {
+        duration: 5000,
+      position: "top-center",
+      style: {
+        background: "red",
+        color: "white",
+        fontWeight: "bold",
+        borderRadius: "10px",
+        boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
+        width: "300px",
+        height: "120px",
+      },
       });
     } else {
-      toast.error("Error de inicio de sesión, se bloqueo el login por 10 seg.", {
-        duration: 5000, 
-        position: "top-center",
-        style: {
-          background: "red",
-          color: "white", 
-          fontWeight: "bold", 
-          borderRadius: "10px",
-          boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)", 
-          width: "300px", 
-          height: "80px", 
-        },
+      toast.error(errorMsg, {
+        duration: 5000,
+      position: "top-center",
+      style: {
+        background: "red",
+        color: "white",
+        fontWeight: "bold",
+        borderRadius: "10px",
+        boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
+        width: "300px",
+        height: "120px",
+      },
       });
     }
+  } else if (status === 404) {
+    // "Usuario no encontrado"
+    toast.error("Usuario no encontrado", {
+      duration: 5000,
+      position: "top-center",
+      style: {
+        background: "red",
+        color: "white",
+        fontWeight: "bold",
+        borderRadius: "10px",
+        boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
+        width: "300px",
+        height: "120px",
+      },
+    });
+  } else {
+    // catch-all
+    toast.error("Error de inicio de sesión", {
+      duration: 5000,
+      position: "top-center",
+      style: {
+        background: "red",
+        color: "white",
+        fontWeight: "bold",
+        borderRadius: "10px",
+        boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
+        width: "300px",
+        height: "120px",
+      },
+    });
   }
+}
 };
 
 
