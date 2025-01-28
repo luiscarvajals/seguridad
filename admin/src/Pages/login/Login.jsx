@@ -45,7 +45,22 @@ const handleLogin = async (e) => {
         recaptchaToken: captchaToken
       });
     if (res.data.roles && (res.data.roles.includes("admin") || res.data.roles.includes("editor") || res.data.roles.includes("manager"))) {
+
+      const userRoles = res.data.roles || [];
+      const { detalles } = res.data;
+
       dispatch({ type: "LOGIN_EXITOSO", payload: res.data.detalles });
+      
+      let redirectPath = "/dashboard"; // default if none of the roles below match
+
+      if (userRoles.includes("admin")) {
+        redirectPath = "/usuarios";
+      } else if (userRoles.includes("editor")) {
+        redirectPath = "/noticias";
+      } else if (userRoles.includes("manager")) {
+        redirectPath = "/sedes";
+      }
+
       toast.success("Inicio de sesión exitoso, Bienvenido", {
         duration: 5000,
         position: "top-center",
@@ -57,11 +72,13 @@ const handleLogin = async (e) => {
           boxShadow: "0 20px 12px rgba(0, 0, 0, 0.4)",
           width: "300px",
           height: "80px",
-        },
+        }
       });
+
       setTimeout(() => {
-        navigate("/usuarios");
+        navigate(redirectPath);
       }, 1200);
+
     } else {
       dispatch({ type: "LOGIN_FALLIDO", message: "No existe el rol" });
       toast.error("No existe el rol", {
