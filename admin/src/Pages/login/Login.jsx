@@ -44,7 +44,7 @@ const handleLogin = async (e) => {
         ...credenciales,
         recaptchaToken: captchaToken
       });
-    if (res.data.roles && res.data.roles.includes("admin")) {
+    if (res.data.roles && (res.data.roles.includes("admin") || res.data.roles.includes("editor") || res.data.roles.includes("manager"))) {
       dispatch({ type: "LOGIN_EXITOSO", payload: res.data.detalles });
       toast.success("Inicio de sesión exitoso, Bienvenido", {
         duration: 5000,
@@ -63,8 +63,8 @@ const handleLogin = async (e) => {
         navigate("/usuarios");
       }, 1200);
     } else {
-      dispatch({ type: "LOGIN_FALLIDO", message: "No eres administrador" });
-      toast.error("No eres administrador", {
+      dispatch({ type: "LOGIN_FALLIDO", message: "No existe el rol" });
+      toast.error("No existe el rol", {
         duration: 5000,
         position: "top-center",
         style: {

@@ -7,25 +7,20 @@ import { AuthContexto } from "../../Context/AuthContexto";
 import { motion } from "framer-motion";
 
 const Sidebar = () => {
-  // const [setSelected] = useState("Dashboard");
   const [sidebarOpen, setSidebarOpen] = useState(true);
-
-
-  const handleToggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-
+  const handleToggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const sidebarAnimation = useSpring({
     transform: sidebarOpen ? "translateX(0)" : "translateX(-100%)",
   });
 
-  // const handleSelect = (option) => {
-  //   setSelected(option);
-  // };
-
-  const { usuario } = useContext(AuthContexto);
+  const { usuario, dispatch } = useContext(AuthContexto);
   const navigate = useNavigate();
-  const { dispatch } = useContext(AuthContexto);
+
+  // logica Roles
+  const userRoles = usuario?.roles || [];
+  const isAdmin = userRoles.includes("admin");
+  const isEditor = userRoles.includes("editor");
+  const isManager = userRoles.includes("manager");
 
   const handleLogout = async () => {
     try {
@@ -41,128 +36,103 @@ const Sidebar = () => {
   };
 
   return (
-      <div className="sidebar" style={sidebarAnimation}>
-        <motion.div
-          className="sidebar-header"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="inside">
-            <motion.div
-              className="insideUp"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-            >
-              <h2 className="comp2">Panel Administrativo</h2>
-            </motion.div>
-            <motion.div
-              className="insideDown"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-            >
-              <h5 className="comp2">{usuario.nombre} {usuario.apellido}</h5>
-            </motion.div>
-          </div>
-        </motion.div>
-  
-        <ul className="sidebar-menu">
-          <motion.li
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
+    <div className="sidebar" style={sidebarAnimation}>
+      <motion.div
+        className="sidebar-header"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="inside">
+          <motion.div
+            className="insideUp"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <NavLink
-              className="comp"
-              to="/dashboard"
-              //onClick={() => handleSelect("Dashboard")}
-            >
-              Dashboard
-            </NavLink>
-          </motion.li>
+            <h2 className="comp2">Panel Administrativo</h2>
+          </motion.div>
+          <motion.div
+            className="insideDown"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
+            {/* mostrando nombre del usuario */}
+            <h5 className="comp2">
+              {usuario?.nombre} {usuario?.apellido}
+            </h5>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      <ul className="sidebar-menu">
+        {/* admin puede ver dashboard */}
+        {isAdmin && (
+              <motion.li
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                >
+                <NavLink className="comp" to="/dashboard">
+                  Dashboard
+                </NavLink>
+              </motion.li>
+        )}
+
+        {/* admin puede ver "Usuarios" */}
+        {isAdmin && (
           <motion.li
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.8, duration: 0.5 }}
           >
-            <NavLink
-              className="comp"
-              to="/usuarios"
-              //onClick={() => handleSelect("Usuarios")}
-            >
+            <NavLink className="comp" to="/usuarios">
               Usuarios
             </NavLink>
           </motion.li>
+        )}
+
+        {/* solo manager puede ver Sedes */}
+        {isManager && (
           <motion.li
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
           >
-            <NavLink
-              className="comp"
-              to="/sedes"
-              //onClick={() => handleSelect("Sedes")}
-            >
+            <NavLink className="comp" to="/sedes">
               Sedes
             </NavLink>
           </motion.li>
+        )}
+
+        {/* solo editor puede ver Noticias */}
+        {isEditor && (
           <motion.li
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.2, duration: 0.5 }}
           >
-            <NavLink
-              className="comp"
-              to="/noticias"
-              //onClick={() => handleSelect("Noticias")}
-            >
+            <NavLink className="comp" to="/noticias">
               Noticias
             </NavLink>
           </motion.li>
+        )}
+
+        {/* solo manager pude ver Carreras */}
+        {isManager && (
           <motion.li
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.4, duration: 0.5 }}
           >
-            <NavLink
-              className="comp"
-              to="/carreras"
-              //onClick={() => handleSelect("Carreras")}
-            >
+            <NavLink className="comp" to="/carreras">
               Carreras
             </NavLink>
-        </motion.li>
-
-        {/* <motion.li
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.4, duration: 0.5 }}
-          >
-            <NavLink
-              className="comp"
-              to="/Eventos"
-              //onClick={() => handleSelect("Eventos")}
-            >
-              Eventos
-            </NavLink>
-        </motion.li>
-
-        <motion.li
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.4, duration: 0.5 }}
-          >
-            <NavLink
-              className="comp"
-              to="/Multimedia"
-              //onClick={() => handleSelect("Multimedia")}
-            >
-              Multimedia
-            </NavLink>
-        </motion.li> */}
+          </motion.li>
+        )}
       </ul>
+
       <motion.button
         className="button-logout"
         onClick={handleLogout}
@@ -178,9 +148,7 @@ const Sidebar = () => {
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
-        icon={sidebarOpen ? "fas fa-times" : "fas fa-bars"}
       />
-      
     </div>
   );
 };
