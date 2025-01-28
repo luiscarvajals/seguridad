@@ -3,6 +3,7 @@ import { crearError } from "../extra/error.js";
 import { sendEmail } from "../utils/sendEmail.js";
 import { validatePasswordPolicy } from "../utils/validatePassword.js";
 import bcrypt from "bcrypt";
+import UserLog from "../models/userLog.js";
 
 export const actualizarUsuario = async (req, res, next) => {
   try {
@@ -63,6 +64,20 @@ export const actualizarUsuario = async (req, res, next) => {
 
     // guardado de usuario actualizado
     const updatedUsuario = await userDB.save();
+
+    await UserLog.create({
+      userId: req.usuario?.id,         // admin que hizo el update, de JWT
+      userName: req.usuario?.usuario,  // username de admin
+      action: "UPDATE",                // or "UPDATE_USER"
+      resource: "Usuario",
+      method: req.method,              // "PUT"
+      endpoint: req.originalUrl,       // "/usuarios/:id"
+      details: {
+        targetUserId: req.params.id,
+        fieldsUpdated: Object.keys(req.body),
+      },
+    });
+
     res.status(200).json(updatedUsuario);
   } catch (err) {
     next(err);
@@ -72,13 +87,24 @@ export const actualizarUsuario = async (req, res, next) => {
   export const borrarUsuario = async (req, res, next) => {
     try {
       const isAdmin = req.user.roles.includes('admin');
-      //logger.info(`Este es el log para saber si el admin llega o no ${req.user.isAdmin}` ) // Obtener el valor de isAdmin del objeto de usuario en la solicitud
       if (!isAdmin) {
         throw crearError(403, 'No tienes permiso para eliminar usuarios');
       }
     
       await Usuario.findByIdAndUpdate(req.params.id, { activo: false });
-      //logger.info(`Usuario eliminado con éxito por el administrador ${req.user.usuario}`);
+
+      await UserLog.create({
+        userId: req.usuario?.id,
+        userName: req.usuario?.usuario,
+        action: "DEACTIVATE",
+        resource: "Usuario",
+        method: req.method,
+        endpoint: req.originalUrl,
+        details: {
+          targetUserId: req.params.id,
+        },
+      });
+
       res.status(200).json("Usuario ha sido borrado");
     } catch (err) {
       //logger.error(`Error al eliminar usuario: ${err.message}`);

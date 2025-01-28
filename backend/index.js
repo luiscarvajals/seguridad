@@ -22,6 +22,7 @@ import dashboardRuta from "./routes/dashboard.js";
 
 import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./swagger.config.js";
+import ApplicationLog from "./models/ApplicationLog.js";
 
 const app = express();
 dotenv.config();
@@ -30,6 +31,16 @@ const connect = async () => {
   try {
     await mongoose.connect(process.env.BASE);
     console.log("Base de datos conectada");
+    
+    // Crear un log de aplicación de inicio exitoso
+    /* await ApplicationLog.create({
+      level: "INFO",
+      message: "Server started and connected to DB",
+      details: {
+        time: new Date().toISOString(),
+      },
+    }); */
+
   } catch (error) {
     console.error(`Error al conectar con la base de datos: ${error}`);
     process.exit(1);

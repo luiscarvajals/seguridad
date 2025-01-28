@@ -8,7 +8,7 @@ const UserLogSchema = new mongoose.Schema({
   method: { type: String, required: false }, // e.g. "POST", "PUT", "PATCH"
   endpoint: { type: String, required: false }, // e.g. "/usuarios"
   timestamp: { type: Date, default: Date.now },
-  details: { type: mongoose.Schema.Types.Mixed }, // store request body or response info if needed
+  details: { type: mongoose.Schema.Types.Mixed }, // objeto opcional para mas informacion
 });
 
 export default mongoose.model("UserLog", UserLogSchema);

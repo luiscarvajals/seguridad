@@ -5,6 +5,8 @@ import { crearError } from '../extra/error.js';
 import { sendEmail } from '../utils/sendEmail.js';
 import { validatePasswordPolicy } from '../utils/validatePassword.js';
 import axios from 'axios';
+import ApplicationLog from '../models/ApplicationLog.js';
+import UserLog from '../models/userLog.js';
 
 export const registroUsuario = async (req, res, next) => {
   try {
@@ -45,6 +47,19 @@ export const registroUsuario = async (req, res, next) => {
       ]
     });
 
+    await UserLog.create({
+      userId: req.usuario?.id || null,  // if an admin is creating this new user
+      userName: req.usuario?.usuario || "System",
+      action: "CREATE",
+      resource: "Usuario",
+      method: req.method,
+      endpoint: req.originalUrl,
+      details: {
+        createdUserId: newUser._id,
+        createdUserUsuario: newUser.usuario,
+      },
+    });
+    
     await newUser.save();
 
     // enviando email con las credenciales al usuario
@@ -113,6 +128,17 @@ export const loginAdmin = async (req, res, next) => {
       if (user.intentosFallidos >= 3) {
         // bloqueo por 10 seg
         user.lockedUntil = new Date(Date.now() + 10 * 1000);
+
+        await ApplicationLog.create({
+          level: "WARN",
+          message: `Usuario ${user.usuario} bloqueado por 10 segundos debido a múltiples intentos fallidos.`,
+          details: {
+            userId: user._id.toString(),
+            usuario: user.usuario,
+            intentosFallidos: user.intentosFallidos,
+            lockedUntil: user.lockedUntil,
+          }
+        });
       }
       await user.save();
       throw crearError(400, "Contraseña incorrecta");
@@ -124,8 +150,18 @@ export const loginAdmin = async (req, res, next) => {
     await user.save();
 
     // creando token
-    const token = jwt.sign({ id: user._id, roles: user.roles }, process.env.JWT, {
+    const token = jwt.sign({ id: user._id, roles: user.roles, usuario: user.usuario }, process.env.JWT, {
       expiresIn: '1h',
+    });
+
+    // creando log de usuario de login
+    await UserLog.create({
+      userId: user._id,
+      userName: user.usuario,
+      action: "LOGIN",
+      resource: "Auth",
+      method: req.method,
+      endpoint: req.originalUrl,
     });
 
     // retornando datos de usuario
@@ -140,7 +176,16 @@ export const loginAdmin = async (req, res, next) => {
   }
 };
 
-export const logoutAdmin = (req, res) => {
+export const logoutAdmin = async (req, res) => {
+  await UserLog.create({
+    userId: req.usuario?.id,
+    userName: req.usuario?.usuario,
+    action: "LOGOUT",
+    resource: "Auth",
+    method: req.method,
+    endpoint: req.originalUrl,
+  });
+  
     res.clearCookie("admin_token");
     res.status(200).json({ mensaje: 'Cierre de sesión exitoso para administrador' });
   };
